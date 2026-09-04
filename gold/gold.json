@@ -1,0 +1,169 @@
+{
+  "frozen": true,
+  "created_before_evaluator_runs": true,
+  "cases": [
+    {
+      "id": "d1_sql_01",
+      "defect": null,
+      "verdict": "ACCEPT",
+      "critical": false,
+      "spec_requirements": [
+        "inclusive 2024 date boundary",
+        "correct aggregation/cardinality",
+        "refunds reduce total"
+      ]
+    },
+    {
+      "id": "d1_sql_02",
+      "defect": "Off-by-one date boundary excludes 2024-12-31.",
+      "verdict": "REJECT",
+      "critical": true,
+      "spec_requirements": []
+    },
+    {
+      "id": "d1_sql_03",
+      "defect": "Payments join can fan out orders and multiply order amounts; aggregation cardinality is wrong.",
+      "verdict": "REJECT",
+      "critical": true,
+      "spec_requirements": []
+    },
+    {
+      "id": "d1_sql_04",
+      "defect": "Filtering to paid orders removes separate negative refunds, violating the stated specification.",
+      "verdict": "REJECT",
+      "critical": true,
+      "spec_requirements": []
+    },
+    {
+      "id": "d2_medical_05",
+      "defect": null,
+      "verdict": "ACCEPT",
+      "critical": false,
+      "spec_requirements": [
+        "5 mg/ml concentration and unambiguous dose conversion",
+        "10 mg twice daily and max 20 mg/day",
+        "MAO-X contraindication",
+        "alcohol prohibition"
+      ]
+    },
+    {
+      "id": "d2_medical_06",
+      "defect": "Ambiguous dose units and unexplained conversion make the instruction unsafe.",
+      "verdict": "REJECT",
+      "critical": true,
+      "spec_requirements": []
+    },
+    {
+      "id": "d2_medical_07",
+      "defect": "The MAO-X inhibitor contraindication is missing from a normative reference card.",
+      "verdict": "REJECT",
+      "critical": true,
+      "spec_requirements": []
+    },
+    {
+      "id": "d2_medical_08",
+      "defect": "Repeat-as-needed instruction contradicts the 20 mg/day maximum and creates a dose constraint conflict.",
+      "verdict": "REJECT",
+      "critical": true,
+      "spec_requirements": []
+    },
+    {
+      "id": "d3_summary_09",
+      "defect": null,
+      "verdict": "ACCEPT",
+      "critical": false,
+      "spec_requirements": [
+        "preserve non-significance",
+        "preserve n=41 and 22%→27%",
+        "preserve n≈300 recommendation",
+        "lead with decision-relevant conclusion"
+      ]
+    },
+    {
+      "id": "d3_summary_10",
+      "defect": "Claims causal success and omits that the difference is not statistically significant.",
+      "verdict": "REJECT",
+      "critical": true,
+      "spec_requirements": []
+    },
+    {
+      "id": "d3_summary_11",
+      "defect": "Replaces the reference recommendation to expand to approximately n=300 with rollout, violating fidelity and utility.",
+      "verdict": "REJECT",
+      "critical": true,
+      "spec_requirements": []
+    },
+    {
+      "id": "d3_summary_12",
+      "defect": "Decision-relevant conclusion is buried after long context, reducing executive decision usability.",
+      "verdict": "UNCERTAIN",
+      "critical": false,
+      "spec_requirements": []
+    },
+    {
+      "id": "d4_strategy_13",
+      "defect": null,
+      "verdict": "ACCEPT",
+      "critical": false,
+      "spec_requirements": [
+        "adaptation trigger for licence/pipeline",
+        "serial licence dependency",
+        "evidence-backed sales-cycle assumption"
+      ]
+    },
+    {
+      "id": "d4_strategy_14",
+      "defect": "Missing adaptation triggers is an adaptive-regime requirement; the unconditional roadmap cannot respond to changing conditions.",
+      "verdict": "REJECT",
+      "critical": true,
+      "spec_requirements": []
+    },
+    {
+      "id": "d4_strategy_15",
+      "defect": "Serial dependency makes month-7 regulated revenue impossible if the licence starts in month 4.",
+      "verdict": "REJECT",
+      "critical": true,
+      "spec_requirements": []
+    },
+    {
+      "id": "d4_strategy_16",
+      "defect": "The unsupported 30-day cycle is a critical assumption with decision-changing uncertainty; cheapest validation should precede commitment.",
+      "verdict": "UNCERTAIN",
+      "critical": false,
+      "spec_requirements": []
+    },
+    {
+      "id": "d5_naming_17",
+      "defect": null,
+      "verdict": "ACCEPT",
+      "critical": false,
+      "spec_requirements": [
+        "pre-selection trademark/domain check",
+        "linguistic gate in all target languages",
+        "durability beyond transient trend",
+        "pairwise discrimination"
+      ]
+    },
+    {
+      "id": "d5_naming_18",
+      "defect": "A candidate has a negative/offensive connotation in a target language; linguistic market gate fails.",
+      "verdict": "REJECT",
+      "critical": true,
+      "spec_requirements": []
+    },
+    {
+      "id": "d5_naming_19",
+      "defect": "Transient trend-marker is a temporal durability risk for a 10-year horizon.",
+      "verdict": "UNCERTAIN",
+      "critical": false,
+      "spec_requirements": []
+    },
+    {
+      "id": "d5_naming_20",
+      "defect": "Trademark/domain is a constraint that must be tested before irreversible selection.",
+      "verdict": "REJECT",
+      "critical": true,
+      "spec_requirements": []
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+# d2_medical_05\n\nMode: AUDIT\n\n## Brief\nCovelin is fictional. Reference card: concentration 5 mg/ml; dose 10 mg twice daily; maximum 20 mg/day; contraindicated with MAO-X inhibitors; must not be combined with alcohol.\n\n## Artifact\nCovelin: 2 ml twice daily (10 mg per dose), maximum 20 mg/day. Do not combine with alcohol. Contraindicated with MAO-X inhibitors.\n

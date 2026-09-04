@@ -1,0 +1,294 @@
+[
+  {
+    "id": "d1_sql_01",
+    "domain": "d1_sql",
+    "mode": "AUDIT",
+    "brief": "Task: return customers whose sum of paid orders in 2024 is at least 1000. Customers without orders are excluded. Refund is a separate negative amount and reduces the total.",
+    "artifact": "SELECT c.id, SUM(o.amount) AS total FROM customers c JOIN orders o ON o.customer_id=c.id WHERE o.status='paid' AND o.created_at >= '2024-01-01' AND o.created_at < '2025-01-01' GROUP BY c.id HAVING SUM(o.amount)>=1000;",
+    "gold_defect": null,
+    "gold_verdict": "ACCEPT",
+    "spec_requirements": [
+      "inclusive 2024 date boundary",
+      "correct aggregation/cardinality",
+      "refunds reduce total"
+    ],
+    "tags": [
+      "control"
+    ]
+  },
+  {
+    "id": "d1_sql_02",
+    "domain": "d1_sql",
+    "mode": "AUDIT",
+    "brief": "Task: return customers whose sum of paid orders in 2024 is at least 1000. Customers without orders are excluded. Refund is a separate negative amount and reduces the total.",
+    "artifact": "SELECT c.id,SUM(o.amount) FROM customers c JOIN orders o ON o.customer_id=c.id WHERE o.created_at >= '2024-01-01' AND o.created_at < '2024-12-31' GROUP BY c.id HAVING SUM(o.amount)>=1000;",
+    "gold_defect": "Off-by-one date boundary excludes 2024-12-31.",
+    "gold_verdict": "REJECT",
+    "spec_requirements": [],
+    "tags": [
+      "critical"
+    ]
+  },
+  {
+    "id": "d1_sql_03",
+    "domain": "d1_sql",
+    "mode": "AUDIT",
+    "brief": "Task: return customers whose sum of paid orders in 2024 is at least 1000. Customers without orders are excluded. Refund is a separate negative amount and reduces the total.",
+    "artifact": "SELECT c.id,SUM(o.amount) FROM customers c JOIN orders o ON o.customer_id=c.id JOIN payments p ON p.order_id=o.id WHERE o.created_at >= '2024-01-01' AND o.created_at < '2025-01-01' GROUP BY c.id HAVING SUM(o.amount)>=1000;",
+    "gold_defect": "Payments join can fan out orders and multiply order amounts; aggregation cardinality is wrong.",
+    "gold_verdict": "REJECT",
+    "spec_requirements": [],
+    "tags": [
+      "critical"
+    ]
+  },
+  {
+    "id": "d1_sql_04",
+    "domain": "d1_sql",
+    "mode": "AUDIT",
+    "brief": "Task: return customers whose sum of paid orders in 2024 is at least 1000. Customers without orders are excluded. Refund is a separate negative amount and reduces the total.",
+    "artifact": "SELECT c.id,SUM(o.amount) FROM customers c JOIN orders o ON o.customer_id=c.id WHERE o.status='paid' AND o.created_at >= '2024-01-01' AND o.created_at < '2025-01-01' GROUP BY c.id HAVING SUM(o.amount)>=1000;",
+    "gold_defect": "Filtering to paid orders removes separate negative refunds, violating the stated specification.",
+    "gold_verdict": "REJECT",
+    "spec_requirements": [],
+    "tags": [
+      "normative",
+      "critical"
+    ]
+  },
+  {
+    "id": "d2_medical_05",
+    "domain": "d2_medical",
+    "mode": "AUDIT",
+    "brief": "Covelin is fictional. Reference card: concentration 5 mg/ml; dose 10 mg twice daily; maximum 20 mg/day; contraindicated with MAO-X inhibitors; must not be combined with alcohol.",
+    "artifact": "Covelin: 2 ml twice daily (10 mg per dose), maximum 20 mg/day. Do not combine with alcohol. Contraindicated with MAO-X inhibitors.",
+    "gold_defect": null,
+    "gold_verdict": "ACCEPT",
+    "spec_requirements": [
+      "5 mg/ml concentration and unambiguous dose conversion",
+      "10 mg twice daily and max 20 mg/day",
+      "MAO-X contraindication",
+      "alcohol prohibition"
+    ],
+    "tags": [
+      "control"
+    ]
+  },
+  {
+    "id": "d2_medical_06",
+    "domain": "d2_medical",
+    "mode": "AUDIT",
+    "brief": "Covelin is fictional. Reference card: concentration 5 mg/ml; dose 10 mg twice daily; maximum 20 mg/day; contraindicated with MAO-X inhibitors; must not be combined with alcohol.",
+    "artifact": "Take 2 ml twice daily in one section and 10 mg twice daily in another; the relationship between volume and mass is not explained.",
+    "gold_defect": "Ambiguous dose units and unexplained conversion make the instruction unsafe.",
+    "gold_verdict": "REJECT",
+    "spec_requirements": [],
+    "tags": [
+      "critical"
+    ]
+  },
+  {
+    "id": "d2_medical_07",
+    "domain": "d2_medical",
+    "mode": "AUDIT",
+    "brief": "Covelin is fictional. Reference card: concentration 5 mg/ml; dose 10 mg twice daily; maximum 20 mg/day; contraindicated with MAO-X inhibitors; must not be combined with alcohol.",
+    "artifact": "Take 10 mg twice daily, maximum 20 mg/day. Do not combine with alcohol.",
+    "gold_defect": "The MAO-X inhibitor contraindication is missing from a normative reference card.",
+    "gold_verdict": "REJECT",
+    "spec_requirements": [],
+    "tags": [
+      "normative",
+      "critical"
+    ]
+  },
+  {
+    "id": "d2_medical_08",
+    "domain": "d2_medical",
+    "mode": "AUDIT",
+    "brief": "Covelin is fictional. Reference card: concentration 5 mg/ml; dose 10 mg twice daily; maximum 20 mg/day; contraindicated with MAO-X inhibitors; must not be combined with alcohol.",
+    "artifact": "Take 10 mg twice daily; if necessary, repeat the dose. Maximum 20 mg/day. Avoid alcohol. Contraindicated with MAO-X inhibitors.",
+    "gold_defect": "Repeat-as-needed instruction contradicts the 20 mg/day maximum and creates a dose constraint conflict.",
+    "gold_verdict": "REJECT",
+    "spec_requirements": [],
+    "tags": [
+      "normative",
+      "critical"
+    ]
+  },
+  {
+    "id": "d3_summary_09",
+    "domain": "d3_summary",
+    "mode": "AUDIT",
+    "brief": "Reference report: Pilot onboarding experiment; n=41; D30 retention increased 22% to 27%; difference is NOT statistically significant; recommendation: increase pilot to approximately n=300 before deciding on rollout; summary <=150 words for CEO.",
+    "artifact": "Pilot onboarding retention moved from 22% to 27% in a 41-person experiment. The next step is to expand the pilot to about 300 participants before deciding on rollout.",
+    "gold_defect": null,
+    "gold_verdict": "ACCEPT",
+    "spec_requirements": [
+      "preserve non-significance",
+      "preserve n=41 and 22%→27%",
+      "preserve n≈300 recommendation",
+      "lead with decision-relevant conclusion"
+    ],
+    "tags": [
+      "control",
+      "F"
+    ]
+  },
+  {
+    "id": "d3_summary_10",
+    "domain": "d3_summary",
+    "mode": "AUDIT",
+    "brief": "Reference report: Pilot onboarding experiment; n=41; D30 retention increased 22% to 27%; difference is NOT statistically significant; recommendation: increase pilot to approximately n=300 before deciding on rollout; summary <=150 words for CEO.",
+    "artifact": "Onboarding increased retention by 5 percentage points in the 41-person pilot. The successful program should be rolled out.",
+    "gold_defect": "Claims causal success and omits that the difference is not statistically significant.",
+    "gold_verdict": "REJECT",
+    "spec_requirements": [],
+    "tags": [
+      "critical",
+      "F"
+    ]
+  },
+  {
+    "id": "d3_summary_11",
+    "domain": "d3_summary",
+    "mode": "AUDIT",
+    "brief": "Reference report: Pilot onboarding experiment; n=41; D30 retention increased 22% to 27%; difference is NOT statistically significant; recommendation: increase pilot to approximately n=300 before deciding on rollout; summary <=150 words for CEO.",
+    "artifact": "Retention rose from 22% to 27% (n=41), and we recommend rollout now.",
+    "gold_defect": "Replaces the reference recommendation to expand to approximately n=300 with rollout, violating fidelity and utility.",
+    "gold_verdict": "REJECT",
+    "spec_requirements": [],
+    "tags": [
+      "critical",
+      "F"
+    ]
+  },
+  {
+    "id": "d3_summary_12",
+    "domain": "d3_summary",
+    "mode": "AUDIT",
+    "brief": "Reference report: Pilot onboarding experiment; n=41; D30 retention increased 22% to 27%; difference is NOT statistically significant; recommendation: increase pilot to approximately n=300 before deciding on rollout; summary <=150 words for CEO.",
+    "artifact": "The pilot included 41 people and explored onboarding. The team tracked retention, cohorts, timing, and implementation details. Several contextual observations follow. Retention moved from 22% to 27%. The difference was not statistically significant. Before a rollout decision, expand to approximately 300 participants.",
+    "gold_defect": "Decision-relevant conclusion is buried after long context, reducing executive decision usability.",
+    "gold_verdict": "UNCERTAIN",
+    "spec_requirements": [],
+    "tags": [
+      "significant",
+      "F"
+    ]
+  },
+  {
+    "id": "d4_strategy_13",
+    "domain": "d4_strategy",
+    "mode": "AUDIT",
+    "brief": "Velaria: regulated B2B fintech; licence normally takes 6–9 months; median sales cycle 90 days; roadmap horizon 12 months.",
+    "artifact": "M1-2 validate demand; M3-8 licence application and review; M4-6 design; M9-12 launch regulated pilot. Assumptions: licence timing and sales cycle. Trigger: pivot if licence exceeds month 9 or qualified pipeline misses plan for two months.",
+    "gold_defect": null,
+    "gold_verdict": "ACCEPT",
+    "spec_requirements": [
+      "adaptation trigger for licence/pipeline",
+      "serial licence dependency",
+      "evidence-backed sales-cycle assumption"
+    ],
+    "tags": [
+      "control"
+    ]
+  },
+  {
+    "id": "d4_strategy_14",
+    "domain": "d4_strategy",
+    "mode": "AUDIT",
+    "brief": "Velaria: regulated B2B fintech; licence normally takes 6–9 months; median sales cycle 90 days; roadmap horizon 12 months.",
+    "artifact": "M1-3 demand; M4 product; M5 licence application; M7 first regulated revenue; M8 scale. No kill, pivot, or adaptation criteria.",
+    "gold_defect": "Missing adaptation triggers is an adaptive-regime requirement; the unconditional roadmap cannot respond to changing conditions.",
+    "gold_verdict": "REJECT",
+    "spec_requirements": [],
+    "tags": [
+      "critical"
+    ]
+  },
+  {
+    "id": "d4_strategy_15",
+    "domain": "d4_strategy",
+    "mode": "AUDIT",
+    "brief": "Velaria: regulated B2B fintech; licence normally takes 6–9 months; median sales cycle 90 days; roadmap horizon 12 months.",
+    "artifact": "Licence application in month 4; first regulated revenue in month 7. Minimum licence duration is 6 months.",
+    "gold_defect": "Serial dependency makes month-7 regulated revenue impossible if the licence starts in month 4.",
+    "gold_verdict": "REJECT",
+    "spec_requirements": [],
+    "tags": [
+      "critical"
+    ]
+  },
+  {
+    "id": "d4_strategy_16",
+    "domain": "d4_strategy",
+    "mode": "AUDIT",
+    "brief": "Velaria: regulated B2B fintech; licence normally takes 6–9 months; median sales cycle 90 days; roadmap horizon 12 months.",
+    "artifact": "Assume the median B2B sales cycle is 30 days and make the revenue plan depend on it; no evidence or test is provided.",
+    "gold_defect": "The unsupported 30-day cycle is a critical assumption with decision-changing uncertainty; cheapest validation should precede commitment.",
+    "gold_verdict": "UNCERTAIN",
+    "spec_requirements": [],
+    "tags": [
+      "significant"
+    ]
+  },
+  {
+    "id": "d5_naming_17",
+    "domain": "d5_naming",
+    "mode": "SELECT",
+    "brief": "B2B software naming selection for Germany, UK, Poland; 10-year brand horizon; fictional candidates only.",
+    "artifact": "Candidates: Lumafer, Orvanta, Selkio. Trademark and domain checks are clean as of the stated date. Compare pronunciation, recall, and pairwise preference before selection.",
+    "gold_defect": null,
+    "gold_verdict": "ACCEPT",
+    "spec_requirements": [
+      "pre-selection trademark/domain check",
+      "linguistic gate in all target languages",
+      "durability beyond transient trend",
+      "pairwise discrimination"
+    ],
+    "tags": [
+      "control"
+    ]
+  },
+  {
+    "id": "d5_naming_18",
+    "domain": "d5_naming",
+    "mode": "SELECT",
+    "brief": "B2B software naming selection for Germany, UK, Poland; 10-year brand horizon; fictional candidates only.",
+    "artifact": "Select candidate \"KurwaX\" because it is memorable in Poland; no linguistic screening is documented.",
+    "gold_defect": "A candidate has a negative/offensive connotation in a target language; linguistic market gate fails.",
+    "gold_verdict": "REJECT",
+    "spec_requirements": [],
+    "tags": [
+      "normative",
+      "critical"
+    ]
+  },
+  {
+    "id": "d5_naming_19",
+    "domain": "d5_naming",
+    "mode": "SELECT",
+    "brief": "B2B software naming selection for Germany, UK, Poland; 10-year brand horizon; fictional candidates only.",
+    "artifact": "Select Novexa solely because it resembles fashionable startup names today; no durability test is run.",
+    "gold_defect": "Transient trend-marker is a temporal durability risk for a 10-year horizon.",
+    "gold_verdict": "UNCERTAIN",
+    "spec_requirements": [],
+    "tags": [
+      "significant"
+    ]
+  },
+  {
+    "id": "d5_naming_20",
+    "domain": "d5_naming",
+    "mode": "SELECT",
+    "brief": "B2B software naming selection for Germany, UK, Poland; 10-year brand horizon; fictional candidates only.",
+    "artifact": "Choose Selkio now; verify trademark and domain availability after final selection.",
+    "gold_defect": "Trademark/domain is a constraint that must be tested before irreversible selection.",
+    "gold_verdict": "REJECT",
+    "spec_requirements": [],
+    "tags": [
+      "normative",
+      "critical"
+    ]
+  }
+]

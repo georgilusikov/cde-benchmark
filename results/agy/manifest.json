@@ -1,0 +1,13 @@
+{
+  "mode": "agy",
+  "seed": 404,
+  "systems": [
+    "B0",
+    "B1",
+    "CDE-STANDARD",
+    "CDE-LIGHT"
+  ],
+  "runs": 3,
+  "gold_hidden": true,
+  "started": 1788542939.8474329
+}

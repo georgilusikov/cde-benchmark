@@ -1,0 +1,1 @@
+# d5_naming_18\n\nMode: SELECT\n\n## Brief\nB2B software naming selection for Germany, UK, Poland; 10-year brand horizon; fictional candidates only.\n\n## Artifact\nSelect candidate "KurwaX" because it is memorable in Poland; no linguistic screening is documented.\n

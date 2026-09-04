@@ -1,0 +1,1 @@
+# d5_naming_20\n\nMode: SELECT\n\n## Brief\nB2B software naming selection for Germany, UK, Poland; 10-year brand horizon; fictional candidates only.\n\n## Artifact\nChoose Selkio now; verify trademark and domain availability after final selection.\n

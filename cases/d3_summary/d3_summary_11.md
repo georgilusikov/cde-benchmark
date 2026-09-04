@@ -1,0 +1,1 @@
+# d3_summary_11\n\nMode: AUDIT\n\n## Brief\nReference report: Pilot onboarding experiment; n=41; D30 retention increased 22% to 27%; difference is NOT statistically significant; recommendation: increase pilot to approximately n=300 before deciding on rollout; summary <=150 words for CEO.\n\n## Artifact\nRetention rose from 22% to 27% (n=41), and we recommend rollout now.\n

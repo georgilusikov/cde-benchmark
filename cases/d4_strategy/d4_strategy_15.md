@@ -1,0 +1,1 @@
+# d4_strategy_15\n\nMode: AUDIT\n\n## Brief\nVelaria: regulated B2B fintech; licence normally takes 6–9 months; median sales cycle 90 days; roadmap horizon 12 months.\n\n## Artifact\nLicence application in month 4; first regulated revenue in month 7. Minimum licence duration is 6 months.\n

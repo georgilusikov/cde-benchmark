@@ -1,0 +1,1 @@
+Analyze the object and context. Output exactly these headings: SUCCESS, GATES, TOP DECISIVE FACTORS, ASSUMPTIONS, TRADE-OFFS, WHAT TO IGNORE, NEXT BEST TEST, VERDICT (ACCEPT / REJECT / UNCERTAIN). Do not invent numeric weights. Separate facts/norms from hypotheses. Be concise and decision-oriented. Do not receive gold.

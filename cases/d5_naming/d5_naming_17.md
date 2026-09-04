@@ -1,0 +1,1 @@
+# d5_naming_17\n\nMode: SELECT\n\n## Brief\nB2B software naming selection for Germany, UK, Poland; 10-year brand horizon; fictional candidates only.\n\n## Artifact\nCandidates: Lumafer, Orvanta, Selkio. Trademark and domain checks are clean as of the stated date. Compare pronunciation, recall, and pairwise preference before selection.\n

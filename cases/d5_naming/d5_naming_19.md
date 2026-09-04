@@ -1,0 +1,1 @@
+# d5_naming_19\n\nMode: SELECT\n\n## Brief\nB2B software naming selection for Germany, UK, Poland; 10-year brand horizon; fictional candidates only.\n\n## Artifact\nSelect Novexa solely because it resembles fashionable startup names today; no durability test is run.\n
