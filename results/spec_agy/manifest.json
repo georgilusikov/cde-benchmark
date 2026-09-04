@@ -1,0 +1,11 @@
+{
+  "jobs": 45,
+  "systems": [
+    "B1",
+    "B1-ENRICHED",
+    "CDE"
+  ],
+  "runs": 3,
+  "model": "gemini-3.6-flash-high",
+  "gold_hidden": true
+}
