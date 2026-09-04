@@ -29,13 +29,21 @@ Both systems caught the same 14/15 mutated defects at the preregistered 2/3 thre
 - CDE-LIGHT: 60 outputs; heuristic pre-score only.
 - Their raw outputs are preserved, but no primary blind-judge conclusion is claimed for them.
 
+## Scope limitation: SPEC / requirements discovery
+
+The preregistered SPEC coverage metric was **not run**. All 240 evaluator calls were artifact audits: 20 artifacts × 4 systems × 3 runs. The separate test in which systems generate requirements before seeing artifacts was absent from the executed benchmark.
+
+Therefore this report supports a conclusion only for **AUDIT / checking an existing object**. It does not test the original hypothesis that CDE discovers decision-changing requirements before object creation.
+
 ## F ablation and block ablation
 
 Not run. The preregistered trigger requires a demonstrated material CDE win. Equal defect recall and poor control behavior do not satisfy that gate.
 
 ## Decision
 
-**COLLAPSE TO SIMPLE PROMPT / RETAIN SELECTED MODULES.** CDE-STANDARD did not materially improve defect recall over B1. It showed a modest verdict advantage in this sample and zero stable unsafe-ignore cases, but used about 2.1× mean latency and 4.3× output characters while still falsely rejecting 3/5 controls. Retain B1’s schema plus provenance/evidence handling and reference-sensitive checks only if validated in a follow-up with stronger control discrimination. Do not claim that CDE v0.4 is proven.
+**AUDIT: COLLAPSE TO SIMPLE PROMPT / RETAIN SELECTED MODULES.** CDE-STANDARD did not materially improve defect recall over B1. It showed a modest verdict advantage in this sample and zero stable unsafe-ignore cases, but used about 2.1× mean latency and 4.3× output characters while still falsely rejecting 3/5 controls.
+
+**REQUIREMENTS DISCOVERY / SPEC: NOT TESTED.** No conclusion is justified about whether CDE is needed for pre-creation requirement discovery. The next decisive experiment is smaller: 5 briefs, systems generate requirements without seeing artifacts, then score coverage of 15 hidden mutations; compare B1, B1+provenance/assumptions/reference, and CDE. Do not claim that CDE v0.4 is proven or disproven for this task.
 
 ## Caveat
 
