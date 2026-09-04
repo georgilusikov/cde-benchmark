@@ -43,7 +43,25 @@ Not run. The preregistered trigger requires a demonstrated material CDE win. Equ
 
 **AUDIT: COLLAPSE TO SIMPLE PROMPT / RETAIN SELECTED MODULES.** CDE-STANDARD did not materially improve defect recall over B1. It showed a modest verdict advantage in this sample and zero stable unsafe-ignore cases, but used about 2.1× mean latency and 4.3× output characters while still falsely rejecting 3/5 controls.
 
-**REQUIREMENTS DISCOVERY / SPEC: NOT TESTED.** No conclusion is justified about whether CDE is needed for pre-creation requirement discovery. The next decisive experiment is smaller: 5 briefs, systems generate requirements without seeing artifacts, then score coverage of 15 hidden mutations; compare B1, B1+provenance/assumptions/reference, and CDE. Do not claim that CDE v0.4 is proven or disproven for this task.
+The initial audit run did not include the preregistered SPEC phase; the follow-up result is recorded below.
+
+## SPEC / Requirements Discovery result
+
+This follow-up tested the original pre-creation question. Evaluators saw only 5 briefs and generated requirements before seeing any artifact or mutation. The blind judge ran 135 checks: 15 hidden mutations × 3 systems × 3 runs, with no judge errors.
+
+| System | Stable SPEC coverage (>=2/3) | Any-run coverage |
+|---|---:|---:|
+| B1 | 13/15 | 14/15 |
+| B1 + provenance/assumptions/reference | 10/15 | 11/15 |
+| CDE | 10/15 | 14/15 |
+
+CDE did not beat B1 on SPEC coverage; it was 3 stable mutations worse. The enriched prompt also did not beat B1. This is evidence against adding the full CDE architecture for this five-brief test, while preserving the possibility that a revised lightweight requirements-discovery prompt could improve on this result. The judge is an LLM, so this is not proof.
+
+## Updated decision
+
+- **AUDIT:** B1 simple prompt is the better default; full CDE is not justified.
+- **REQUIREMENTS DISCOVERY / SPEC:** B1 currently leads (13/15); CDE is not justified by this experiment either.
+- **Recommendation:** **COLLAPSE TO SIMPLE PROMPT**, with provenance/reference checks added only when a follow-up validates marginal value. Investigate control false rejects and the three missed SPEC mutations before further architecture work.
 
 ## Caveat
 

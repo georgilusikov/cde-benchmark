@@ -1,0 +1,3 @@
+# SPEC benchmark protocol
+
+Five briefs expose no future artifacts or gold mutations to evaluators. Compare B1, B1+provenance/assumptions/reference, and CDE in SPEC mode. Three independent runs per brief/system, randomized order, same evaluator model (`gemini-3.6-flash-high`), agy CLI only, eight parallel subprocesses. A separate Claude judge receives the brief, hidden mutation description, and anonymous generated requirements and judges whether a requirement would detect the mutation, whether it is a hard gate where appropriate, and whether it is actionable. SPEC COVERAGE is the number of mutations covered stably in at least 2/3 runs.

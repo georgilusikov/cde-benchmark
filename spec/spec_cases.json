@@ -1,0 +1,47 @@
+[
+  {
+    "id": "spec_d1_sql",
+    "brief": "A data team needs a query that returns customers whose total paid-order amount in calendar year 2024 is at least 1000. Customers without orders are excluded. Refunds are separate negative rows and reduce the total. The query will be used in a monthly finance report.",
+    "mutations": [
+      "The date range excludes 2024-12-31.",
+      "A payments join multiplies orders through one-to-many fan-out.",
+      "A paid-only filter removes negative refund rows."
+    ]
+  },
+  {
+    "id": "spec_d2_medical",
+    "brief": "A fictional medicine Covelin needs a patient instruction. Reference card: concentration 5 mg/ml; dose 10 mg twice daily; maximum 20 mg/day; contraindicated with MAO-X inhibitors; must not be combined with alcohol.",
+    "mutations": [
+      "Dose is expressed inconsistently as 2 ml and 10 mg without conversion.",
+      "The MAO-X contraindication is omitted.",
+      "An as-needed repeat instruction conflicts with the maximum daily dose."
+    ]
+  },
+  {
+    "id": "spec_d3_summary",
+    "brief": "A CEO needs an executive summary of a pilot onboarding experiment. Source report: n=41; D30 retention 22% to 27%; difference not statistically significant; recommendation is to expand to approximately n=300 before deciding on rollout; summary maximum 150 words.",
+    "mutations": [
+      "The summary claims causal success and hides non-significance.",
+      "It recommends rollout instead of expanding the pilot.",
+      "The decision-relevant recommendation is buried after excessive context."
+    ]
+  },
+  {
+    "id": "spec_d4_strategy",
+    "brief": "A 12-month roadmap is being designed for a regulated B2B fintech in fictional Velaria. A licence normally takes 6–9 months and the median sales cycle is 90 days. The roadmap must support a decision to proceed, pivot, or stop.",
+    "mutations": [
+      "The roadmap has no adaptation or kill/pivot triggers.",
+      "Licence application in month 4 is followed by regulated revenue in month 7 despite a six-month minimum licence duration.",
+      "Revenue depends on an unsupported 30-day sales-cycle assumption."
+    ]
+  },
+  {
+    "id": "spec_d5_naming",
+    "brief": "A B2B software name must be selected for Germany, the UK, and Poland with a 10-year horizon. Candidates are fictional. The selection must support an irreversible final choice.",
+    "mutations": [
+      "A candidate has a negative or offensive meaning in one target language.",
+      "Selection relies only on a transient fashionable startup naming trend.",
+      "Trademark and domain checks are postponed until after final selection."
+    ]
+  }
+]

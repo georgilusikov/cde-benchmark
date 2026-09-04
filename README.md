@@ -4,7 +4,7 @@ Reproducible, preregistered benchmark comparing B1 (strong structured prompt) wi
 
 ## Status
 
-The completed run answers only the **AUDIT** question (detect defects in an existing artifact). It does not answer the original **SPEC / requirements-discovery** question: the preregistered pre-artifact SPEC coverage phase was not executed. `REPORT.md` records this limitation. Dataset and gold are frozen before evaluator runs. `python runner/run.py --mode mock` is only a pipeline smoke test and MUST NOT be treated as evidence. Real runs require an evaluator provider configured in `runner/config.yaml` or environment variables. `results/` stores raw outputs and scores.
+The initial run answered only the **AUDIT** question. A follow-up SPEC / requirements-discovery run is now complete and its result is in `REPORT.md`: B1 13/15 stable coverage, enriched B1 10/15, CDE 10/15. The benchmark still does not prove the architecture; it is synthetic and LLM-judged. Dataset and gold are frozen before evaluator runs. `python runner/run.py --mode mock` is only a pipeline smoke test and MUST NOT be treated as evidence. `results/` stores raw outputs and scores.
 
 ## Quick start
 
