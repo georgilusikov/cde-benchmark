@@ -1,0 +1,9 @@
+{
+  "jobs": 150,
+  "systems": [
+    "B1",
+    "B2"
+  ],
+  "runs": 3,
+  "model": "gemini-3.6-flash-high"
+}

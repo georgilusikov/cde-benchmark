@@ -1,0 +1,252 @@
+[
+  {
+    "id": "d1_sql_v2_clean_ready",
+    "domain": "d1_sql",
+    "kind": "CLEAN_READY",
+    "brief": "Task: return customers whose total order amount in 2024 is at least 1000. Customers without orders are excluded. Refund rows have status REFUND and negative amount; paid rows have status PAID. Refunds reduce the total. Schema: one row per order or refund; payments are not joined. Test data includes boundary timestamps. ",
+    "artifact": "Task: return customers whose total order amount in 2024 is at least 1000. Customers without orders are excluded. Refund rows have status REFUND and negative amount; paid rows have status PAID. Refunds reduce the total. Schema: one row per order or refund; payments are not joined. Test data includes boundary timestamps. Artifact: SELECT customer_id, SUM(amount) AS total FROM orders WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01' GROUP BY customer_id HAVING SUM(amount) >= 1000;",
+    "gold_defect_status": "PASS",
+    "gold_readiness": "READY",
+    "gold_mutation": null
+  },
+  {
+    "id": "d1_sql_v2_clean_incomplete",
+    "domain": "d1_sql",
+    "kind": "CLEAN_INCOMPLETE",
+    "brief": "Task: return customers whose total order amount in 2024 is at least 1000. Refunds reduce the total. ",
+    "artifact": "Task: return customers whose total order amount in 2024 is at least 1000. Refunds reduce the total. Artifact: SELECT customer_id, SUM(amount) FROM orders WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01' GROUP BY customer_id; The schema and refund status semantics are not supplied, and no test data is available.",
+    "gold_defect_status": "PASS",
+    "gold_readiness": "NEEDS_EVIDENCE",
+    "gold_mutation": null
+  },
+  {
+    "id": "d2_medical_v2_clean_ready",
+    "domain": "d2_medical",
+    "kind": "CLEAN_READY",
+    "brief": "Covelin is fictional. Reference card: 5 mg/ml; 10 mg twice daily; maximum 20 mg/day; contraindicated with MAO-X inhibitors; must not be combined with alcohol. Artifact states all five items, with dose conversion 2 ml = 10 mg, and no duplicate or conflicting instructions.",
+    "artifact": "Covelin is fictional. Reference card: 5 mg/ml; 10 mg twice daily; maximum 20 mg/day; contraindicated with MAO-X inhibitors; must not be combined with alcohol. Artifact states all five items, with dose conversion 2 ml = 10 mg, and no duplicate or conflicting instructions.",
+    "gold_defect_status": "PASS",
+    "gold_readiness": "READY",
+    "gold_mutation": null
+  },
+  {
+    "id": "d2_medical_v2_clean_incomplete",
+    "domain": "d2_medical",
+    "kind": "CLEAN_INCOMPLETE",
+    "brief": "Covelin is fictional. The brief says it requires a safe patient instruction, but the concentration, dose, maximum, contraindications, and alcohol rule reference card are missing. Artifact gives only a draft sentence: Take Covelin as directed.",
+    "artifact": "Covelin is fictional. The brief says it requires a safe patient instruction, but the concentration, dose, maximum, contraindications, and alcohol rule reference card are missing. Artifact gives only a draft sentence: Take Covelin as directed.",
+    "gold_defect_status": "PASS",
+    "gold_readiness": "NEEDS_EVIDENCE",
+    "gold_mutation": null
+  },
+  {
+    "id": "d3_summary_v2_clean_ready",
+    "domain": "d3_summary",
+    "kind": "CLEAN_READY",
+    "brief": "Source report: pilot onboarding, n=41, D30 retention 22% to 27%, difference NOT statistically significant, recommendation expand to approximately n=300 before rollout decision. Artifact summary leads with the recommendation, preserves all facts, and is under 150 words.",
+    "artifact": "Source report: pilot onboarding, n=41, D30 retention 22% to 27%, difference NOT statistically significant, recommendation expand to approximately n=300 before rollout decision. Artifact summary leads with the recommendation, preserves all facts, and is under 150 words.",
+    "gold_defect_status": "PASS",
+    "gold_readiness": "READY",
+    "gold_mutation": null
+  },
+  {
+    "id": "d3_summary_v2_clean_incomplete",
+    "domain": "d3_summary",
+    "kind": "CLEAN_INCOMPLETE",
+    "brief": "A CEO needs a faithful summary of an onboarding pilot. The source report and its significance result are unavailable. Artifact contains a short generic summary with no numbers or recommendation.",
+    "artifact": "A CEO needs a faithful summary of an onboarding pilot. The source report and its significance result are unavailable. Artifact contains a short generic summary with no numbers or recommendation.",
+    "gold_defect_status": "PASS",
+    "gold_readiness": "NEEDS_EVIDENCE",
+    "gold_mutation": null
+  },
+  {
+    "id": "d4_strategy_v2_clean_ready",
+    "domain": "d4_strategy",
+    "kind": "CLEAN_READY",
+    "brief": "Velaria regulated B2B fintech. Licence takes 6–9 months; median sales cycle 90 days; regulated launch occurs only after licence. Artifact roadmap respects this dependency, states assumptions, and has pivot/stop triggers.",
+    "artifact": "Velaria regulated B2B fintech. Licence takes 6–9 months; median sales cycle 90 days; regulated launch occurs only after licence. Artifact roadmap respects this dependency, states assumptions, and has pivot/stop triggers.",
+    "gold_defect_status": "PASS",
+    "gold_readiness": "READY",
+    "gold_mutation": null
+  },
+  {
+    "id": "d4_strategy_v2_clean_incomplete",
+    "domain": "d4_strategy",
+    "kind": "CLEAN_INCOMPLETE",
+    "brief": "Velaria regulated B2B fintech needs a 12-month roadmap. Licence timing, sales-cycle evidence, pipeline data, and launch dependency details are not yet available. Artifact is a high-level list of aspirations only.",
+    "artifact": "Velaria regulated B2B fintech needs a 12-month roadmap. Licence timing, sales-cycle evidence, pipeline data, and launch dependency details are not yet available. Artifact is a high-level list of aspirations only.",
+    "gold_defect_status": "PASS",
+    "gold_readiness": "NEEDS_EVIDENCE",
+    "gold_mutation": null
+  },
+  {
+    "id": "d5_naming_v2_clean_ready",
+    "domain": "d5_naming",
+    "kind": "CLEAN_READY",
+    "brief": "Select a fictional B2B software name for Germany, UK, and Poland over a 10-year horizon. Artifact has three viable names, clean trademark/domain checks, documented linguistic screening, and completed target-user pairwise testing.",
+    "artifact": "Select a fictional B2B software name for Germany, UK, and Poland over a 10-year horizon. Artifact has three viable names, clean trademark/domain checks, documented linguistic screening, and completed target-user pairwise testing.",
+    "gold_defect_status": "PASS",
+    "gold_readiness": "READY",
+    "gold_mutation": null
+  },
+  {
+    "id": "d5_naming_v2_clean_incomplete",
+    "domain": "d5_naming",
+    "kind": "CLEAN_INCOMPLETE",
+    "brief": "Select a fictional B2B software name for Germany, UK, and Poland over a 10-year horizon. Artifact proposes three names but has no linguistic screening, trademark/domain check, or target-user pairwise evidence.",
+    "artifact": "Select a fictional B2B software name for Germany, UK, and Poland over a 10-year horizon. Artifact proposes three names but has no linguistic screening, trademark/domain check, or target-user pairwise evidence.",
+    "gold_defect_status": "PASS",
+    "gold_readiness": "NEEDS_EVIDENCE",
+    "gold_mutation": null
+  },
+  {
+    "id": "d1_sql_02_v2",
+    "domain": "d1_sql",
+    "kind": "MUTATION",
+    "brief": "Task: return customers whose sum of paid orders in 2024 is at least 1000. Customers without orders are excluded. Refund is a separate negative amount and reduces the total.",
+    "artifact": "SELECT c.id,SUM(o.amount) FROM customers c JOIN orders o ON o.customer_id=c.id WHERE o.created_at >= '2024-01-01' AND o.created_at < '2024-12-31' GROUP BY c.id HAVING SUM(o.amount)>=1000;",
+    "gold_defect_status": "FAIL",
+    "gold_readiness": "BLOCKED",
+    "gold_mutation": "Off-by-one date boundary excludes 2024-12-31."
+  },
+  {
+    "id": "d1_sql_03_v2",
+    "domain": "d1_sql",
+    "kind": "MUTATION",
+    "brief": "Task: return customers whose sum of paid orders in 2024 is at least 1000. Customers without orders are excluded. Refund is a separate negative amount and reduces the total.",
+    "artifact": "SELECT c.id,SUM(o.amount) FROM customers c JOIN orders o ON o.customer_id=c.id JOIN payments p ON p.order_id=o.id WHERE o.created_at >= '2024-01-01' AND o.created_at < '2025-01-01' GROUP BY c.id HAVING SUM(o.amount)>=1000;",
+    "gold_defect_status": "FAIL",
+    "gold_readiness": "BLOCKED",
+    "gold_mutation": "Payments join can fan out orders and multiply order amounts; aggregation cardinality is wrong."
+  },
+  {
+    "id": "d1_sql_04_v2",
+    "domain": "d1_sql",
+    "kind": "MUTATION",
+    "brief": "Task: return customers whose sum of paid orders in 2024 is at least 1000. Customers without orders are excluded. Refund is a separate negative amount and reduces the total.",
+    "artifact": "SELECT c.id,SUM(o.amount) FROM customers c JOIN orders o ON o.customer_id=c.id WHERE o.status='paid' AND o.created_at >= '2024-01-01' AND o.created_at < '2025-01-01' GROUP BY c.id HAVING SUM(o.amount)>=1000;",
+    "gold_defect_status": "FAIL",
+    "gold_readiness": "BLOCKED",
+    "gold_mutation": "Filtering to paid orders removes separate negative refunds, violating the stated specification."
+  },
+  {
+    "id": "d2_medical_06_v2",
+    "domain": "d2_medical",
+    "kind": "MUTATION",
+    "brief": "Covelin is fictional. Reference card: concentration 5 mg/ml; dose 10 mg twice daily; maximum 20 mg/day; contraindicated with MAO-X inhibitors; must not be combined with alcohol.",
+    "artifact": "Take 2 ml twice daily in one section and 10 mg twice daily in another; the relationship between volume and mass is not explained.",
+    "gold_defect_status": "FAIL",
+    "gold_readiness": "BLOCKED",
+    "gold_mutation": "Ambiguous dose units and unexplained conversion make the instruction unsafe."
+  },
+  {
+    "id": "d2_medical_07_v2",
+    "domain": "d2_medical",
+    "kind": "MUTATION",
+    "brief": "Covelin is fictional. Reference card: concentration 5 mg/ml; dose 10 mg twice daily; maximum 20 mg/day; contraindicated with MAO-X inhibitors; must not be combined with alcohol.",
+    "artifact": "Take 10 mg twice daily, maximum 20 mg/day. Do not combine with alcohol.",
+    "gold_defect_status": "FAIL",
+    "gold_readiness": "BLOCKED",
+    "gold_mutation": "The MAO-X inhibitor contraindication is missing from a normative reference card."
+  },
+  {
+    "id": "d2_medical_08_v2",
+    "domain": "d2_medical",
+    "kind": "MUTATION",
+    "brief": "Covelin is fictional. Reference card: concentration 5 mg/ml; dose 10 mg twice daily; maximum 20 mg/day; contraindicated with MAO-X inhibitors; must not be combined with alcohol.",
+    "artifact": "Take 10 mg twice daily; if necessary, repeat the dose. Maximum 20 mg/day. Avoid alcohol. Contraindicated with MAO-X inhibitors.",
+    "gold_defect_status": "FAIL",
+    "gold_readiness": "BLOCKED",
+    "gold_mutation": "Repeat-as-needed instruction contradicts the 20 mg/day maximum and creates a dose constraint conflict."
+  },
+  {
+    "id": "d3_summary_10_v2",
+    "domain": "d3_summary",
+    "kind": "MUTATION",
+    "brief": "Reference report: Pilot onboarding experiment; n=41; D30 retention increased 22% to 27%; difference is NOT statistically significant; recommendation: increase pilot to approximately n=300 before deciding on rollout; summary <=150 words for CEO.",
+    "artifact": "Onboarding increased retention by 5 percentage points in the 41-person pilot. The successful program should be rolled out.",
+    "gold_defect_status": "FAIL",
+    "gold_readiness": "BLOCKED",
+    "gold_mutation": "Claims causal success and omits that the difference is not statistically significant."
+  },
+  {
+    "id": "d3_summary_11_v2",
+    "domain": "d3_summary",
+    "kind": "MUTATION",
+    "brief": "Reference report: Pilot onboarding experiment; n=41; D30 retention increased 22% to 27%; difference is NOT statistically significant; recommendation: increase pilot to approximately n=300 before deciding on rollout; summary <=150 words for CEO.",
+    "artifact": "Retention rose from 22% to 27% (n=41), and we recommend rollout now.",
+    "gold_defect_status": "FAIL",
+    "gold_readiness": "BLOCKED",
+    "gold_mutation": "Replaces the reference recommendation to expand to approximately n=300 with rollout, violating fidelity and utility."
+  },
+  {
+    "id": "d3_summary_12_v2",
+    "domain": "d3_summary",
+    "kind": "MUTATION",
+    "brief": "Reference report: Pilot onboarding experiment; n=41; D30 retention increased 22% to 27%; difference is NOT statistically significant; recommendation: increase pilot to approximately n=300 before deciding on rollout; summary <=150 words for CEO.",
+    "artifact": "The pilot included 41 people and explored onboarding. The team tracked retention, cohorts, timing, and implementation details. Several contextual observations follow. Retention moved from 22% to 27%. The difference was not statistically significant. Before a rollout decision, expand to approximately 300 participants.",
+    "gold_defect_status": "PASS",
+    "gold_readiness": "NEEDS_EVIDENCE",
+    "gold_mutation": "Decision-relevant conclusion is buried after long context, reducing executive decision usability."
+  },
+  {
+    "id": "d4_strategy_14_v2",
+    "domain": "d4_strategy",
+    "kind": "MUTATION",
+    "brief": "Velaria: regulated B2B fintech; licence normally takes 6–9 months; median sales cycle 90 days; roadmap horizon 12 months.",
+    "artifact": "M1-3 demand; M4 product; M5 licence application; M7 first regulated revenue; M8 scale. No kill, pivot, or adaptation criteria.",
+    "gold_defect_status": "FAIL",
+    "gold_readiness": "BLOCKED",
+    "gold_mutation": "Missing adaptation triggers is an adaptive-regime requirement; the unconditional roadmap cannot respond to changing conditions."
+  },
+  {
+    "id": "d4_strategy_15_v2",
+    "domain": "d4_strategy",
+    "kind": "MUTATION",
+    "brief": "Velaria: regulated B2B fintech; licence normally takes 6–9 months; median sales cycle 90 days; roadmap horizon 12 months.",
+    "artifact": "Licence application in month 4; first regulated revenue in month 7. Minimum licence duration is 6 months.",
+    "gold_defect_status": "FAIL",
+    "gold_readiness": "BLOCKED",
+    "gold_mutation": "Serial dependency makes month-7 regulated revenue impossible if the licence starts in month 4."
+  },
+  {
+    "id": "d4_strategy_16_v2",
+    "domain": "d4_strategy",
+    "kind": "MUTATION",
+    "brief": "Velaria: regulated B2B fintech; licence normally takes 6–9 months; median sales cycle 90 days; roadmap horizon 12 months.",
+    "artifact": "Assume the median B2B sales cycle is 30 days and make the revenue plan depend on it; no evidence or test is provided.",
+    "gold_defect_status": "PASS",
+    "gold_readiness": "NEEDS_EVIDENCE",
+    "gold_mutation": "The unsupported 30-day cycle is a critical assumption with decision-changing uncertainty; cheapest validation should precede commitment."
+  },
+  {
+    "id": "d5_naming_18_v2",
+    "domain": "d5_naming",
+    "kind": "MUTATION",
+    "brief": "B2B software naming selection for Germany, UK, Poland; 10-year brand horizon; fictional candidates only.",
+    "artifact": "Select candidate \"KurwaX\" because it is memorable in Poland; no linguistic screening is documented.",
+    "gold_defect_status": "FAIL",
+    "gold_readiness": "BLOCKED",
+    "gold_mutation": "A candidate has a negative/offensive connotation in a target language; linguistic market gate fails."
+  },
+  {
+    "id": "d5_naming_19_v2",
+    "domain": "d5_naming",
+    "kind": "MUTATION",
+    "brief": "B2B software naming selection for Germany, UK, Poland; 10-year brand horizon; fictional candidates only.",
+    "artifact": "Select Novexa solely because it resembles fashionable startup names today; no durability test is run.",
+    "gold_defect_status": "PASS",
+    "gold_readiness": "NEEDS_EVIDENCE",
+    "gold_mutation": "Transient trend-marker is a temporal durability risk for a 10-year horizon."
+  },
+  {
+    "id": "d5_naming_20_v2",
+    "domain": "d5_naming",
+    "kind": "MUTATION",
+    "brief": "B2B software naming selection for Germany, UK, Poland; 10-year brand horizon; fictional candidates only.",
+    "artifact": "Choose Selkio now; verify trademark and domain availability after final selection.",
+    "gold_defect_status": "FAIL",
+    "gold_readiness": "BLOCKED",
+    "gold_mutation": "Trademark/domain is a constraint that must be tested before irreversible selection."
+  }
+]

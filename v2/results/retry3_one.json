@@ -1,0 +1,1 @@
+{"case_id": "d5_naming_20_v2", "run": 3, "system": "B1", "judgment": "```json\n{\n  \"defect_status_correct\": false,\n  \"readiness_correct\": false,\n  \"false_defect\": false\n}\n```", "error": null}

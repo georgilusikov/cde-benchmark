@@ -1,0 +1,155 @@
+{
+  "frozen": true,
+  "cases": [
+    {
+      "id": "d1_sql_v2_clean_ready",
+      "defect_status": "PASS",
+      "readiness": "READY",
+      "mutation": null
+    },
+    {
+      "id": "d1_sql_v2_clean_incomplete",
+      "defect_status": "PASS",
+      "readiness": "NEEDS_EVIDENCE",
+      "mutation": null
+    },
+    {
+      "id": "d2_medical_v2_clean_ready",
+      "defect_status": "PASS",
+      "readiness": "READY",
+      "mutation": null
+    },
+    {
+      "id": "d2_medical_v2_clean_incomplete",
+      "defect_status": "PASS",
+      "readiness": "NEEDS_EVIDENCE",
+      "mutation": null
+    },
+    {
+      "id": "d3_summary_v2_clean_ready",
+      "defect_status": "PASS",
+      "readiness": "READY",
+      "mutation": null
+    },
+    {
+      "id": "d3_summary_v2_clean_incomplete",
+      "defect_status": "PASS",
+      "readiness": "NEEDS_EVIDENCE",
+      "mutation": null
+    },
+    {
+      "id": "d4_strategy_v2_clean_ready",
+      "defect_status": "PASS",
+      "readiness": "READY",
+      "mutation": null
+    },
+    {
+      "id": "d4_strategy_v2_clean_incomplete",
+      "defect_status": "PASS",
+      "readiness": "NEEDS_EVIDENCE",
+      "mutation": null
+    },
+    {
+      "id": "d5_naming_v2_clean_ready",
+      "defect_status": "PASS",
+      "readiness": "READY",
+      "mutation": null
+    },
+    {
+      "id": "d5_naming_v2_clean_incomplete",
+      "defect_status": "PASS",
+      "readiness": "NEEDS_EVIDENCE",
+      "mutation": null
+    },
+    {
+      "id": "d1_sql_02_v2",
+      "defect_status": "FAIL",
+      "readiness": "BLOCKED",
+      "mutation": "Off-by-one date boundary excludes 2024-12-31."
+    },
+    {
+      "id": "d1_sql_03_v2",
+      "defect_status": "FAIL",
+      "readiness": "BLOCKED",
+      "mutation": "Payments join can fan out orders and multiply order amounts; aggregation cardinality is wrong."
+    },
+    {
+      "id": "d1_sql_04_v2",
+      "defect_status": "FAIL",
+      "readiness": "BLOCKED",
+      "mutation": "Filtering to paid orders removes separate negative refunds, violating the stated specification."
+    },
+    {
+      "id": "d2_medical_06_v2",
+      "defect_status": "FAIL",
+      "readiness": "BLOCKED",
+      "mutation": "Ambiguous dose units and unexplained conversion make the instruction unsafe."
+    },
+    {
+      "id": "d2_medical_07_v2",
+      "defect_status": "FAIL",
+      "readiness": "BLOCKED",
+      "mutation": "The MAO-X inhibitor contraindication is missing from a normative reference card."
+    },
+    {
+      "id": "d2_medical_08_v2",
+      "defect_status": "FAIL",
+      "readiness": "BLOCKED",
+      "mutation": "Repeat-as-needed instruction contradicts the 20 mg/day maximum and creates a dose constraint conflict."
+    },
+    {
+      "id": "d3_summary_10_v2",
+      "defect_status": "FAIL",
+      "readiness": "BLOCKED",
+      "mutation": "Claims causal success and omits that the difference is not statistically significant."
+    },
+    {
+      "id": "d3_summary_11_v2",
+      "defect_status": "FAIL",
+      "readiness": "BLOCKED",
+      "mutation": "Replaces the reference recommendation to expand to approximately n=300 with rollout, violating fidelity and utility."
+    },
+    {
+      "id": "d3_summary_12_v2",
+      "defect_status": "PASS",
+      "readiness": "NEEDS_EVIDENCE",
+      "mutation": "Decision-relevant conclusion is buried after long context, reducing executive decision usability."
+    },
+    {
+      "id": "d4_strategy_14_v2",
+      "defect_status": "FAIL",
+      "readiness": "BLOCKED",
+      "mutation": "Missing adaptation triggers is an adaptive-regime requirement; the unconditional roadmap cannot respond to changing conditions."
+    },
+    {
+      "id": "d4_strategy_15_v2",
+      "defect_status": "FAIL",
+      "readiness": "BLOCKED",
+      "mutation": "Serial dependency makes month-7 regulated revenue impossible if the licence starts in month 4."
+    },
+    {
+      "id": "d4_strategy_16_v2",
+      "defect_status": "PASS",
+      "readiness": "NEEDS_EVIDENCE",
+      "mutation": "The unsupported 30-day cycle is a critical assumption with decision-changing uncertainty; cheapest validation should precede commitment."
+    },
+    {
+      "id": "d5_naming_18_v2",
+      "defect_status": "FAIL",
+      "readiness": "BLOCKED",
+      "mutation": "A candidate has a negative/offensive connotation in a target language; linguistic market gate fails."
+    },
+    {
+      "id": "d5_naming_19_v2",
+      "defect_status": "PASS",
+      "readiness": "NEEDS_EVIDENCE",
+      "mutation": "Transient trend-marker is a temporal durability risk for a 10-year horizon."
+    },
+    {
+      "id": "d5_naming_20_v2",
+      "defect_status": "FAIL",
+      "readiness": "BLOCKED",
+      "mutation": "Trademark/domain is a constraint that must be tested before irreversible selection."
+    }
+  ]
+}
