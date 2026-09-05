@@ -1,6 +1,6 @@
-# Final decision — Requirements Finder / What Matters v1.1
+# Final decision — Requirements Finder / What Matters v1.2
 
-Status: **FROZEN FOR PRODUCTION, AMENDED BY HELD-OUT B5 EVIDENCE**
+Status: **FROZEN FOR PRODUCTION — B5 RETAINED, POST-B5 EXPANSIONS REJECTED**
 
 Production implementation lives in a separate project/repository: `requirements-finder` (standalone skill). This benchmark repository contains only research history, cases, results, and the decision record.
 
@@ -18,7 +18,11 @@ Do **not** ship:
 - B3/B3.1 confirmation-gate variants;
 - mandatory fixed relational-failure taxonomy;
 - multi-agent roles, debate, voting, or B4 DEEP lenses;
-- broad subagent criticism by default.
+- broad subagent criticism by default;
+- mandatory stakeholder / POV expansion (B6);
+- mandatory supersystem/subsystem boundary expansion (B7);
+- mandatory temporal/lifecycle expansion (B8);
+- outcome / Goal-Tree-style necessary-condition decomposition (B10).
 
 Subagents/tools are allowed only for **targeted evidence acquisition** after the single-agent pass identifies one concrete decision-relevant evidence gap.
 
@@ -34,7 +38,7 @@ For composite objects:
 
 Failure-first reasoning is a discovery mechanism, not a mandate to generate more suspicions.
 
-The decomposition is derived from the object itself, not from a fixed checklist of legal / UX / risk / timing / lifecycle categories.
+The decomposition is derived from the object itself, not from a fixed checklist of legal / UX / risk / timing / lifecycle / stakeholder / supersystem / future-value categories.
 
 ## Empirical basis
 
@@ -104,6 +108,76 @@ Important audit notes:
 
 Conclusion: B5 is held-out evidence that **object-space decomposition is useful on composite objects**, unlike generic taxonomy expansion or multi-agent criticism.
 
+### B6 / B7 / B8 requirements-axes experiments
+
+Branch/commit: `experiment/requirements-axes` / `a1e29b88`
+
+Each experiment compared B5 against B5 plus one explicit reasoning axis on 14 cases × 3 runs/system:
+
+- B6: stakeholder / POV;
+- B7: supersystem/subsystem boundary;
+- B8: temporal/lifecycle transition.
+
+Aggregate results:
+
+| Experiment | B5 recall | Candidate recall | B5 class | Candidate class | B5 unsupported | Candidate unsupported |
+|---|---:|---:|---:|---:|---:|---:|
+| B6 Stakeholder | 1.00 | 1.00 | 1.00 | 1.00 | 0.000 | 0.000 |
+| B7 System level | 1.00 | 1.00 | 1.00 | 1.00 | 0.000 | 0.024 |
+| B8 Temporal | 1.00 | 1.00 | 1.00 | 1.00 | 0.000 | 0.024 |
+
+B6 did not demonstrate incremental benefit because B5 already solved all six stakeholder cases (ceiling). It was not harmful on the tested set, but it added no demonstrated coverage.
+
+B7 and B8 also added no recall and each introduced one unsupported confirmed requirement/failure. The failures matched the predicted risk of explicit axis expansion: speculative external/future constraints or invented verification requirements were promoted into confirmed problems.
+
+Conclusion:
+- do not add stakeholder, system-level, or temporal axes to production core;
+- stakeholder/system/time reasoning may still arise naturally inside ordinary decomposition when the supplied object and facts make them materially relevant;
+- explicit axis prompts are not justified by current evidence.
+
+### B10 value / necessary-condition decomposition
+
+Branch/commit: `experiment/value-decomp-b10` / `9c9d1158`
+
+B10 tested:
+
+`OUTCOME -> NECESSARY CONDITIONS -> B5 OBJECT DECOMPOSITION -> FAILURES -> REQUIREMENTS -> TESTS`
+
+Held-out aggregate:
+
+| System | Recall | Value recall | Class | Unsupported confirmed | Readiness | Relative chars |
+|---|---:|---:|---:|---:|---:|---:|
+| B5 | 1.00 | 1.00 | 1.00 | 0.148 | 0.22 | 1.00x |
+| B10 | 0.93 | 1.00 | 0.93 | 0.148 | 0.28 | 1.06x |
+
+B10 produced:
+- zero B5-miss -> B10-hit cases;
+- one stable miss on an evidence-gap case (`g01`);
+- one stable false FAIL/BLOCKED on clean `c03`, inventing additional operational/verification requirements even though the supplied requirement was already satisfied;
+- no value-recall gain over B5.
+
+Therefore B10 failed the preregistered gate and is rejected for production.
+
+#### Critical methodology correction discovered after B10
+
+The development set that allowed held-out execution contained an invalid gold case, `devc3_token_chain`.
+
+As written:
+- token issued at 14:00;
+- token valid for 30 minutes (expires 14:30);
+- step B runs 20 minutes;
+- step C starts after B.
+
+Therefore C starts at 14:20, not 14:40. The planted finding "token expires at 14:30 but step C starts at 14:40" is not entailed by the brief.
+
+So the apparent development discrimination (`B5 = 3/4`) was not valid evidence of B5 headroom. With that case corrected/removed, all three development attempts were effectively ceiling-level for B5.
+
+The held-out value set also turned out easier than intended: many cases stated the global constraint nearly explicitly (e.g. exactly-once, combined weight cap, freshness bound, approval must cover shipped version), allowing B5 to solve them without necessary-condition decomposition.
+
+This weakens the experiment as a test of whether value decomposition can help on genuinely hidden cross-cutting requirements, but it **does not rescue B10 as a production patch**: B10 already demonstrated concrete regressions with zero observed coverage gain.
+
+The extended "unsupported necessary condition" judge metric from B10 is also considered invalid/miscalibrated and must not be reused without a new calibration study.
+
 ## What survived the research
 
 1. Outcome first.
@@ -116,6 +190,19 @@ Conclusion: B5 is held-out evidence that **object-space decomposition is useful 
 8. Missing evidence is not a defect.
 9. Remove criteria that do not support the outcome, satisfy an explicit must, or prevent a material failure.
 10. Resolve uncertainty with narrow targeted evidence retrieval, not broad parallel criticism.
+11. Increase the resolution of the supplied object; do not increase the space of suspicions without a demonstrated miss.
+
+## General research conclusion
+
+The strongest pattern across B1–B10 is:
+
+> **Increase the resolution of what is given; do not proactively increase the number of perspectives from which the model is asked to suspect missing requirements.**
+
+B5 helped by making the supplied object's causal structure more explicit.
+
+Most failed post-B5 variants did something different: they expanded the search space of possible requirements (more roles, more external levels, more future states, more necessary conditions). This repeatedly produced no recall gain or increased unsupported requirements.
+
+This is the current working explanation for why B5 survives while broader reasoning expansions do not.
 
 ## Production routing rule
 
@@ -123,10 +210,28 @@ Use decomposition only when the supplied object is structurally composite: multi
 
 Otherwise use the flat pass.
 
+Stakeholder, temporal, supersystem, lifecycle, and value conditions may be noticed when they are already materially implied by the supplied facts, but production must not force separate scans for them.
+
 This is a complexity gate, not a taxonomy router.
 
 ## Stop condition
 
-The prompt/framework optimization phase is closed again after adopting this single held-out structural correction.
+The prompt/framework optimization phase is **closed**.
 
-Reopen only with new held-out evidence showing a specific, repeated production failure that the current conditional-decomposition skill cannot handle—not merely because another plausible taxonomy, role, or reasoning layer can be imagined.
+Do not reopen because another framework, TRIZ method, stakeholder map, Goal Tree, system operator, lifecycle matrix, role, or reasoning layer seems plausible.
+
+Reopen only after a **real repeated production miss** is observed in the current B5-based Requirements Finder.
+
+Future research must be **miss-driven**:
+
+1. Start from a concrete production miss that is provably real.
+2. Identify the minimal missing reasoning operation that caused the miss.
+3. Build a development set with analogous but non-identical cases.
+4. Independently sanity-check every planted gold from brief + artifact only; for arithmetic/timing cases, use deterministic assertions where possible.
+5. Development qualification requires both:
+   - baseline B5 demonstrates genuine headroom (not ceiling), and
+   - the frozen candidate demonstrates at least one stable `B5 MISS -> CANDIDATE HIT` with no new stable false FAIL.
+6. Only then freeze a new independent held-out suite.
+7. Do not tune the candidate after seeing held-out results.
+
+Until such evidence exists, **B5 / Requirements Finder v1.1 remains the production design**.
