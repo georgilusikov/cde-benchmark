@@ -1,0 +1,729 @@
+{
+  "cases": {
+    "etl_interface": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B1": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            true
+          ],
+          "latency_s": [
+            12.46508002281189,
+            8.10305380821228,
+            13.914876937866211
+          ],
+          "output_chars": [
+            2430,
+            2364,
+            2392
+          ]
+        },
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            15.007894039154053,
+            13.963515996932983,
+            14.460231065750122
+          ],
+          "output_chars": [
+            3954,
+            5192,
+            5044
+          ]
+        }
+      }
+    },
+    "dose_handoff": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B1": {
+          "target_detected_runs": [
+            false,
+            false,
+            false
+          ],
+          "stable_detected": false,
+          "class_correct_runs": [
+            false,
+            false,
+            true
+          ],
+          "stable_class": false,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            8.595792055130005,
+            9.268785953521729,
+            7.183174133300781
+          ],
+          "output_chars": [
+            1328,
+            1959,
+            1679
+          ]
+        },
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            false
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            false
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            11.520999908447266,
+            13.469030141830444,
+            12.640445947647095
+          ],
+          "output_chars": [
+            3564,
+            4926,
+            4276
+          ]
+        }
+      }
+    },
+    "edit_render_gap": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B1": {
+          "target_detected_runs": [
+            false,
+            false,
+            false
+          ],
+          "stable_detected": false,
+          "class_correct_runs": [
+            false,
+            false,
+            false
+          ],
+          "stable_class": false,
+          "stable_status": "PASS",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            8.947602987289429,
+            10.635897874832153,
+            8.690514326095581
+          ],
+          "output_chars": [
+            2168,
+            1883,
+            2204
+          ]
+        },
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            15.19009804725647,
+            14.359616994857788,
+            13.793687105178833
+          ],
+          "output_chars": [
+            4892,
+            5319,
+            5739
+          ]
+        }
+      }
+    },
+    "phase_gate": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B1": {
+          "target_detected_runs": [
+            false,
+            false,
+            false
+          ],
+          "stable_detected": false,
+          "class_correct_runs": [
+            false,
+            false,
+            false
+          ],
+          "stable_class": false,
+          "stable_status": "FAIL",
+          "stable_readiness": "BLOCKED",
+          "unsupported_confirmed_runs": [
+            true,
+            true,
+            true
+          ],
+          "latency_s": [
+            8.630234241485596,
+            9.320933818817139,
+            8.668467044830322
+          ],
+          "output_chars": [
+            1892,
+            1645,
+            1842
+          ]
+        },
+        "B5": {
+          "target_detected_runs": [
+            false,
+            false,
+            false
+          ],
+          "stable_detected": false,
+          "class_correct_runs": [
+            false,
+            false,
+            false
+          ],
+          "stable_class": false,
+          "stable_status": "FAIL",
+          "stable_readiness": "BLOCKED",
+          "unsupported_confirmed_runs": [
+            true,
+            true,
+            true
+          ],
+          "latency_s": [
+            12.09354305267334,
+            14.675920009613037,
+            14.31764817237854
+          ],
+          "output_chars": [
+            3877,
+            5391,
+            4462
+          ]
+        }
+      }
+    },
+    "report_chain": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B1": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            8.78718113899231,
+            6.813886880874634,
+            9.21973705291748
+          ],
+          "output_chars": [
+            1866,
+            1436,
+            1834
+          ]
+        },
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            10.995077133178711,
+            10.396953821182251,
+            9.539671897888184
+          ],
+          "output_chars": [
+            3821,
+            3777,
+            3601
+          ]
+        }
+      }
+    },
+    "screen_decide": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B1": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "BLOCKED",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            7.059580087661743,
+            6.578060150146484,
+            9.327284097671509
+          ],
+          "output_chars": [
+            1548,
+            1542,
+            2138
+          ]
+        },
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "BLOCKED",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            10.249467849731445,
+            13.27431607246399,
+            10.657633066177368
+          ],
+          "output_chars": [
+            3722,
+            4289,
+            5260
+          ]
+        }
+      }
+    },
+    "zoom_plan": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B1": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            7.871870994567871,
+            9.314049005508423,
+            11.341015100479126
+          ],
+          "output_chars": [
+            1617,
+            1583,
+            1690
+          ]
+        },
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            9.413609981536865,
+            11.342104196548462,
+            10.446666955947876
+          ],
+          "output_chars": [
+            3768,
+            4002,
+            2921
+          ]
+        }
+      }
+    },
+    "etl_clean": {
+      "gold": {
+        "target_class": "NONE",
+        "status": "PASS",
+        "readiness": "READY"
+      },
+      "systems": {
+        "B1": {
+          "target_detected_runs": [
+            null,
+            null
+          ],
+          "stable_detected": null,
+          "class_correct_runs": [
+            null,
+            null
+          ],
+          "stable_class": null,
+          "stable_status": "PASS",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false
+          ],
+          "latency_s": [
+            9.704216718673706,
+            10.82131290435791,
+            13.651012182235718
+          ],
+          "output_chars": [
+            2753,
+            2580,
+            2614
+          ]
+        },
+        "B5": {
+          "target_detected_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_detected": null,
+          "class_correct_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_class": null,
+          "stable_status": "PASS",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            16.351656913757324,
+            14.283991813659668,
+            16.16384792327881
+          ],
+          "output_chars": [
+            4554,
+            5126,
+            5142
+          ]
+        }
+      }
+    },
+    "dose_clean": {
+      "gold": {
+        "target_class": "NONE",
+        "status": "PASS",
+        "readiness": "READY"
+      },
+      "systems": {
+        "B1": {
+          "target_detected_runs": [
+            null,
+            null
+          ],
+          "stable_detected": null,
+          "class_correct_runs": [
+            null,
+            null
+          ],
+          "stable_class": null,
+          "stable_status": "PASS",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false
+          ],
+          "latency_s": [
+            8.10419511795044,
+            12.858386993408203,
+            11.485674858093262
+          ],
+          "output_chars": [
+            1877,
+            1791,
+            2090
+          ]
+        },
+        "B5": {
+          "target_detected_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_detected": null,
+          "class_correct_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_class": null,
+          "stable_status": "PASS",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            13.975063800811768,
+            15.399815082550049,
+            12.342679023742676
+          ],
+          "output_chars": [
+            5459,
+            6085,
+            4367
+          ]
+        }
+      }
+    },
+    "phases_clean": {
+      "gold": {
+        "target_class": "NONE",
+        "status": "PASS",
+        "readiness": "READY"
+      },
+      "systems": {
+        "B1": {
+          "target_detected_runs": [
+            null,
+            null
+          ],
+          "stable_detected": null,
+          "class_correct_runs": [
+            null,
+            null
+          ],
+          "stable_class": null,
+          "stable_status": "PASS",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false
+          ],
+          "latency_s": [
+            14.783752918243408,
+            7.982810735702515,
+            8.354297161102295
+          ],
+          "output_chars": [
+            2059,
+            2270,
+            2084
+          ]
+        },
+        "B5": {
+          "target_detected_runs": [
+            null,
+            null
+          ],
+          "stable_detected": null,
+          "class_correct_runs": [
+            null,
+            null
+          ],
+          "stable_class": null,
+          "stable_status": "PASS",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            true,
+            false
+          ],
+          "latency_s": [
+            24.01043200492859,
+            22.64154815673828,
+            15.31838083267212
+          ],
+          "output_chars": [
+            4763,
+            6329,
+            5102
+          ]
+        }
+      }
+    }
+  },
+  "aggregate": {
+    "B1": {
+      "target_finding_recall": 0.5714285714285714,
+      "finding_class_accuracy": 0.5714285714285714,
+      "unsupported_confirmed_defect_rate": 0.14814814814814814,
+      "readiness_calibration": 0.5,
+      "output_chars": 19719.333333333332,
+      "latency": {
+        "median_s": 9.083670020103455,
+        "p95_s": 13.79613779783249
+      }
+    },
+    "B5": {
+      "target_finding_recall": 0.8571428571428571,
+      "finding_class_accuracy": 0.8571428571428571,
+      "unsupported_confirmed_defect_rate": 0.13793103448275862,
+      "readiness_calibration": 0.5,
+      "output_chars": 46241.333333333336,
+      "latency": {
+        "median_s": 13.878601551055908,
+        "p95_s": 19.81109709739685
+      }
+    }
+  },
+  "judge_errors": 0,
+  "evaluator_errors": 0,
+  "status_missing": 0
+}

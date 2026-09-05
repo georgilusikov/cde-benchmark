@@ -1,0 +1,112 @@
+[
+  {
+    "id": "etl_interface",
+    "domain": "sql",
+    "kind": "INTERFACE_DEFECT",
+    "brief": "Two-stage pipeline. Extract stage: return all 2024 rows; PAID rows are positive, REFUND rows negative; one row per order/refund. Load stage: sum extracted rows per customer, keep customers with net total at least 1000.",
+    "artifact": "Extract: SELECT customer_id, amount FROM orders WHERE status='PAID' AND created_at >= DATE '2024-01-01' AND created_at < DATE '2025-01-01'. Load: SELECT customer_id, SUM(amount) AS total FROM extracted GROUP BY customer_id HAVING SUM(amount) >= 1000.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "extract stage drops REFUND rows that the load-stage net sum requires",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "dose_handoff",
+    "domain": "medical",
+    "kind": "INTERFACE_DEFECT",
+    "brief": "Covelin is fictional. Section A (prescriber): 10 mg twice daily, max 20 mg/day. Section B (patient card) must restate the same schedule; the patient follows only section B.",
+    "artifact": "Section A: prescribe 10 mg twice daily, maximum 20 mg per day. Section B (patient card): take 10 mg in the morning and 10 mg whenever needed during the day.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "patient card permits an as-needed dose that violates the prescriber daily maximum",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "edit_render_gap",
+    "domain": "summary",
+    "kind": "INTERFACE_DEFECT",
+    "brief": "Edit list marks kept segments; the editor retains 350 ms handles on BOTH ends of each kept segment for trimming. Render spec: concatenate kept segments into a gap-free master after trimming 350 ms from the START of each segment only.",
+    "artifact": "Kept segments (each with 350 ms head and tail handles): seg1 [00:10-00:40], seg2 [01:05-01:30]. Render: trim 350 ms from each segment start, then concatenate directly.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "trailing 350 ms handles are never trimmed, so the master keeps tail overlap",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "phase_gate",
+    "domain": "strategy",
+    "kind": "INTERFACE_DEFECT",
+    "brief": "Velaria plan has two phases. Phase 1: licence application starts M1; licensing takes 6-9 months. Phase 2: first regulated revenue, which legally requires the licence to be granted.",
+    "artifact": "Phase 1: licence application filed M1, expected grant between M7 and M10. Phase 2: first regulated revenue starts M7.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "phase 2 revenue starts before the earliest stated licence grant",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "report_chain",
+    "domain": "summary",
+    "kind": "COMPONENT_DEFECT",
+    "brief": "Source report: pilot n=41, retention 22% to 27%, not statistically significant, expand to about n=300 before rollout decision. The summary has a Results section and a Recommendation section; both must preserve the source.",
+    "artifact": "Results: retention moved from 22% to 27% in n=41, not statistically significant. Recommendation: roll out now to all users.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "recommendation section reverses the stated expand-before-rollout decision",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "screen_decide",
+    "domain": "naming",
+    "kind": "COMPONENT_DEFECT",
+    "brief": "Name selection rule: the linguistic screen must be complete before any irreversible selection. Supplied linguistic screen: the string 'vargu' is a severe vulgarity in Poland.",
+    "artifact": "Decision: irreversibly select 'VarguX' today. Linguistic screen: scheduled next week, results pending.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "irreversible selection precedes the required completed linguistic screen",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "zoom_plan",
+    "domain": "summary",
+    "kind": "COMPONENT_DEFECT",
+    "brief": "Render plan for talking-head video. Zoom rule: at most 2 zoom levels, 1.08x and 1.16x, so states stay visually distinct but natural. Face rule: face height 40-60% of frame height.",
+    "artifact": "Zoom track: 1.08x intro, 1.10x point A, 1.12x point B, 1.16x climax. Framing: face height 50% of frame.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "four zoom levels exceed the two-level maximum",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "etl_clean",
+    "domain": "sql",
+    "kind": "CLEAN_COMPOSITE",
+    "brief": "Two-stage pipeline. Extract stage: return all 2024 rows; PAID rows are positive, REFUND rows negative, amounts are already signed, one row per order/refund. Load stage: sum extracted rows per customer, keep customers with net total at least 1000.",
+    "artifact": "Extract: SELECT customer_id, amount FROM orders WHERE created_at >= DATE '2024-01-01' AND created_at < DATE '2025-01-01'. Load: SELECT customer_id, SUM(amount) AS total FROM extracted GROUP BY customer_id HAVING SUM(amount) >= 1000.",
+    "target_class": "NONE",
+    "target_finding": "",
+    "status": "PASS",
+    "readiness": "READY"
+  },
+  {
+    "id": "dose_clean",
+    "domain": "medical",
+    "kind": "CLEAN_COMPOSITE",
+    "brief": "Covelin is fictional. Reference: 5 mg/ml, 10 mg twice daily, max 20 mg/day, no MAO-X inhibitors, no alcohol. Section A (prescriber) and section B (patient card) must state the same schedule; the patient follows only section B.",
+    "artifact": "Section A: prescribe 10 mg (2 ml) twice daily, max 20 mg/day, contraindicated with MAO-X inhibitors, no alcohol. Section B (patient card): take 2 ml (10 mg) twice daily, max 20 mg/day, no MAO-X inhibitors, no alcohol.",
+    "target_class": "NONE",
+    "target_finding": "",
+    "status": "PASS",
+    "readiness": "READY"
+  },
+  {
+    "id": "phases_clean",
+    "domain": "strategy",
+    "kind": "CLEAN_COMPOSITE",
+    "brief": "Velaria plan has two phases. Phase 1: licence application starts M1; licensing takes 6-9 months. Phase 2: first regulated revenue, which legally requires the licence to be granted, and must include a pivot trigger if the licence slips past M10.",
+    "artifact": "Phase 1: licence application filed M1, expected grant M7-M10. Phase 2: first regulated revenue starts after licence grant (M11 earliest); pivot to unregulated pilot if no licence by M10.",
+    "target_class": "NONE",
+    "target_finding": "",
+    "status": "PASS",
+    "readiness": "READY"
+  }
+]
