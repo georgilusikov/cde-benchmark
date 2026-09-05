@@ -1,0 +1,23 @@
+{
+  "jobs": 150,
+  "systems": [
+    "B1",
+    "B4"
+  ],
+  "runs": 3,
+  "model": "gemini-3.6-flash-high",
+  "gold_hidden": true,
+  "cases": "cases.json",
+  "lenses": [
+    "lens_constraint.md",
+    "lens_failure.md",
+    "lens_outcome.md"
+  ],
+  "domain_map": {
+    "sql": "lens_domain_sql.md",
+    "medical": "lens_domain_medical.md",
+    "summary": "lens_domain_summary.md",
+    "strategy": "lens_domain_strategy.md",
+    "naming": "lens_domain_naming.md"
+  }
+}
