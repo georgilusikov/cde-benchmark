@@ -1,0 +1,180 @@
+{
+  "frozen": true,
+  "cases": [
+    {
+      "id": "sql_ready",
+      "target_finding": "",
+      "target_class": "NONE",
+      "status": "PASS",
+      "readiness": "READY"
+    },
+    {
+      "id": "sql_incomplete",
+      "target_finding": "schema semantics and boundary test data are missing",
+      "target_class": "EVIDENCE_GAP",
+      "status": "PASS",
+      "readiness": "NEEDS_EVIDENCE"
+    },
+    {
+      "id": "med_ready",
+      "target_finding": "",
+      "target_class": "NONE",
+      "status": "PASS",
+      "readiness": "READY"
+    },
+    {
+      "id": "med_incomplete",
+      "target_finding": "dose and contraindication reference is unavailable",
+      "target_class": "EVIDENCE_GAP",
+      "status": "PASS",
+      "readiness": "NEEDS_EVIDENCE"
+    },
+    {
+      "id": "sum_ready",
+      "target_finding": "",
+      "target_class": "NONE",
+      "status": "PASS",
+      "readiness": "READY"
+    },
+    {
+      "id": "sum_incomplete",
+      "target_finding": "source report and significance result are unavailable",
+      "target_class": "EVIDENCE_GAP",
+      "status": "PASS",
+      "readiness": "NEEDS_EVIDENCE"
+    },
+    {
+      "id": "str_ready",
+      "target_finding": "",
+      "target_class": "NONE",
+      "status": "PASS",
+      "readiness": "READY"
+    },
+    {
+      "id": "str_incomplete",
+      "target_finding": "licence, sales-cycle, and pipeline evidence are missing",
+      "target_class": "EVIDENCE_GAP",
+      "status": "PASS",
+      "readiness": "NEEDS_EVIDENCE"
+    },
+    {
+      "id": "name_ready",
+      "target_finding": "",
+      "target_class": "NONE",
+      "status": "PASS",
+      "readiness": "READY"
+    },
+    {
+      "id": "name_incomplete",
+      "target_finding": "selection evidence is missing",
+      "target_class": "EVIDENCE_GAP",
+      "status": "PASS",
+      "readiness": "NEEDS_EVIDENCE"
+    },
+    {
+      "id": "sql_m1",
+      "target_finding": "upper date bound excludes 2024-12-31",
+      "target_class": "CONFIRMED_DEFECT",
+      "status": "FAIL",
+      "readiness": "BLOCKED"
+    },
+    {
+      "id": "sql_m2",
+      "target_finding": "one-to-many payments join multiplies order amounts",
+      "target_class": "CONFIRMED_DEFECT",
+      "status": "FAIL",
+      "readiness": "BLOCKED"
+    },
+    {
+      "id": "sql_m3",
+      "target_finding": "PAID-only filter excludes REFUND rows required in net total",
+      "target_class": "CONFIRMED_DEFECT",
+      "status": "FAIL",
+      "readiness": "BLOCKED"
+    },
+    {
+      "id": "med_m1",
+      "target_finding": "dose units are ambiguous despite stated concentration",
+      "target_class": "CONFIRMED_DEFECT",
+      "status": "FAIL",
+      "readiness": "BLOCKED"
+    },
+    {
+      "id": "med_m2",
+      "target_finding": "required MAO-X contraindication is omitted from complete instruction",
+      "target_class": "CONFIRMED_DEFECT",
+      "status": "FAIL",
+      "readiness": "BLOCKED"
+    },
+    {
+      "id": "med_m3",
+      "target_finding": "as-needed repeat contradicts the stated daily maximum",
+      "target_class": "CONFIRMED_DEFECT",
+      "status": "FAIL",
+      "readiness": "BLOCKED"
+    },
+    {
+      "id": "sum_m1",
+      "target_finding": "summary asserts success and omits explicitly stated non-significance",
+      "target_class": "CONFIRMED_DEFECT",
+      "status": "FAIL",
+      "readiness": "BLOCKED"
+    },
+    {
+      "id": "sum_m2",
+      "target_finding": "summary reverses the stated recommendation",
+      "target_class": "CONFIRMED_DEFECT",
+      "status": "FAIL",
+      "readiness": "BLOCKED"
+    },
+    {
+      "id": "sum_m3",
+      "target_finding": "correct recommendation is buried after unnecessary context, violating explicit prominence requirement",
+      "target_class": "CONFIRMED_DEFECT",
+      "status": "FAIL",
+      "readiness": "BLOCKED"
+    },
+    {
+      "id": "str_m1",
+      "target_finding": "complete roadmap omits required pivot/stop adaptation triggers",
+      "target_class": "CONFIRMED_DEFECT",
+      "status": "FAIL",
+      "readiness": "BLOCKED"
+    },
+    {
+      "id": "str_m2",
+      "target_finding": "serial licence dependency makes M7 revenue impossible",
+      "target_class": "CONFIRMED_DEFECT",
+      "status": "FAIL",
+      "readiness": "BLOCKED"
+    },
+    {
+      "id": "str_m3",
+      "target_finding": "30-day sales-cycle assumption lacks evidence against the stated 90-day baseline",
+      "target_class": "EVIDENCE_GAP",
+      "status": "PASS",
+      "readiness": "NEEDS_EVIDENCE"
+    },
+    {
+      "id": "name_m1",
+      "target_finding": "candidate has a negative Polish connotation",
+      "target_class": "CONFIRMED_DEFECT",
+      "status": "FAIL",
+      "readiness": "BLOCKED"
+    },
+    {
+      "id": "name_m2",
+      "target_finding": "10-year durability evidence is missing",
+      "target_class": "EVIDENCE_GAP",
+      "status": "PASS",
+      "readiness": "NEEDS_EVIDENCE"
+    },
+    {
+      "id": "name_m3",
+      "target_finding": "required pre-selection legal/domain gate is violated",
+      "target_class": "CONFIRMED_DEFECT",
+      "status": "FAIL",
+      "readiness": "BLOCKED"
+    }
+  ]
+}
