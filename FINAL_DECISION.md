@@ -2,7 +2,7 @@
 
 Status: **FROZEN FOR PRODUCTION**
 
-Production implementation: `.claude/skills/requirements-finder/SKILL.md`
+Production implementation lives in a separate project/repository: `requirements-finder` (standalone skill). This benchmark repository contains only research history, cases, results, and the decision record.
 
 ## Decision
 
