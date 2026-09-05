@@ -1,23 +1,35 @@
 {
   "B1": {
     "target_finding_recall": 0.95,
-    "finding_class_accuracy": 0.75,
-    "unsupported_confirmed_defect_rate": 0.05405405405405406,
+    "finding_class_accuracy": 0.95,
+    "unsupported_confirmed_defect_rate": 0.08108108108108109,
     "readiness_calibration": 0.52,
-    "output_chars": 47329.666666666664
+    "output_chars": 48854.666666666664,
+    "latency": {
+      "median_s": 8.896177053451538,
+      "p95_s": 17.226328873634337
+    }
   },
   "B2": {
-    "target_finding_recall": 0.95,
-    "finding_class_accuracy": 0.75,
-    "unsupported_confirmed_defect_rate": 0.17391304347826086,
-    "readiness_calibration": 0.6,
-    "output_chars": 91883.66666666667
+    "target_finding_recall": 1.0,
+    "finding_class_accuracy": 1.0,
+    "unsupported_confirmed_defect_rate": 0.1232876712328767,
+    "readiness_calibration": 0.56,
+    "output_chars": 91726.66666666667,
+    "latency": {
+      "median_s": 11.58000111579895,
+      "p95_s": 15.944535183906556
+    }
   },
   "B3": {
-    "target_finding_recall": 1.0,
-    "finding_class_accuracy": 0.65,
-    "unsupported_confirmed_defect_rate": 0.029850746268656716,
-    "readiness_calibration": 0.64,
-    "output_chars": 55525.666666666664
+    "target_finding_recall": 0.9,
+    "finding_class_accuracy": 0.8,
+    "unsupported_confirmed_defect_rate": 0.028169014084507043,
+    "readiness_calibration": 0.68,
+    "output_chars": 56692.0,
+    "latency": {
+      "median_s": 9.772451639175415,
+      "p95_s": 20.267742323875428
+    }
   }
 }
