@@ -1,0 +1,595 @@
+{
+  "cases": {
+    "sum_m1_omission": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B3": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "BLOCKED",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            9.554264068603516,
+            9.952323198318481,
+            16.823775053024292
+          ],
+          "output_chars": [
+            1962,
+            2565,
+            2340
+          ]
+        },
+        "B3.1": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "BLOCKED",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            9.646984815597534,
+            26.535813331604004,
+            14.032284021377563
+          ],
+          "output_chars": [
+            2459,
+            2180,
+            1955
+          ]
+        }
+      }
+    },
+    "str_m1_omission": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B3": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            false,
+            false,
+            false
+          ],
+          "stable_class": false,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            12.60138201713562,
+            12.124467134475708,
+            16.402647256851196
+          ],
+          "output_chars": [
+            2109,
+            2679,
+            3070
+          ]
+        },
+        "B3.1": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            false,
+            false
+          ],
+          "stable_class": false,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            11.622273206710815,
+            18.282867193222046,
+            13.450665950775146
+          ],
+          "output_chars": [
+            2744,
+            2889,
+            4317
+          ]
+        }
+      }
+    },
+    "med_incomplete_evidence": {
+      "gold": {
+        "target_class": "EVIDENCE_GAP",
+        "status": "PASS",
+        "readiness": "NEEDS_EVIDENCE"
+      },
+      "systems": {
+        "B3": {
+          "target_detected_runs": [
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false
+          ],
+          "latency_s": [
+            8.828589916229248,
+            8.650845050811768,
+            10.113415002822876
+          ],
+          "output_chars": [
+            2121,
+            2236,
+            2263
+          ]
+        },
+        "B3.1": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            6.972494840621948,
+            43.111244916915894,
+            18.90118408203125
+          ],
+          "output_chars": [
+            1888,
+            2598,
+            2227
+          ]
+        }
+      }
+    },
+    "sum_incomplete_evidence": {
+      "gold": {
+        "target_class": "EVIDENCE_GAP",
+        "status": "PASS",
+        "readiness": "NEEDS_EVIDENCE"
+      },
+      "systems": {
+        "B3": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            7.832789659500122,
+            8.018244981765747,
+            8.24197506904602
+          ],
+          "output_chars": [
+            2075,
+            2270,
+            2523
+          ]
+        },
+        "B3.1": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            9.359793901443481,
+            8.913045883178711,
+            8.961659908294678
+          ],
+          "output_chars": [
+            3127,
+            2531,
+            2624
+          ]
+        }
+      }
+    },
+    "str_incomplete_evidence": {
+      "gold": {
+        "target_class": "EVIDENCE_GAP",
+        "status": "PASS",
+        "readiness": "NEEDS_EVIDENCE"
+      },
+      "systems": {
+        "B3": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            7.728960990905762,
+            7.153100252151489,
+            15.990993976593018
+          ],
+          "output_chars": [
+            2609,
+            2293,
+            2129
+          ]
+        },
+        "B3.1": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            8.654500007629395,
+            15.17276382446289,
+            9.390269994735718
+          ],
+          "output_chars": [
+            2487,
+            2225,
+            2648
+          ]
+        }
+      }
+    },
+    "name_incomplete_evidence": {
+      "gold": {
+        "target_class": "EVIDENCE_GAP",
+        "status": "PASS",
+        "readiness": "NEEDS_EVIDENCE"
+      },
+      "systems": {
+        "B3": {
+          "target_detected_runs": [
+            true,
+            true,
+            false
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            false
+          ],
+          "stable_class": true,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            10.637608289718628,
+            8.198431015014648,
+            8.506489038467407
+          ],
+          "output_chars": [
+            2924,
+            2960,
+            2410
+          ]
+        },
+        "B3.1": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            9.760833024978638,
+            11.522899866104126,
+            8.58256483078003
+          ],
+          "output_chars": [
+            2431,
+            3678,
+            2975
+          ]
+        }
+      }
+    },
+    "sql_ready_corrected": {
+      "gold": {
+        "target_class": "NONE",
+        "status": "PASS",
+        "readiness": "READY"
+      },
+      "systems": {
+        "B3": {
+          "target_detected_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_detected": null,
+          "class_correct_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_class": null,
+          "stable_status": "PASS",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            13.656086921691895,
+            17.307697057724,
+            14.92770504951477
+          ],
+          "output_chars": [
+            2718,
+            2629,
+            3302
+          ]
+        },
+        "B3.1": {
+          "target_detected_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_detected": null,
+          "class_correct_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_class": null,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            15.053887844085693,
+            13.65385913848877,
+            33.7300181388855
+          ],
+          "output_chars": [
+            4008,
+            3431,
+            3478
+          ]
+        }
+      }
+    },
+    "name_m1_supplied_fact": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B3": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            false,
+            true,
+            false
+          ],
+          "stable_class": false,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            14.75080394744873,
+            9.250444173812866,
+            15.24787187576294
+          ],
+          "output_chars": [
+            2235,
+            1839,
+            2317
+          ]
+        },
+        "B3.1": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            false,
+            false,
+            true
+          ],
+          "stable_class": false,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "latency_s": [
+            49.522178649902344,
+            15.89499020576477,
+            28.321588039398193
+          ],
+          "output_chars": [
+            2022,
+            2574,
+            2197
+          ]
+        }
+      }
+    }
+  },
+  "aggregate": {
+    "B3": {
+      "target_finding_recall": 1.0,
+      "finding_class_accuracy": 0.7142857142857143,
+      "unsupported_confirmed_defect_rate": 0.0,
+      "readiness_calibration": 0.75,
+      "output_chars": 19526.0,
+      "latency": {
+        "median_s": 10.032869100570679,
+        "p95_s": 16.760605883598327
+      }
+    },
+    "B3.1": {
+      "target_finding_recall": 1.0,
+      "finding_class_accuracy": 0.7142857142857143,
+      "unsupported_confirmed_defect_rate": 0.0,
+      "readiness_calibration": 0.625,
+      "output_chars": 21897.666666666668,
+      "latency": {
+        "median_s": 13.552262544631958,
+        "p95_s": 41.70406090021133
+      }
+    }
+  },
+  "judge_errors": 0,
+  "status_missing": 0
+}
