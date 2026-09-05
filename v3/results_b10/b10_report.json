@@ -1,0 +1,3637 @@
+{
+  "cases": {
+    "v01_fee_chain": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            true,
+            false
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Price Service outputs the canonical listed price",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Fee Stage adds no surcharge ($0.00) for standard checkout",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Payment Stage charges the exact amount received from the Fee Stage",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Fee Stage passes the unmodified listed price to the Payment Stage",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Price service outputs the exact listed price without modification",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Fee stage adds no surcharge (0% / $0.00) for standard checkout",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Payment stage charges exactly the amount it receives from upstream",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Interface contract between Fee Stage and Payment Stage must unambiguously distinguish base price from total payable to prevent ambiguous fee flags",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Receipt itemization must satisfy receipt_total == listed_price + surcharge == charged_amount",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Price Service generates and outputs the exact catalog listed price",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Fee Stage adds no surcharge for standard checkout, outputting an amount equal to the input listed price",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Payment Stage charges the exact total amount passed to it",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Price Service transmits the un-augmented listed price to the Fee Stage",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Fee Stage transmits the final calculated total amount (without default mandatory surcharge) to the Payment Stage",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            10.24606704711914,
+            11.935084104537964,
+            8.81689977645874
+          ],
+          "output_chars": [
+            3798,
+            4993,
+            3034
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            false,
+            false
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Fee stage adds no surcharge for standard checkout",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Price service outputs the listed price",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Payment stage charges exactly the amount it receives",
+                "class": "EXPLICIT"
+              }
+            ],
+            [
+              {
+                "condition": "Price Service outputs the exact listed price",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Fee Stage applies zero surcharge (0%) for standard checkout",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Payment Stage charges exactly the amount received from Fee Stage",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Payload transmitted from Fee Stage to Payment Stage equals exact listed price",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Total charged to customer equals listed price",
+                "class": "EXPLICIT"
+              }
+            ],
+            [
+              {
+                "condition": "Fee Stage applies zero surcharge (0%) for standard checkout",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Payment Stage charges exactly the amount received from the Fee Stage",
+                "class": "EXPLICIT"
+              }
+            ]
+          ],
+          "latency_s": [
+            12.158119201660156,
+            9.435004949569702,
+            8.63446593284607
+          ],
+          "output_chars": [
+            4321,
+            3576,
+            4049
+          ]
+        }
+      }
+    },
+    "v02_notification_replay": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Delivery Engine must retry alert delivery upon timeout expiry (at-least-once delivery)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Alert Handler must maintain state or interface with a deduplication layer tracking handled incident IDs",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Deliveries must carry a persistent, unique incident identifier preserved across retries to enable downstream deduplication",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Each incident notifies on-call exactly once",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Delivery subsystem guarantees at-least-once redelivery after timeouts",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Alert handler maintains deduplication state/idempotency records for handled incidents",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Delivery payloads carry a unique incident identifier",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Delivery payloads must attach sequence/attempt metadata",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Handoff protocol must support idempotent acknowledgment to suppress redeliveries arriving after timeout",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Each incident notifies on-call exactly once",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Delivery payload includes an immutable unique Incident Identifier (incident_id)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Delivery payload includes an incrementing delivery attempt metadata attribute",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Alert Handler maintains an idempotent state record / deduplication cache of handled incident_ids",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Handoff protocol pairs at-least-once delivery with receiver-side deduplication",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            11.708807945251465,
+            11.34145212173462,
+            10.302178859710693
+          ],
+          "output_chars": [
+            3588,
+            4193,
+            4360
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            false,
+            false
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Delivery System attempts delivery of incident notifications",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Handled alerts are recorded/deduplicated prior to paging on-call, OR delivery is strictly guaranteed exactly-once",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Alert Handler emits a page upon receiving an unhandled incident delivery",
+                "class": "EXPLICIT"
+              }
+            ],
+            [
+              {
+                "condition": "Notification Coverage (at least once notification)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Notification Deduplication (at most once notification)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Handler idempotency / deduplication per incident ID under at-least-once redelivery",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "An incident generates at least one alert delivery to the alert handler",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Redeliveries of an already-handled incident do not trigger additional pages to on-call",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            15.428049802780151,
+            10.346865892410278,
+            12.90279507637024
+          ],
+          "output_chars": [
+            5504,
+            4235,
+            5612
+          ]
+        }
+      }
+    },
+    "v03_cargo_weight": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "The loaded truck combined weight must not exceed the 10-ton road limit",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Individual crates must remain within the 3-ton handling limit",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Combined load calculation and validation against the 10-ton truck limit must be performed prior to plan approval",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Combined load weight must not exceed the truck's 10-ton road limit",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Individual crate weight must not exceed the 3-ton handling limit",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Crate-to-truck handoff interface must pass validated crate weights to trigger vehicle-level payload validation prior to plan approval",
+                "class": "UNSUPPORTED"
+              }
+            ],
+            [
+              {
+                "condition": "Combined load on the truck must not exceed the 10-ton road limit (sum of crate weights <= 10 tons)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Each individual crate must not exceed its 3-ton handling limit",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Plan certification must require an explicit pass signal from both Per-Crate Validation and Total Load Aggregation before declaring compliance",
+                "class": "UNSUPPORTED"
+              }
+            ]
+          ],
+          "latency_s": [
+            9.800523042678833,
+            9.986634016036987,
+            9.990614891052246
+          ],
+          "output_chars": [
+            3912,
+            3375,
+            3641
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Each loaded crate must weigh <= 3 tons (individual handling limit)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Total combined payload on the truck must not exceed 10 tons (road limit)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Plan approval requires satisfying both individual crate handling limits and aggregate truck load limits",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Individual Crate Weight Compliance (<= 3 tons per crate)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Aggregated Truck Payload Compliance (<= 10 tons total load)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Weight Aggregation Handoff (Sum of crate weights evaluated against truck limit)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Validation flow enforces Overall Approval = (Component A Pass) AND (Component B Pass)",
+                "class": "UNSUPPORTED"
+              }
+            ],
+            [
+              {
+                "condition": "Combined truck load weight does not exceed 10-ton road limit",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Individual crate weight does not exceed 3-ton handling limit",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Validation logic must evaluate total combined load independently of individual crate compliance before declaring a plan satisfied",
+                "class": "UNSUPPORTED"
+              }
+            ]
+          ],
+          "latency_s": [
+            12.782675981521606,
+            9.417508125305176,
+            14.085842847824097
+          ],
+          "output_chars": [
+            4563,
+            3679,
+            5122
+          ]
+        }
+      }
+    },
+    "v04_config_secrets": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            false,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Restoration of application configuration and database contents from backup",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Restoration or availability of vault secrets in the recovery environment",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Inclusion of vault/secret reconnection or re-integration steps in the recovery runbook prior to declaring readiness",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Restored service must have access to operational secrets stored in Vault to serve authenticated traffic",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Disaster recovery process must incorporate Vault restoration, unsealing, or reconnection",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Application configuration and database contents must be restored from backup",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Restoration of application configuration and database contents from backup",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Restored application service must have access to Vault secrets to serve authenticated traffic",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Recovery runbook must orchestrate unsealing the Vault",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Application service must perform a startup dependency check for Vault secret accessibility and fail readiness probes if secrets are missing",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Handoff between database replay and service initialization must validate that authentication key identifiers in restored database match active keys in Vault",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            12.95444393157959,
+            9.593822002410889,
+            9.60652208328247
+          ],
+          "output_chars": [
+            4360,
+            4234,
+            3969
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "BLOCKED",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            false
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Application Configuration & Database Content Restored",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Secrets Availability & Accessibility (Vault recovery/reconnection)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Post-Restore End-to-End Service Validation",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Application config and database contents are restored to the target environment",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Vault secrets / authentication credentials are accessible to the restored service upon recovery",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "The recovery runbook executes all steps required to transition the service into an authenticated-traffic-ready state",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "The DR process must include explicit steps to restore, unseal, or re-integrate Vault access/secrets prior to declaring readiness for authenticated traffic",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Service readiness declaration must be gated by a functional authentication probe",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "The handoff between service restore and secret availability must guarantee valid secret binding before opening traffic routing",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Application configuration and database contents are restored",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Vault secrets / secret access are available to the restored service",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Application runtime initializes and accepts authenticated network requests",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            10.63868522644043,
+            11.031653881072998,
+            12.083477973937988
+          ],
+          "output_chars": [
+            5033,
+            4403,
+            5855
+          ]
+        }
+      }
+    },
+    "v05_search_freshness": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            true,
+            true,
+            true
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Index age at query time must not exceed 60 minutes",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Candidate pool handed off from Index to Ranking must contain all listings updated within the last hour",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Ranking stage must correctly order candidate listings according to ranking criteria",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "UI freshness claims must strictly match actual index age and data state",
+                "class": "UNSUPPORTED"
+              }
+            ],
+            [
+              {
+                "condition": "Index age must not exceed 1 hour to reflect listings updated within the last hour",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Ranking stage correctly orders whatever index contains",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Ranking stage avoids data corruption across frequent index updates",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "User-facing freshness claims on search page must match index age constraints",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Interface contract handoff between ranking stage and presentation layer passing freshness metadata",
+                "class": "UNSUPPORTED"
+              }
+            ],
+            [
+              {
+                "condition": "Index age must not exceed 1 hour at query execution time so results reflect listings updated within the last hour",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Index handoff mechanism must validate that index age is within SLA before passing candidate sets to the ranking engine",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Presentation UI freshness claims must accurately match index freshness metadata or suppress 'latest listings' claims",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Ranking engine must maintain deterministic ordering over the provided index candidate set",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            11.78630805015564,
+            10.923524141311646,
+            11.153406858444214
+          ],
+          "output_chars": [
+            5086,
+            4426,
+            3902
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            true,
+            true,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Index age at query time is <= 1 hour",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Search UI freshness assertions match actual index freshness",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Index age at query execution time must be <= 1 hour",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Index update/rebuild cadence must maintain an index age <= 1 hour",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Search UI presentation contract must accurately reflect actual index freshness",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Index age at query time must be <= 1 hour",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Ranking stage correctly orders the index contents",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            11.622042179107666,
+            11.156816959381104,
+            13.226461172103882
+          ],
+          "output_chars": [
+            4354,
+            5638,
+            5876
+          ]
+        }
+      }
+    },
+    "v06_approval_versions": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Legal approval must cover the exact document version nominated for release (version 8)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Security approval must cover the exact document version nominated for release (version 8)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Release gate must enforce version identity/equality between all mandatory approvals and the shipped document version",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Any modification post-Legal sign-off must automatically reset Legal approval status to PENDING_RE_APPROVAL (Requirement 1.2)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Every approval must apply to the shipped document",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Checklist release gate must enforce version equality between all approvals and the shipped document before authorizing release (shipped_version == legal_approval.version == security_approval.version)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Any revision post-approval must produce a new version identifier and set all prior approval statuses to STALE / REQUIRES_REAPPROVAL",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Every approval record must capture and immutably bind to a cryptographic content hash",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Interface schema between sign-off store and release gate must pass structured approval metadata { approver, version_approved, signature } and reject flat boolean reduction",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Every approval must apply to the shipped document",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Legal approval must cover the shipped version (version 8)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Security approval must cover the shipped version (version 8)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Every approval record must explicitly bind the approving domain's sign-off to a specific version string evaluated",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "The release checklist gatekeeper must enforce automated version identity assertion (Version(Approval_i) == Version(ShippedDoc)) prior to release authorization",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "The shipping pipeline must require a cryptographically signed or verified gatekeeper manifest proving all approvals match the payload version before releasing",
+                "class": "UNSUPPORTED"
+              }
+            ]
+          ],
+          "latency_s": [
+            13.626926183700562,
+            12.639907121658325,
+            13.184538841247559
+          ],
+          "output_chars": [
+            5042,
+            5696,
+            5414
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            true,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Legal approval must be explicitly given for Version 8 (the shipped version)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Security approval must be explicitly given for Version 8 (the shipped version)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "The Release Checklist must validate that all approval versions strictly match the shipped document version before authorizing release",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "The handoff schema must pass a coupled tuple (ApprovalStatus, ApprovedVersion) rather than a simple boolean flag",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Legal approval applies to Version 8",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Security approval applies to Version 8",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "The release checklist enforces exact version matching between each approval record and the document version scheduled for release",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Legal approval explicitly applies to Version 8 (the shipped version)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Security approval explicitly applies to Version 8 (the shipped version)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "The release checklist verifies version equality across all approval records and the target release version prior to authorizing release",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            11.630746841430664,
+            12.397628784179688,
+            11.810279846191406
+          ],
+          "output_chars": [
+            5171,
+            5661,
+            5225
+          ]
+        }
+      }
+    },
+    "v07_anonymized_ids": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            true,
+            true,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Published rows must be non-identifying through the removal of direct identifiers such as names",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Elimination of unique quasi-identifier combinations (exact birth date plus postal code) via generalization or suppression so published rows are not uniquely identifying",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Quasi-Identifier Profiler component computing equivalence classes and flagging tuples with k < k_threshold",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Automated interface handoff between profiler and transformation engine to automatically enforce transformation rules",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Publication Release Gatekeeper performing automated pre-release re-identification risk verification",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Candidate dataset must be accompanied by a cryptographic or auditable risk profile proof confirming k >= k_threshold",
+                "class": "UNSUPPORTED"
+              }
+            ],
+            [
+              {
+                "condition": "Removal of direct personal identifiers (names) from published records",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Generalization or suppression of birth date and postal code combinations so rows do not remain unique and identifying",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "An automated profiling-to-transformation handoff interface that ingests data profile uniqueness signals to trigger generalization rules",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "An automated pre-publication verification gate that computes re-identification risk and blocks tables containing unique quasi-identifiers",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Removal of direct identifiers (names) from published rows",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Transformation (generalization, suppression, or aggregation) of birth date and postal code quasi-identifiers so rows are not uniquely identifiable",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Removal or hashing of unstated direct identifier types not present in the data (SSNs, local IDs)",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Compliance with a formal k-anonymity threshold (e.g., k >= 5) verified by automated k-anonymity calculation testing",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Implementation of an automated publication clearance interface / validation handoff gate to evaluate and block releases",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            12.564204692840576,
+            12.57274317741394,
+            12.27116584777832
+          ],
+          "output_chars": [
+            4834,
+            6396,
+            5959
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            false,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Removal of direct identifiers (names)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Suppression, generalization, or masking of unique quasi-identifier combinations (birth date and postal code)",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Direct explicit identifiers (names) must be removed",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Retained attribute combinations (quasi-identifiers) must not uniquely identify individuals/rows",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Direct identifiers (names) are removed",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Unique quasi-identifier combinations (birth date and postal code) are modified, aggregated, or suppressed such that no row uniquely isolates an individual",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Transformation logic validates output row uniqueness against input profile constraints prior to release via an automated pre-release audit script",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            10.830480813980103,
+            9.769397020339966,
+            10.94039011001587
+          ],
+          "output_chars": [
+            4831,
+            4109,
+            4382
+          ]
+        }
+      }
+    },
+    "v08_cache_staleness": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            true,
+            true,
+            true
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Cache entry lifetime must not exceed 5 minutes (300 seconds)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Cache layer must evict or revalidate entries older than 5 minutes prior to serving",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Price display layer must verify data age and reject payloads older than 5 minutes",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Telemetry and monitoring layer must track data staleness alongside hit rate and report unhealthy status when data age exceeds 5 minutes",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Deployment pipeline must enforce automated configuration validation to block TTLs exceeding 5 minutes",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Health metric payload must pair hit rate with 99th-percentile data staleness age",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Cache entry lifetime (TTL) must be configured and enforced to not exceed 5 minutes",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Price Page presentation layer must inspect entry age metadata and reject payloads older than 5 minutes",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "System health telemetry must evaluate freshness SLA compliance rather than decoupled hit-rate metrics",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Displayed prices must be at most 5 minutes old",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Cache entry lifetime (TTL) must be capped at 5 minutes or less when entry lifetime is the sole governor of staleness",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Cache engine telemetry and health reporting must reflect data freshness SLA rather than operational uptime or hit-rate",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Price page presentation layer must evaluate payload age metadata and reject or force-refresh stale entries",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Policy update pipeline must validate and enforce SLA limits prior to acceptance by the cache engine",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Cache-to-page handoff interface must transmit explicit timestamp metadata and SLA compliance status",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            12.680032014846802,
+            11.414940118789673,
+            11.779659032821655
+          ],
+          "output_chars": [
+            5662,
+            4692,
+            4772
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            true,
+            true,
+            true
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Displayed price age <= 5 minutes",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Cache entry lifetime <= 5 minutes",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Health status reporting incorporates staleness compliance alongside hit rate",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Cache entry lifetime must be <= 5 minutes",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Cached price entries must expire and become unavailable after 5 minutes from ingestion",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Caching layer health signals must incorporate price age compliance (<= 5 minutes) and flag non-compliance",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Cache entry lifetime <= 5 minutes",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Price page serves entries within active lifetime (prices <= 5 minutes old)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Health and status telemetry flags cache entries exceeding 5 minutes as unhealthy / reflects freshness compliance",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            13.369562149047852,
+            11.297019004821777,
+            9.227652788162231
+          ],
+          "output_chars": [
+            6554,
+            4711,
+            4504
+          ]
+        }
+      }
+    },
+    "a01_filter_range": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            false,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Query must cover all orders created within calendar year 2024 (from 2024-01-01 through 2024-12-31)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "PAID order amounts must enter the sum as positive values and REFUND order amounts as negative values",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The aggregation must process every 2024 row exactly once",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Signed numeric values must enter the SUM accumulator to calculate the correct net sum",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Query must cover the entire 2024 calendar year, including December 2024",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "PAID rows must be positive and REFUND rows must be negative in the net sum",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Query must aggregate every matching 2024 row exactly once per customer",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "December 2024 transactions must pass through filtering into the customer net aggregation",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Predicate must encompass the entire 2024 calendar year (created_at >= DATE '2024-01-01' AND created_at < DATE '2025-01-01')",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Aggregate must yield net total where PAID contributes positively and REFUND contributes negatively",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Aggregate every eligible 2024 row per customer exactly once into customer_id groups",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Filter-to-aggregator handoff must evaluate timestamp boundaries consistently against the target reporting timezone",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Row status/sign interface must map negative sign to refund amounts before passing to SUM()",
+                "class": "UNSUPPORTED"
+              }
+            ]
+          ],
+          "latency_s": [
+            13.192965745925903,
+            11.691192150115967,
+            13.650343894958496
+          ],
+          "output_chars": [
+            4979,
+            4497,
+            5253
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "BLOCKED",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            false,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Full temporal coverage of all 2024 calendar year orders (2024-01-01 through 2024-12-31)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Correct net sum sign alignment (PAID orders positive, REFUND orders negative entering net sum)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Exactly-once aggregation of every qualifying 2024 order record",
+                "class": "EXPLICIT"
+              }
+            ],
+            [
+              {
+                "condition": "Full-Year Temporal Coverage: The query must select orders across all of 2024 (2024-01-01 00:00:00 to < 2025-01-01 00:00:00)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Net Sum Sign Application: PAID row amounts must contribute positively (+ amount) and REFUND row amounts must contribute negatively (- amount)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Exact Grouped Aggregation: Every 2024 order row must be included exactly once, aggregated by customer_id",
+                "class": "EXPLICIT"
+              }
+            ],
+            [
+              {
+                "condition": "Full Calendar Year 2024 Coverage (2024-01-01 to 2025-01-01)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Net Sum Calculation with Positive PAID and Negative REFUND",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Exact Single Ingestion per 2024 Order Row",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Grouping by Customer (customer_id)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            13.00311803817749,
+            12.174468040466309,
+            14.987425088882446
+          ],
+          "output_chars": [
+            5541,
+            4075,
+            4842
+          ]
+        }
+      }
+    },
+    "a02_dose_conflict": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "The patient leaflet must specify a fixed twice-daily schedule matching the reference (10 mg twice daily)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The patient leaflet must state the maximum daily cap of 20 mg/day",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The patient follows only the literal text of the leaflet",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The dosing regimen must be fixed scheduled administration rather than conditional/PRN ('whenever needed')",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Instructional text must yield 100% patient adherence and prevent improper dose spacing or interval violations",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Patient leaflet must state the same schedule as the reference (10 mg twice daily) without conditional or PRN phrasing",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Leaflet must specify a unit dose of 10 mg per administration",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Leaflet must specify a daily maximum ceiling of 20 mg/day",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Patient follows only the written leaflet instructions without external intervention",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Leaflet must mandate two administrations per 24-hour period",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Leaflet text must protect against dose clustering by enforcing a minimum interval or specific morning/evening separation",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Reference specification defines a clinical dosing schedule of 10 mg twice daily and a daily maximum limit of 20 mg/day.",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Patient leaflet must state the same schedule as the reference (10 mg twice daily) without converting scheduled doses into conditional/PRN administration.",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Patient execution follows only the written instructions in the leaflet.",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The leaflet states a maximum daily dose matching the reference upper limit of 20 mg/day.",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Zero semantic drift between clinical specification and patient leaflet wording regarding dosing schedule modality.",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Written instructions must produce deterministic administration timing without ambiguity.",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Patient execution must maintain an intended clinical control model with timing stability and control predictability.",
+                "class": "UNSUPPORTED"
+              }
+            ]
+          ],
+          "latency_s": [
+            11.835108995437622,
+            12.668061256408691,
+            12.108141899108887
+          ],
+          "output_chars": [
+            4978,
+            5285,
+            5088
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            false,
+            false
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Leaflet explicitly instructs a scheduled twice-daily regimen (10 mg twice daily)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Leaflet explicitly states a daily maximum dose of 20 mg/day",
+                "class": "EXPLICIT"
+              }
+            ],
+            [
+              {
+                "condition": "Leaflet specifies 10 mg per dose",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Leaflet specifies a fixed twice-daily schedule",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Leaflet specifies maximum daily dose of 20 mg/day",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Leaflet content matches the reference schedule without introducing unapproved patient discretion",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "The leaflet must specify a fixed twice-daily dosing schedule rather than a conditional/as-needed (PRN) schedule.",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The leaflet must specify a single dose amount of 10 mg.",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The leaflet must state a maximum daily limit of 20 mg/day.",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The leaflet text must match the reference schedule requirements without alteration, as the patient follows only the leaflet.",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Leaflet wording must produce consistent twice-daily dose administration regardless of patient symptom state.",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            10.673910856246948,
+            13.034581899642944,
+            12.58461880683899
+          ],
+          "output_chars": [
+            4538,
+            6433,
+            4843
+          ]
+        }
+      }
+    },
+    "a03_summary_reversal": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            false
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Preserve the recommendation that a confirmatory trial is required prior to any launch claim",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Prevent un-gated launch recommendations when the primary endpoint is missed",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "The summary must state the exact trial sample size (n=55)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "The summary must state the primary endpoint outcome (missed)",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Accurately capture and report empirical trial metadata and outcome (sample size n=55, primary endpoint missed)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Preserve the recommendation's strict temporal prerequisite structure requiring a confirmatory trial before any launch claim",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Enforce a dependency handoff where the negative trial outcome conditions launch claims on confirmatory evidence as a non-bypassable gate",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Must retain the sequence constraint requiring confirmatory trial completion prior to any launch claims",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Trial endpoint failure must act as an active blocking gate on immediate launch posture",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Must capture exact trial sample size (n=55) and primary endpoint failure",
+                "class": "EXPLICIT"
+              }
+            ]
+          ],
+          "latency_s": [
+            10.001628875732422,
+            11.571754932403564,
+            9.705043077468872
+          ],
+          "output_chars": [
+            3771,
+            3396,
+            3165
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Accurate representation of empirical trial facts (sample size n=55, primary endpoint missed)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Preservation of recommendation timing and constraint (confirmatory trial required before any launch claim)",
+                "class": "EXPLICIT"
+              }
+            ],
+            [
+              {
+                "condition": "Fact Preservation (Trial size n=55 and primary endpoint result must be stated accurately)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Recommendation Precedence Preservation (Confirmatory trial execution must be established as a mandatory prerequisite before any launch claim)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Fact-to-Directive Handoff (Missed primary endpoint assertion must enforce gating rule blocking pre-confirmatory launch claims)",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "The summary must accurately state the trial size (n=55) and that the primary endpoint was missed",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "The summary must state that a confirmatory trial must be conducted before any launch claim is made",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The recommendation must maintain the failed trial result as a gate preventing launch claims",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            9.224565982818604,
+            11.177976131439209,
+            9.946610927581787
+          ],
+          "output_chars": [
+            4142,
+            3187,
+            4353
+          ]
+        }
+      }
+    },
+    "a04_gate_skip": {
+      "gold": {
+        "target_class": "CONFIRMED_DEFECT",
+        "status": "FAIL",
+        "readiness": "BLOCKED"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "BLOCKED",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Trademark screening for 'Zentix' must be completed prior to irreversible brand adoption.",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Trademark screening stage must maintain an explicit system state as PENDING and withhold clearance signals until all checks complete.",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Brand adoption decision system must enforce an automated hard blocking rule that programmatically prevents adoption when status is not PASSED/COMPLETED.",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Screening-to-adoption handoff interface must evaluate exact clearance state signals rather than projected completion dates.",
+                "class": "UNSUPPORTED"
+              }
+            ],
+            [
+              {
+                "condition": "Trademark screen must complete prior to irreversible brand adoption",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Screen completion timestamp must precede decision execution timestamp (ScreenCompletionTimestamp < DecisionExecutionTimestamp)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Trademark screen must yield a cleared status (ScreenStatus == COMPLETED_CLEARED, free of conflicting filings, legal risks, or rejections) to permit irreversible adoption",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Screening component must output a definitive completion status (COMPLETED_CLEARED or COMPLETED_REJECTED) before downstream adoption workflows can be initiated",
+                "class": "UNSUPPORTED"
+              }
+            ],
+            [
+              {
+                "condition": "Trademark screen must be completed prior to irreversible brand adoption",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Screening completion date/timestamp must precede or equal adoption execution date/timestamp",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Trademark screening component must provide a deterministic state signal ('Completed' or 'Pending') and block adoption workflows while in 'Pending' state",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Screening-to-adoption interface must enforce temporal validation and invalidate execution if adoption date precedes screening completion date",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            11.1162588596344,
+            11.209465026855469,
+            10.702507972717285
+          ],
+          "output_chars": [
+            3505,
+            3820,
+            3794
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "FAIL",
+          "stable_readiness": "READY",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            false,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Trademark screen completion prior to adoption",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Adoption execution gate control verifying completion status",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Trademark screen completion prior to irreversible brand name adoption",
+                "class": "EXPLICIT"
+              }
+            ],
+            [
+              {
+                "condition": "The trademark screen for 'Zentix' must reach completed status before irreversible adoption occurs",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The adoption execution flow must gate its execution state on receiving verified screen completion",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            12.742895126342773,
+            12.144469022750854,
+            9.92806601524353
+          ],
+          "output_chars": [
+            4135,
+            5221,
+            4021
+          ]
+        }
+      }
+    },
+    "c01_video_complete": {
+      "gold": {
+        "target_class": "NONE",
+        "status": "PASS",
+        "readiness": "READY"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_detected": null,
+          "class_correct_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_class": null,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Editor trims repeated heads and false starts from raw takes so each selected block starts cleanly without repeated audio",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Assembler sequences and concatenates trimmed take segments into a continuous timeline without gaps or overlaps",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Renderer exports the assembled timeline into a finalized video master matching plan pixels frame-for-frame",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "QC checks the exported file for block completeness and zero repeated audio",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Editor hands off trimmed segment cut-points/metadata to Assembler",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Assembler hands off timeline structure and project metadata to Renderer",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Renderer hands off exported media container file to QC Inspector",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "QC Inspector performs automated transcript alignment and repetition detection across 100% of exported master duration",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Editor and Assembler use a standardized cut-point metadata schema (e.g., OpenTimelineIO / EDL) specifying absolute frame indices bound to unique asset IDs",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Renderer export profile inherits frame rate, 48 kHz audio sample rate, and channel mapping directly from Assembler project parameters",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Master file export conforms to a strictly standardized Constant Frame Rate (CFR) container and audio profile",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Editor trims repeated heads/false starts from raw takes without clipping initial spoken phonemes",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Assembler concatenates trimmed takes so every selected block is included exactly once in sequence",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Assembler timeline sequence must have zero timeline gaps",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Renderer exports the plan pixels matching timeline edit points frame-for-frame",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Rendered output file must match timeline edit points sample-for-sample without drift",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "QC audits the exported file to verify all selected spoken blocks are present exactly once without repeated audio",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "QC verification suite must validate 100% of audio content via automated ASR forced alignment",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Timecode standard, frame rate, and sample rate clock definitions must be identical between Editor and Assembler contexts",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Renderer buffer frame boundaries must align precisely with timeline cut points without introducing padding frames or sample rounding errors",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Container metadata and timing flags must strictly adhere to standard container specs expected by QC parsers",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Raw QC execution logs, ASR transcripts, or audio waveform reports are required to confirm compliance",
+                "class": "UNSUPPORTED"
+              }
+            ],
+            [
+              {
+                "condition": "Editor trims repeated heads and false starts so that each selected spoken block is preserved exactly once without repeated audio",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Assembler concatenates trimmed takes in timeline order with zero missing, out-of-order, or duplicated clips",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Editor-to-Assembler handoff schema (EDL/XML) must explicitly declare sub-frame sample timecode and reference frame rate with deterministic rounding (REQ-INT-EA-01)",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Renderer exports plan pixels frame-for-frame matching total timeline duration",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Audio-video synchronization remains within +/- 0.5 frames across the entire file duration (REQ-REND-01)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Timeline graph handoff must enforce mandatory audio resampling locks to renderer target clock rate prior to buffer transfer (REQ-INT-AR-01)",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "QC checks the exported file to confirm all blocks are present exactly once",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "QC inspection must execute automated speech-to-text / acoustic fingerprint matching on the final exported audio stream (REQ-QC-01)",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Master container export must write standardized delay/padding headers (e.g., edit lists / iCCP metadata) recognized by the QC decoder parser (REQ-INT-RQ-01)",
+                "class": "UNSUPPORTED"
+              }
+            ]
+          ],
+          "latency_s": [
+            15.373319864273071,
+            14.363417148590088,
+            18.353299140930176
+          ],
+          "output_chars": [
+            6731,
+            7753,
+            8281
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_detected": null,
+          "class_correct_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_class": null,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            false,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "All selected spoken blocks are present in the final output",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Every selected spoken block appears exactly once with zero repeated audio/heads",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The final exported master video is watchable and matches the plan frame-for-frame",
+                "class": "EXPLICIT"
+              }
+            ],
+            [
+              {
+                "condition": "All selected spoken blocks are present in the final video",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Every selected spoken block appears exactly once with zero repeated head or duplicate audio",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The final exported media file is watchable and playable frame-for-frame",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "All selected spoken blocks are present in the output.",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Every selected spoken block appears exactly once with no repeated audio/heads.",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The final exported master is watchable (visually and audibly intact, rendering matches plan frame-for-frame).",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            15.41146183013916,
+            15.093788862228394,
+            12.93967580795288
+          ],
+          "output_chars": [
+            7880,
+            6735,
+            7032
+          ]
+        }
+      }
+    },
+    "c02_checkout_complete": {
+      "gold": {
+        "target_class": "NONE",
+        "status": "PASS",
+        "readiness": "READY"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_detected": null,
+          "class_correct_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_class": null,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Price service calculates and outputs the listed price",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Payment processing service charges the exact received price without surcharge",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Receipt storage persists record matching the actual charged amount",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Handoff of listed price payload from Price Service to Payment Processing Service",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Handoff of confirmed execution result and charged amount from Payment Processing Service to Receipt Storage Service",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Price service outputs listed price as an immutable, explicitly typed payload with integer cents and ISO currency code",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Price service supplies a cryptographically signed, time-bounded price token validated by payment processing",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Payment to receipt handoff uses an idempotent event payload containing a settled transaction authorization code",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Price Service outputs the exact listed price",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Price Service outputs listed price as an exact non-negative integer representation of the smallest currency unit alongside an ISO currency code",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Handoff between Price Service and Payment Service preserves exact monetary precision and currency alignment",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Payment Service charges the exact received amount with zero processing fees or surcharges",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Payment Service transmits payload to Receipt Service only upon confirmed gateway success, passing the exact executed charge amount",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Receipt Service stores a receipt record matching the charged amount",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Receipt Service stores an immutable receipt record",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Price Service outputs the canonical listed price",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Price Service outputs ISO currency code",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Interface 1 transfers the listed price to Payment Service without numerical drift or mutation",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Interface 1 preserves currency attribute and exact numerical scale during transit",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Payment Service charges exactly the received amount with zero added surcharge",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Interface 2 transfers final charged amount to Receipt Service",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Receipt handoff must be idempotent and guaranteed via reliable delivery of finalized charge events",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Receipt Service persists the transaction receipt matching the exact charged amount",
+                "class": "EXPLICIT"
+              }
+            ]
+          ],
+          "latency_s": [
+            14.262821912765503,
+            13.255537033081055,
+            13.789675235748291
+          ],
+          "output_chars": [
+            6247,
+            5318,
+            6490
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_detected": null,
+          "class_correct_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_class": null,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            false,
+            false
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Price Output Accuracy (Price Service outputs authoritative listed price)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Price-to-Payment Handoff Integrity (Uncorrupted transmission of listed price from Price Service to Payment Service)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Zero-Surcharge Charge Execution (Payment Service charges exactly received amount with no surcharge)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Payment-to-Receipt Handoff Integrity (Accurate transmission of charged amount and confirmation from Payment Service to Receipt Service)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Receipt Amount Storage Matching (Receipt Service persists receipt matching charged amount)",
+                "class": "EXPLICIT"
+              }
+            ],
+            [
+              {
+                "condition": "Price Service outputs the authoritative listed price",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Payment Service charges the received amount without surcharge",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Receipt Service stores the charged amount",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Price Service to Payment Service interface handoff preserves payload integrity",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Payment Service to Receipt Service interface handoff preserves charged amount payload integrity",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Price Service outputs the listed price (P_output = P_listed)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Price-to-Payment Handoff Integrity (P_received_payment = P_output)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Payment Service charges received amount with zero surcharge (P_charged = P_received_payment)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Payment-to-Receipt Handoff Integrity (P_received_receipt = P_charged)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Receipt Service stores charged amount (P_stored = P_received_receipt)",
+                "class": "EXPLICIT"
+              }
+            ]
+          ],
+          "latency_s": [
+            15.445090055465698,
+            15.158262014389038,
+            12.213400840759277
+          ],
+          "output_chars": [
+            7320,
+            6342,
+            6495
+          ]
+        }
+      }
+    },
+    "c03_migration_complete": {
+      "gold": {
+        "target_class": "NONE",
+        "status": "PASS",
+        "readiness": "READY"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_detected": null,
+          "class_correct_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_class": null,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Readers are updated before the writer emits the new field",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Writer emits only fields readers accept during the transition period",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Final end-to-end verification confirms zero failed reads",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Readers accept both legacy and extended schemas without unhandled exceptions",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "100% reader rollout convergence prior to writer field emission",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Deployment control plane enforces a strict barrier lock blocking writer emission until reader rollout is verifiably immutable",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Continuous telemetry sampling pipeline auditing metrics across transition windows",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Readers are updated before the writer emits the new field",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Writer emits only fields readers accept during transition",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Final state is verified end-to-end for zero failed reads",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Reader code accepts and safely parses both legacy payloads and new-field payloads",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Writer transition to emitting the new field must be hard-gated by an automated 100% reader fleet deployment acknowledgment",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "End-to-end verification engine must capture read error logs across 100% of reader nodes throughout the full migration window",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Readers are updated to schema-tolerant code before writer emits the new field",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Writer emits only fields readers accept during the transition window",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Final state is verified end to end to confirm zero failed reads",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "An explicit synchronization barrier must block writer field emission until 100% reader rollout and cache invalidation are universally confirmed",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Writer transition startup events must automatically signal and synchronize continuous telemetry capture across all reader error logs",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Verification must evaluate continuous telemetry logs across the entire transition window rather than a post-transition end-to-end verification",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            11.373029232025146,
+            14.217950105667114,
+            13.965153932571411
+          ],
+          "output_chars": [
+            5238,
+            5680,
+            6137
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_detected": null,
+          "class_correct_runs": [
+            null,
+            null,
+            null
+          ],
+          "stable_class": null,
+          "stable_status": "FAIL",
+          "stable_readiness": "BLOCKED",
+          "unsupported_confirmed_runs": [
+            true,
+            true,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            false
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Readers are updated to handle the new field schema before the writer emits the new field",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The writer emits only fields that active readers accept during the transition phase",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The final state is verified end-to-end",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "An explicit blocking deployment gate holding writer release until 100% of reader instances report readiness",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Explicit recitation of the transition emission boundary constraint within the artifact plan text",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Continuous auditing of read logs and error rates across all reader endpoints during and post-migration",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "All reader instances must be updated to accept the new schema before the writer emits the new field",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "During the transition phase, the writer must emit only fields that active readers accept",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Final state must be verified end-to-end showing zero failed reads",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "An automated synchronization gate in the deployment pipeline blocking writer rollout until reader fleet rollout reaches 100%",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Writer payload serializer enforcement and contract validation to prevent intermediate or draft fields during transition",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Continuous real-time read-error telemetry tracking throughout the transition window",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Readers updated before writer emits new field",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Writer emits only fields readers accept during transition",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Final state is verified end-to-end",
+                "class": "EXPLICIT"
+              }
+            ]
+          ],
+          "latency_s": [
+            15.683196067810059,
+            14.718837976455688,
+            14.27035403251648
+          ],
+          "output_chars": [
+            7265,
+            5265,
+            5886
+          ]
+        }
+      }
+    },
+    "g01_fee_unknown": {
+      "gold": {
+        "target_class": "EVIDENCE_GAP",
+        "status": "PASS",
+        "readiness": "NEEDS_EVIDENCE"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Final charge must stay within the customer-approved limit supplied at payment time",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Stage amounts must be aggregated into an exact total charge baseline",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Payment dispatch must be blocked while limit compliance is pending or limit value is unavailable",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Post-evaluation stage amount mutations must invalidate approved status back to pending and force re-evaluation",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Final charge must stay within the customer-approved limit",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Customer-approved limit is supplied at payment time and is not yet available pre-payment",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Pre-payment stage amounts must be accurately summed into a total charge",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Compliance evaluation state must remain PENDING while the customer-approved limit is unavailable",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Evaluate Total Charge <= Customer-Approved Limit upon limit ingestion",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Authorize charge execution if and only if compliance verdict is PASS",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Interface A handoff payload must include an immutable total, explicit currency code, and timestamp/version token",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Interface B limit ingestion must atomically bind to session ID and trigger evaluator re-assessment",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Interface C verdict payload must use a strongly-typed enum (PENDING | PASS | FAIL) with explicit default-deny parsing",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Accurate calculation of stage totals prior to payment time to determine candidate final charge (Requirement 1.1)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Evaluation of final_charge <= customer_approved_limit at payment time to approve or block the charge (Requirement 2.2)",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Reporting limit compliance status as PENDING prior to receiving the customer-approved limit (Requirement 2.1)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Preservation of exact bitwise/numeric value without precision truncation or rounding drift across handoff (Requirement A.1)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Atomic ingestion of customer_approved_limit and resolution of PENDING state prior to charge execution (Requirement B.1)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            12.527647972106934,
+            17.296020984649658,
+            13.3907790184021
+          ],
+          "output_chars": [
+            4946,
+            5847,
+            4504
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            false,
+            false
+          ],
+          "stable_detected": false,
+          "class_correct_runs": [
+            true,
+            false,
+            false
+          ],
+          "stable_class": false,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Accurately accumulate specified stage amounts into total charge",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Defer authorization while customer-approved limit is unavailable",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Evaluate total charge against limit upon receipt at payment time",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Stage amounts are accurately calculated to determine the total charge figure",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Final charge authorization is held in a PENDING state prior to receiving the customer-approved limit",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Upon receiving the customer-approved limit at payment time, the final total charge is evaluated against the limit prior to execution",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Stage Amount Computation (accurate calculation of stage amounts to establish the basis for final charge)",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Pending State Management Prior to Payment Time (marking limit compliance status as PENDING when the limit is unavailable)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Stage-to-Limit Data Handoff (preserving computed stage amounts into a pending compliance record for payment-time evaluation)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            14.238688945770264,
+            12.371519088745117,
+            11.7102689743042
+          ],
+          "output_chars": [
+            4141,
+            5540,
+            4969
+          ]
+        }
+      }
+    },
+    "g02_freshness_unknown": {
+      "gold": {
+        "target_class": "EVIDENCE_GAP",
+        "status": "PASS",
+        "readiness": "NEEDS_EVIDENCE"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            false,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Delivery and ingestion of the search-quality policy document containing the numeric freshness target to evaluate freshness compliance",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Serving ranked index results strictly according to the fully specified ranking behavior",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Computing and attaching document index age metadata to index records",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Maintaining freshness compliance status as PENDING while the policy target is unavailable",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Timestamp unit consistency and result metadata ordering across component interface boundaries",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Delivery of the search-quality policy document containing the numeric freshness target",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Search page serves ranked index results according to specified ranking behavior and index age",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Freshness compliance status is flagged as PENDING while the numeric policy target is missing",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Preservation and propagation of index age timestamp metadata through query execution and ranking transformations",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Mapping of the freshness compliance status flag to the final served response payload",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Ingestion layer treats a missing policy target as an uncalibrated PENDING state rather than a numerical boundary",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Attaching an absolute, monotonic UTC timestamp formatted in Unix epoch milliseconds to all index builds",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Handoff contract explicitly enforces a 64-bit integer Unix epoch millisecond schema between Index Tracker and Serving Engine",
+                "class": "UNSUPPORTED"
+              }
+            ],
+            [
+              {
+                "condition": "Continuously track and attach accurate document age timestamps to all indexed items",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Order search results strictly according to specified ranking criteria regardless of freshness compliance status",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Accept numeric freshness targets when delivered, and emit pending compliance status when the policy document is unavailable",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Serve ranked index results and accurately surface pending policy target status without suppressing valid search results",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Mandate explicit, standardized timestamp serialization schema across the index-to-ranking interface",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Maintain document metadata integrity during ranking engine transformations",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Serving Layer contract must support a formal tri-state compliance status (PASS, FAIL, PENDING)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            12.664001941680908,
+            12.531606674194336,
+            11.007352113723755
+          ],
+          "output_chars": [
+            6059,
+            5647,
+            5382
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Ranked Index Serving",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Explicit Pending State Handling for Freshness",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Quantitative Freshness Target Evaluation",
+                "class": "EXPLICIT"
+              }
+            ],
+            [
+              {
+                "condition": "Correct Index Ranking & Age Execution",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Compliance State Tracking During Missing Evidence",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Evaluation Against Numeric Target Upon Policy Ingestion",
+                "class": "LOGICALLY_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Index age and ranking behavior match specification",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Numeric freshness target policy is supplied for policy evaluation",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Freshness compliance status is explicitly marked as pending when policy is missing",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            10.441741704940796,
+            14.333303928375244,
+            13.37397313117981
+          ],
+          "output_chars": [
+            5638,
+            5806,
+            7256
+          ]
+        }
+      }
+    },
+    "g03_tolerance_unknown": {
+      "gold": {
+        "target_class": "EVIDENCE_GAP",
+        "status": "PASS",
+        "readiness": "NEEDS_EVIDENCE"
+      },
+      "systems": {
+        "B5": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Execution of stage-wise rounding rules as specified",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Final error within the numeric tolerance in the measurement specification",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Availability of the numeric tolerance threshold to evaluate compliance",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Rounding engine retaining unrounded cumulative error metrics during execution (Requirement 1.2)",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Stage-wise rounding engine handing off accumulated unrounded error data to the tolerance evaluator (Interface 1 -> 2 Requirement)",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Evaluator outputting PENDING status when tolerance specification is missing (Requirement 2.1)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Published outputs bundling rounded values with tolerance compliance flag (Requirement 3.1 / Interface 2 -> 3)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Execution of stage-by-stage rounding strictly per specification",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Evaluation of final pipeline error against the numeric tolerance in the measurement specification",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Provision of the missing specification page containing the numeric error tolerance limit to verify compliance",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Marking compliance status as PENDING and blocking PASS assertions when tolerance specification is missing",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Calculating and transmitting cumulative theoretical rounding error bounds from Stage Processing to Tolerance Verification",
+                "class": "UNSUPPORTED"
+              },
+              {
+                "condition": "Atomic metadata bundling and failing publication payload serialization if compliance status is missing or malformed",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Downstream systems parsing and respecting the PENDING status flag",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Execution of stage-specific precision rounding strictly according to specified rules",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Ingestion of official numeric error tolerance threshold from the measurement specification",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Suspending tolerance verification and marking compliance status as PENDING pending the missing specification page",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Calculating and bounding the maximum theoretical cumulative rounding error across stages relative to the tolerance threshold",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Enforcing clear, immutable metadata in published output payloads stating compliance status as PENDING",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Controlled document ingestion fallback mechanism that halts tolerance evaluation without halting publication",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            12.837387084960938,
+            11.77501392364502,
+            12.381163835525513
+          ],
+          "output_chars": [
+            5463,
+            5803,
+            5918
+          ]
+        },
+        "B10": {
+          "target_detected_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_detected": true,
+          "class_correct_runs": [
+            true,
+            true,
+            true
+          ],
+          "stable_class": true,
+          "stable_status": "PASS",
+          "stable_readiness": "NEEDS_EVIDENCE",
+          "unsupported_confirmed_runs": [
+            false,
+            false,
+            false
+          ],
+          "unsupported_nc_runs": [
+            true,
+            true,
+            true
+          ],
+          "nc_conditions": [
+            [
+              {
+                "condition": "Adherence to stage-by-stage rounding rules",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Availability of numeric tolerance threshold",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "Explicit compliance state flagging (PENDING vs VERIFIED)",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Stage-Wise Rounding Execution",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Availability of Numeric Tolerance Threshold",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              },
+              {
+                "condition": "Truthful Compliance Reporting",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ],
+            [
+              {
+                "condition": "Stage-wise computation adheres to fully specified rounding rules",
+                "class": "EXPLICIT"
+              },
+              {
+                "condition": "The numeric tolerance threshold is defined and available for evaluation",
+                "class": "LOGICALLY_NECESSARY"
+              },
+              {
+                "condition": "Unverified outputs are explicitly marked as pending tolerance validation upon publication",
+                "class": "DESIRABLE_NOT_NECESSARY"
+              }
+            ]
+          ],
+          "latency_s": [
+            13.02835202217102,
+            12.11402702331543,
+            11.422480821609497
+          ],
+          "output_chars": [
+            6799,
+            5972,
+            5013
+          ]
+        }
+      }
+    }
+  },
+  "aggregate": {
+    "B5": {
+      "target_finding_recall": 1.0,
+      "finding_class_accuracy": 1.0,
+      "value_recall": 1.0,
+      "value_class": 1.0,
+      "anchor_recall": 1.0,
+      "unsupported_confirmed_defect_rate": 0.14814814814814814,
+      "unsupported_nc_rate": 0.8148148148148148,
+      "readiness_calibration": 0.2222222222222222,
+      "output_chars": 89437.66666666667,
+      "latency": {
+        "median_s": 12.021613001823425,
+        "p95_s": 14.716883099079132
+      }
+    },
+    "B10": {
+      "target_finding_recall": 0.9333333333333333,
+      "finding_class_accuracy": 0.9333333333333333,
+      "value_recall": 1.0,
+      "value_class": 1.0,
+      "anchor_recall": 1.0,
+      "unsupported_confirmed_defect_rate": 0.14814814814814814,
+      "unsupported_nc_rate": 0.5555555555555556,
+      "readiness_calibration": 0.2777777777777778,
+      "output_chars": 94551.0,
+      "latency": {
+        "median_s": 12.166293621063232,
+        "p95_s": 15.417267620563507
+      }
+    }
+  },
+  "judge_errors": 0,
+  "evaluator_errors": 0,
+  "status_missing": 0
+}

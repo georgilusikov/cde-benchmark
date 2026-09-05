@@ -1,0 +1,68 @@
+[
+  {
+    "id": "devc1_double_round",
+    "domain": "sql",
+    "kind": "DEV_DEFECT",
+    "brief": "Pipeline outcome requires the final published value to be within 0.5 of the true measurement. Stage 1 rounds each measurement to one decimal place. Stage 2 rounds its input to an integer, rounding halves up. Both stages follow their stated rounding rules exactly.",
+    "artifact": "Pipeline publishes stage2(stage1(x)) for all inputs. Release note claims the 0.5 tolerance holds for every possible input.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "two individually-correct rounding stages compose to an error above the 0.5 tolerance",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "devc2_quota_sum",
+    "domain": "sql",
+    "kind": "DEV_DEFECT",
+    "brief": "Three workers each stay within their own per-worker quota: A at most 40 writes, B at most 40 writes, C at most 40 writes. The shared database outcome requires total concurrent writes strictly below 100. No global limiter is present.",
+    "artifact": "Launch plan runs all three workers at their full per-worker quotas simultaneously and declares the database constraint satisfied because each worker is within its own quota.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "individually-valid quotas sum to 120 concurrent writes above the sub-100 global limit",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "devc3_token_chain",
+    "domain": "sql",
+    "kind": "DEV_DEFECT",
+    "brief": "Access token is valid for 30 minutes after issue. Step A issues the token at 14:00. Step B runs 20 minutes, then step C runs 20 minutes; C starts only after B completes. Step C must present the same token while it is still valid.",
+    "artifact": "Execution plan uses the step-A token in step C with no reissue.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "token expires at 14:30 but step C starts at 14:40",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "devc4_migration_window",
+    "domain": "sql",
+    "kind": "DEV_DEFECT",
+    "brief": "Migration runs in three steps: deploy writer v2 first, leave readers at v1 for 20 minutes, then update readers to v2. Writer v2 begins writing records with a new mandatory field immediately. Reader v1 rejects any record containing an unknown mandatory field. The end state with all components at v2 is fully correct.",
+    "artifact": "Migration plan declares zero failed reads during the whole migration because the final v2 state is correct.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "during the 20-minute transitional window v1 readers reject v2 records",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "devc5_migration_clean",
+    "domain": "sql",
+    "kind": "DEV_CLEAN",
+    "brief": "Migration runs in three steps: update readers to v2 first, then deploy writer v2, then remove v1. Writer v2 begins writing records with a new mandatory field only after all readers accept it. Reader v2 accepts the new field. The end state is fully correct.",
+    "artifact": "Migration plan updates readers before the writer starts emitting the new field, and declares zero failed reads.",
+    "target_class": "NONE",
+    "target_finding": "",
+    "status": "PASS",
+    "readiness": "READY"
+  },
+  {
+    "id": "devc6_window_unknown",
+    "domain": "sql",
+    "kind": "DEV_GAP",
+    "brief": "Migration outcome requires the transitional mixed-version window to stay within the approved limit. The approved limit for mixed-version operation has not been supplied; architecture review will set it next week. Step order and component versions are otherwise fully specified.",
+    "artifact": "Migration plan lists step order and versions; mixed-window compliance is marked pending the architecture review limit.",
+    "target_class": "EVIDENCE_GAP",
+    "target_finding": "approved mixed-version window limit is unavailable",
+    "status": "PASS",
+    "readiness": "NEEDS_EVIDENCE"
+  }
+]

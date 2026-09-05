@@ -1,0 +1,68 @@
+[
+  {
+    "id": "devb1_handle_trim",
+    "domain": "summary",
+    "kind": "DEV_DEFECT",
+    "brief": "Final video must contain no repeated audio. The editor retains 0.5-second handles on every kept segment for transitions. The assembler trims handles at a join only when that join carries a transition effect. Joins without a transition effect are concatenated as delivered.",
+    "artifact": "Join J7 has no transition effect. Both adjacent segments were delivered with 0.5-second handles. Assembly concatenates J7 directly.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "untrimmed handles at the transition-free join duplicate audio",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "devb2_dedup_window",
+    "domain": "sql",
+    "kind": "DEV_DEFECT",
+    "brief": "Every customer payment must be captured at most once. Retry policy reuses the same request id so the provider can deduplicate. The provider keeps deduplication records for 10 minutes after first receipt. Failed payments are retried by the nightly batch, which runs 30 minutes after the original attempt.",
+    "artifact": "Payment P times out at 02:00. The nightly batch resends P with the same request id at 02:30. Both captures settle.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "retry arrives after the 10-minute dedup window expires, so the same payment settles twice",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "devb3_cohort_compare",
+    "domain": "summary",
+    "kind": "DEV_DEFECT",
+    "brief": "Dashboard compares monthly churn fairly. March churn is computed over users registered before March 1. April churn is computed over users registered before April 1, which includes the large March signup campaign cohort. A fair comparison requires identical cohort definitions.",
+    "artifact": "Dashboard headline: churn improved from 8% (March) to 5% (April).",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "churn comparison mixes two different cohort definitions",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "devb4_restore_math",
+    "domain": "sql",
+    "kind":"DEV_DEFECT",
+    "brief": "Restored records must cover every commit up to 30 minutes before any permitted restore moment (RPO 30 minutes). Snapshots run every 2 hours. Transaction logs are retained for 45 minutes. Restore replays only the retained log on top of the latest snapshot, which may be up to 1 hour 59 minutes old.",
+    "artifact": "Recovery plan states the 30-minute RPO is satisfied by hourly-verified snapshots plus log replay.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "oldest uncovered commit predates the restore moment by more than the 30-minute RPO",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "devb5_handle_clean",
+    "domain": "summary",
+    "kind": "DEV_CLEAN",
+    "brief": "Final video must contain no repeated audio. The editor retains 0.5-second handles on every kept segment for transitions. The assembler trims handles at every join that carries a transition effect.",
+    "artifact": "Join J7 carries a crossfade transition. Both adjacent segments were delivered with 0.5-second handles. Assembly trims both handles at J7 and applies the crossfade.",
+    "target_class": "NONE",
+    "target_finding": "",
+    "status": "PASS",
+    "readiness": "READY"
+  },
+  {
+    "id": "devb6_budget_unknown",
+    "domain": "strategy",
+    "kind": "DEV_GAP",
+    "brief": "Launch outcome requires rollout cost to stay within the approved budget. The approved budget figure will be set by finance next week and is not yet available. All costed items are otherwise fully listed.",
+    "artifact": "Rollout plan with fully itemized costs; budget-compliance section marked pending the finance figure.",
+    "target_class": "EVIDENCE_GAP",
+    "target_finding": "approved budget figure is unavailable",
+    "status": "PASS",
+    "readiness": "NEEDS_EVIDENCE"
+  }
+]

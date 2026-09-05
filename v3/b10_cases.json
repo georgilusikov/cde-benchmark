@@ -1,0 +1,200 @@
+[
+  {
+    "id": "v01_fee_chain",
+    "domain": "sql",
+    "kind": "VALUE_DEFECT",
+    "brief": "Checkout outcome requires the customer to be charged exactly the listed price. Price service outputs the listed price. Fee stage adds no surcharge for standard checkout. Payment stage charges exactly the amount it receives. Each stage is locally correct.",
+    "artifact": "Fee stage applies a 2% processing fee labeled standard on every checkout. Payment stage charges the received amount. Receipt shows listed price plus 2%.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "fee stage adds a surcharge the no-surcharge checkout promise forbids",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "v02_notification_replay",
+    "domain": "sql",
+    "kind": "VALUE_DEFECT",
+    "brief": "Alert outcome requires each incident to notify on-call exactly once. Delivery guarantees at-least-once redelivery after timeouts. The alert handler sends one page per delivery it receives and keeps no record of handled alerts.",
+    "artifact": "Incident I times out once and is redelivered. On-call receives two pages for incident I.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "stateless handler pages twice for one incident under at-least-once redelivery",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "v03_cargo_weight",
+    "domain": "strategy",
+    "kind": "VALUE_DEFECT",
+    "brief": "Freight outcome requires the loaded truck to stay within its 10-ton road limit. Each of the four crates is individually within its 3-ton handling limit. No crate exceeds any per-crate rule. The truck limit applies to the combined load.",
+    "artifact": "Loading plan puts all four 3-ton crates on one truck and declares all limits satisfied because every crate is within its handling limit.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "combined 12-ton load exceeds the 10-ton truck limit",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "v04_config_secrets",
+    "domain": "sql",
+    "kind": "VALUE_DEFECT",
+    "brief": "Disaster-recovery outcome requires the restored service to serve authenticated traffic. Nightly backup captures application config and database contents. Secrets live only in the vault, which is excluded from the backup. Restore replays the backup with no other steps.",
+    "artifact": "Recovery runbook restores config plus database and declares the service ready for authenticated traffic.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "restored service lacks vault secrets required for authenticated traffic",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "v05_search_freshness",
+    "domain": "summary",
+    "kind": "VALUE_DEFECT",
+    "brief": "Search outcome requires results to reflect listings updated within the last hour. The index rebuilds every 24 hours. The ranking stage correctly orders whatever the index contains. Freshness is determined solely by index age.",
+    "artifact": "Search page claims results reflect the latest listings. Index is 20 hours old at query time.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "20-hour-old index cannot satisfy the within-the-hour freshness requirement",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "v06_approval_versions",
+    "domain": "summary",
+    "kind": "VALUE_DEFECT",
+    "brief": "Release outcome requires every approval to apply to the shipped document. Legal approved version 7. Security approved version 8 after late edits. The shipped document is version 8. Each approval record is genuine.",
+    "artifact": "Release checklist shows legal approval and security approval both present and ships version 8.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "legal approval covers version 7, not the shipped version 8",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "v07_anonymized_ids",
+    "domain": "sql",
+    "kind": "VALUE_DEFECT",
+    "brief": "Sharing outcome requires published rows to be non-identifying. The transform removes names but keeps exact birth date plus postal code for every row. The published table is the only released artifact. Uniqueness of birth-date-plus-postal-code combinations is stated in the supplied data profile.",
+    "artifact": "Published table contains exact birth dates and postal codes with names removed, declared anonymized.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "kept quasi-identifiers remain unique per the supplied profile, so rows stay identifying",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "v08_cache_staleness",
+    "domain": "sql",
+    "kind": "VALUE_DEFECT",
+    "brief": "Pricing outcome requires displayed prices to be at most 5 minutes old. Cache tuning raised the hit rate by extending entry lifetime to 60 minutes. Hit-rate dashboards are green. Staleness is governed only by entry lifetime.",
+    "artifact": "Price page serves 45-minute-old cached prices and reports the caching layer healthy.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "45-minute-old prices violate the 5-minute freshness requirement",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "a01_filter_range",
+    "domain": "sql",
+    "kind": "ANCHOR",
+    "brief": "Report must cover all 2024 orders. PAID rows are positive and REFUND rows negative; both enter the net sum. The query must aggregate every 2024 row exactly once.",
+    "artifact": "SELECT customer_id, SUM(amount) FROM orders WHERE created_at >= DATE '2024-01-01' AND created_at < DATE '2024-12-01' GROUP BY customer_id.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "date filter drops December 2024 rows",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "a02_dose_conflict",
+    "domain": "medical",
+    "kind": "ANCHOR",
+    "brief": "Covelin is fictional. Reference: 10 mg twice daily, max 20 mg/day. The patient leaflet must state the same schedule; the patient follows only the leaflet.",
+    "artifact": "Leaflet: take 10 mg in the morning and 10 mg whenever needed during the day. Maximum 20 mg/day.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "as-needed dosing conflicts with the twice-daily schedule and daily maximum",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "a03_summary_reversal",
+    "domain": "summary",
+    "kind": "ANCHOR",
+    "brief": "Source: trial n=55, primary endpoint missed, recommendation is to run a confirmatory trial before any launch claim. The summary must preserve the recommendation.",
+    "artifact": "Summary: endpoint missed in n=55. Recommendation: launch now while planning confirmatory work later.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "summary recommends launch despite the source requiring a confirmatory trial first",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "a04_gate_skip",
+    "domain": "naming",
+    "kind": "ANCHOR",
+    "brief": "A brand name may be irreversibly adopted only after the trademark screen completes. Supplied screen result for 'Zentix' is still pending.",
+    "artifact": "Decision: irreversibly adopt 'Zentix' today; trademark screen completes next week.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "irreversible adoption precedes the required completed trademark screen",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "c01_video_complete",
+    "domain": "summary",
+    "kind": "CLEAN_READY",
+    "brief": "Outcome: a watchable final video preserving all selected spoken blocks exactly once with no repeated audio. Editor trims repeated heads, assembler concatenates, renderer exports the plan pixels, QC checks the exported file.",
+    "artifact": "Plan: trimmed takes concatenated, rendered master matches the plan frame for frame, QC verified the exported file with all blocks present exactly once.",
+    "target_class": "NONE",
+    "target_finding": "",
+    "status": "PASS",
+    "readiness": "READY"
+  },
+  {
+    "id": "c02_checkout_complete",
+    "domain": "sql",
+    "kind": "CLEAN_READY",
+    "brief": "Outcome: a successful customer checkout charging exactly the listed price with a stored receipt. Price service outputs the listed price, payment charges exactly the received amount with no surcharge, receipt stores the charged amount.",
+    "artifact": "Checkout charges the listed price with no surcharge; stored receipt matches the charged amount.",
+    "target_class": "NONE",
+    "target_finding": "",
+    "status": "PASS",
+    "readiness": "READY"
+  },
+  {
+    "id": "c03_migration_complete",
+    "domain": "sql",
+    "kind": "CLEAN_READY",
+    "brief": "Outcome: a migration with zero failed reads. Readers are updated before the writer emits the new field, the writer emits only fields readers accept during transition, and the final state is verified end to end.",
+    "artifact": "Plan updates readers first, writer emits the new field after, final verification shows zero failed reads.",
+    "target_class": "NONE",
+    "target_finding": "",
+    "status": "PASS",
+    "readiness": "READY"
+  },
+  {
+    "id": "g01_fee_unknown",
+    "domain": "sql",
+    "kind": "EVIDENCE_GAP",
+    "brief": "Checkout outcome requires the final charge to stay within the customer-approved limit. The customer-approved limit will be supplied at payment time and is not yet available. Stage amounts are otherwise fully specified.",
+    "artifact": "Checkout computes stage amounts; limit compliance is marked pending the customer-approved limit.",
+    "target_class": "EVIDENCE_GAP",
+    "target_finding": "customer-approved charge limit is unavailable",
+    "status": "PASS",
+    "readiness": "NEEDS_EVIDENCE"
+  },
+  {
+    "id": "g02_freshness_unknown",
+    "domain": "summary",
+    "kind": "EVIDENCE_GAP",
+    "brief": "Search outcome requires results to meet the freshness target in the supplied search-quality policy. The policy document with the numeric freshness target has not been delivered yet. Index age and ranking behavior are otherwise fully specified.",
+    "artifact": "Search page serves the ranked index; freshness compliance is marked pending the policy target.",
+    "target_class": "EVIDENCE_GAP",
+    "target_finding": "numeric freshness target from the quality policy is unavailable",
+    "status": "PASS",
+    "readiness": "NEEDS_EVIDENCE"
+  },
+  {
+    "id": "g03_tolerance_unknown",
+    "domain": "sql",
+    "kind": "EVIDENCE_GAP",
+    "brief": "Pipeline outcome requires final error within the tolerance in the supplied measurement specification. The specification page stating the numeric tolerance is missing. Rounding rules at each stage are fully specified.",
+    "artifact": "Pipeline publishes rounded values; tolerance compliance is marked pending the missing specification page.",
+    "target_class": "EVIDENCE_GAP",
+    "target_finding": "numeric error tolerance from the measurement specification is unavailable",
+    "status": "PASS",
+    "readiness": "NEEDS_EVIDENCE"
+  }
+]

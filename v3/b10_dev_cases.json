@@ -1,0 +1,68 @@
+[
+  {
+    "id": "dev1_montage_overlap",
+    "domain": "summary",
+    "kind": "DEV_DEFECT",
+    "brief": "Final video must preserve each selected spoken block exactly once. Retake stage: for block 2, take B is selected; take B begins by repeating the last 2 seconds of take A. Assembler concatenates whole selected takes end to end. There is no overlap-removal stage.",
+    "artifact": "Edit plan: block 1 = take A (full), block 2 = take B (full), concatenated directly.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "concatenation duplicates the 2-second overlap between take A and take B",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "dev2_retry_idempotency",
+    "domain": "sql",
+    "kind": "DEV_DEFECT",
+    "brief": "Every customer payment must be captured at most once and never lost. Worker retries a request after a timeout. The payment provider may already have processed a request whose response timed out. Retries use a new request id. The provider deduplicates only identical request ids.",
+    "artifact": "Retry policy: on timeout, resend the payment with a newly generated request id.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "new-id retry can capture the same payment twice",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "dev3_report_integrity",
+    "domain": "summary",
+    "kind": "DEV_DEFECT",
+    "brief": "Executive summary must support the same decision as the source report. Source: pilot n=40, effect +3 points, confidence low, more evidence required before rollout. Each summary section must preserve the source meaning.",
+    "artifact": "Results: +3 points in n=40, confidence low. Confidence note: evidence is still weak. Recommendation: proceed with full rollout now.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "recommendation implies rollout while the source requires more evidence",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "dev4_backup_rpo",
+    "domain": "sql",
+    "kind": "DEV_DEFECT",
+    "brief": "Restored system must reproduce all committed records. Database snapshot runs every hour. Transaction log is retained for 20 minutes only. Stated recovery point objective: 10 minutes. A snapshot used for restore may be up to 59 minutes old.",
+    "artifact": "Recovery plan: restore the latest hourly snapshot, then replay the retained 20-minute transaction log. Plan claims the 10-minute RPO is met.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "snapshot-plus-log coverage leaves a gap exceeding the 10-minute RPO",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "dev5_montage_clean",
+    "domain": "summary",
+    "kind": "DEV_CLEAN",
+    "brief": "Final video must preserve each selected spoken block exactly once. Retake stage: for block 2, take B is selected; take B begins by repeating the last 2 seconds of take A. Assembler concatenates takes after the overlap-removal stage trims repeated audio at every join.",
+    "artifact": "Edit plan: block 1 = take A (full), block 2 = take B with its repeated 2-second head trimmed, concatenated directly.",
+    "target_class": "NONE",
+    "target_finding": "",
+    "status": "PASS",
+    "readiness": "READY"
+  },
+  {
+    "id": "dev6_downtime_unknown",
+    "domain": "strategy",
+    "kind": "DEV_GAP",
+    "brief": "Migration outcome requires service interruption to stay within the approved limit. The approved downtime limit has not been supplied yet; it will be set by the change board next week. Current plan stages are otherwise fully specified.",
+    "artifact": "Migration plan with staged cutover; interruption window marked as pending the change-board limit.",
+    "target_class": "EVIDENCE_GAP",
+    "target_finding": "approved downtime limit is unavailable",
+    "status": "PASS",
+    "readiness": "NEEDS_EVIDENCE"
+  }
+]
