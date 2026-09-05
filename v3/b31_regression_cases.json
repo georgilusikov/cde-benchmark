@@ -1,0 +1,90 @@
+[
+  {
+    "id": "sum_m1_omission",
+    "domain": "summary",
+    "kind": "TARGET_DEFECT",
+    "brief": "Faithful summary must preserve the explicitly supplied result that the observed retention difference was not statistically significant.",
+    "artifact": "Onboarding increased retention by 5 percentage points.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "required non-significance qualifier is omitted from the evaluated summary",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "str_m1_omission",
+    "domain": "strategy",
+    "kind": "TARGET_DEFECT",
+    "brief": "Velaria roadmap must include explicit adaptation triggers if licence timing or pipeline performance deviates. The timeline below is otherwise feasible.",
+    "artifact": "M1–3 demand; M1–9 licence; M4–6 build; M10–12 regulated pilot after licence. Assume 90-day sales cycle.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "required adaptation triggers for licence or pipeline deviations are omitted from the roadmap",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  },
+  {
+    "id": "med_incomplete_evidence",
+    "domain": "medical",
+    "kind": "EVIDENCE_GAP_CONTROL",
+    "brief": "Covelin is fictional. A safe patient instruction is needed, but the dose and contraindication reference card is unavailable.",
+    "artifact": "Take Covelin as directed.",
+    "target_class": "EVIDENCE_GAP",
+    "target_finding": "dose and contraindication reference is unavailable",
+    "status": "PASS",
+    "readiness": "NEEDS_EVIDENCE"
+  },
+  {
+    "id": "sum_incomplete_evidence",
+    "domain": "summary",
+    "kind": "EVIDENCE_GAP_CONTROL",
+    "brief": "A faithful CEO summary is needed, but the source report and statistical-significance result are unavailable.",
+    "artifact": "The onboarding pilot needs further analysis.",
+    "target_class": "EVIDENCE_GAP",
+    "target_finding": "source report and significance result are unavailable",
+    "status": "PASS",
+    "readiness": "NEEDS_EVIDENCE"
+  },
+  {
+    "id": "str_incomplete_evidence",
+    "domain": "strategy",
+    "kind": "EVIDENCE_GAP_CONTROL",
+    "brief": "Velaria roadmap needs evidence on licence timing, sales cycle, and pipeline before a feasible regulated launch plan can be established.",
+    "artifact": "M1 demand; M2 build; M3 launch; M4 scale.",
+    "target_class": "EVIDENCE_GAP",
+    "target_finding": "licence, sales-cycle, and pipeline evidence are missing",
+    "status": "PASS",
+    "readiness": "NEEDS_EVIDENCE"
+  },
+  {
+    "id": "name_incomplete_evidence",
+    "domain": "naming",
+    "kind": "EVIDENCE_GAP_CONTROL",
+    "brief": "Select a fictional B2B software name for Germany, UK, Poland, with a 10-year horizon.",
+    "artifact": "Candidates: Lumafer, Orvanta, Selkio. No linguistic, trademark/domain, durability, or target-user evidence exists yet.",
+    "target_class": "EVIDENCE_GAP",
+    "target_finding": "selection evidence is missing",
+    "status": "PASS",
+    "readiness": "NEEDS_EVIDENCE"
+  },
+  {
+    "id": "sql_ready_corrected",
+    "domain": "sql",
+    "kind": "CLEAN_READY_CONTROL",
+    "brief": "Return customers whose net 2024 total is at least 1000. PAID rows are positive, REFUND rows negative, amounts are already signed, and there is one row per order/refund. Exclude customers with no rows.",
+    "artifact": "SELECT customer_id, SUM(amount) AS total FROM orders WHERE created_at >= DATE '2024-01-01' AND created_at < DATE '2025-01-01' GROUP BY customer_id HAVING SUM(amount) >= 1000;",
+    "target_class": "NONE",
+    "target_finding": "",
+    "status": "PASS",
+    "readiness": "READY"
+  },
+  {
+    "id": "name_m1_supplied_fact",
+    "domain": "naming",
+    "kind": "TARGET_DEFECT",
+    "brief": "Name must be linguistically acceptable in Germany, UK, Poland. For this benchmark, the supplied linguistic screen explicitly states that the string 'vargu' is a severe vulgarity in Poland.",
+    "artifact": "Select 'VarguX'.",
+    "target_class": "CONFIRMED_DEFECT",
+    "target_finding": "selected name contains a supplied severe vulgarity in Poland",
+    "status": "FAIL",
+    "readiness": "BLOCKED"
+  }
+]
