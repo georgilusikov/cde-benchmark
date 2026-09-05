@@ -1,0 +1,156 @@
+[
+ {
+  "id": "gateway_rate_limit",
+  "domain": "sql",
+  "kind": "AXIS_DEFECT",
+  "brief": "Uploader component produces correct requests. External gateway accepts at most 20 requests/second per client. System outcome requires all requests to be accepted.",
+  "artifact": "Uploader sends 100 correct requests/second directly to the gateway with no queue or throttling.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "system exceeds the supplied gateway rate limit",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "sensor_range_mismatch",
+  "domain": "sql",
+  "kind": "AXIS_DEFECT",
+  "brief": "Controller algorithm accepts inputs 0-255. Actual subsystem sensor outputs raw values 0-1023. A scaling step is required before controller input.",
+  "artifact": "Raw sensor values are passed directly to the controller.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "subsystem sensor range is incompatible with controller input range because required scaling is absent",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "site_power_boundary",
+  "domain": "strategy",
+  "kind": "AXIS_DEFECT",
+  "brief": "Machine requires 230 V AC input. Deployment site's only available supply is 110 V AC. No converter is present.",
+  "artifact": "Deployment plan installs the machine directly on the site's available supply.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "machine's required input is incompatible with the supplied site power",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "carrier_manifest_boundary",
+  "domain": "summary",
+  "kind": "AXIS_DEFECT",
+  "brief": "Internal order record is complete for the application. External carrier interface additionally requires hazard_code for every hazardous shipment. Shipment X is explicitly hazardous.",
+  "artifact": "Application sends shipment X to the carrier without hazard_code.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "locally complete order fails the supplied carrier interface requirement",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "os_background_limit",
+  "domain": "medical",
+  "kind": "AXIS_DEFECT",
+  "brief": "App outcome requires a background sync every 5 minutes. The supplied mobile OS constraint permits background execution no more often than every 15 minutes.",
+  "artifact": "Design relies only on the OS background scheduler and schedules sync every 5 minutes.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "required 5-minute sync cannot be produced by the explicitly limited 15-minute scheduler",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "shared_db_capacity",
+  "domain": "sql",
+  "kind": "AXIS_DEFECT",
+  "brief": "Each worker is locally valid. Shared database permits at most 10 concurrent write transactions. System launches 50 workers simultaneously and each immediately opens one write transaction.",
+  "artifact": "All 50 workers start writes simultaneously with no queue or concurrency limit.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "combined system exceeds the supplied shared-database concurrency limit",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "unit_handoff_anchor",
+  "domain": "sql",
+  "kind": "COMPOSITE_DEFECT",
+  "brief": "Two-stage telemetry pipeline. Stage A outputs duration values in milliseconds. Stage B must compute average duration in seconds and expects its input already converted to seconds.",
+  "artifact": "Stage A outputs duration=1500 for a 1.5 second event. Stage B directly averages the numeric values and reports 1500 seconds.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "Stage B interprets millisecond values as seconds",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "report_decision_anchor",
+  "domain": "summary",
+  "kind": "COMPOSITE_DEFECT",
+  "brief": "Source report: pilot n=60; conversion moved from 10% to 12%; result is not statistically significant; recommendation is to gather another 300 observations before rollout.",
+  "artifact": "Results section: conversion moved from 10% to 12% in n=60 and was not statistically significant. Recommendation section: roll out to all users now.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "recommendation reverses the supplied wait-for-more-evidence decision",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "selection_gate_anchor",
+  "domain": "naming",
+  "kind": "COMPOSITE_DEFECT",
+  "brief": "A supplier may be irreversibly selected only after both financial and security screening are complete.",
+  "artifact": "Financial screening: PASS. Security screening: scheduled tomorrow. Decision: supplier contract irreversibly awarded today.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "irreversible selection occurs before mandatory security screening",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "timeline_mapping_anchor",
+  "domain": "summary",
+  "kind": "COMPOSITE_DEFECT",
+  "brief": "A video edit removes the first 10 seconds of the source. All downstream effect timestamps must use the edited-output timeline.",
+  "artifact": "Source event at 00:30 should appear at 00:20 after the cut. Zoom plan still places the effect at 00:30 in the edited output.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "downstream effect uses source time instead of edited-output time",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "clean_multi_actor",
+  "domain": "summary",
+  "kind": "CLEAN_READY",
+  "brief": "Actors are user, payer and platform operator. The only supplied acceptance requirement is that report export completes in under 2 seconds. No additional actor-specific constraints are supplied.",
+  "artifact": "Measured export time: 1.4 seconds.",
+  "target_class": "NONE",
+  "target_finding": "",
+  "status": "PASS",
+  "readiness": "READY"
+ },
+ {
+  "id": "clean_multilevel",
+  "domain": "sql",
+  "kind": "CLEAN_READY",
+  "brief": "A sensor sends integer values 0-100 to a controller. The controller explicitly accepts integer values 0-100. The gateway accepts the controller's resulting JSON unchanged. No other surrounding-system constraints are supplied.",
+  "artifact": "Sensor sends 0-100 integers; controller validates 0-100 and emits the required JSON; gateway receives it unchanged.",
+  "target_class": "NONE",
+  "target_finding": "",
+  "status": "PASS",
+  "readiness": "READY"
+ },
+ {
+  "id": "future_contract_unknown",
+  "domain": "sql",
+  "kind": "CLEAN_INCOMPLETE",
+  "brief": "The current API contract is supplied and the artifact satisfies it. The artifact is also being considered for deployment next quarter, but the next-quarter API contract has not yet been published and may change.",
+  "artifact": "Implementation exactly satisfies the current API contract.",
+  "target_class": "EVIDENCE_GAP",
+  "target_finding": "next-quarter API contract is unavailable",
+  "status": "PASS",
+  "readiness": "NEEDS_EVIDENCE"
+ },
+ {
+  "id": "stakeholder_rule_unknown",
+  "domain": "summary",
+  "kind": "CLEAN_INCOMPLETE",
+  "brief": "The current product behavior is fully specified and satisfied. Before a later enterprise launch, procurement will supply an additional data-retention rule, but that rule is not yet available.",
+  "artifact": "Current product behavior matches all currently supplied requirements.",
+  "target_class": "EVIDENCE_GAP",
+  "target_finding": "future enterprise data-retention rule is unavailable",
+  "status": "PASS",
+  "readiness": "NEEDS_EVIDENCE"
+ }
+]

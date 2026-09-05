@@ -1,0 +1,11 @@
+{
+  "jobs": 84,
+  "systems": [
+    "B5",
+    "B6"
+  ],
+  "runs": 3,
+  "model": "gemini-3.6-flash-high",
+  "gold_hidden": true,
+  "cases": "b6_cases.json"
+}

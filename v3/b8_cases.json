@@ -1,0 +1,156 @@
+[
+ {
+  "id": "license_timing",
+  "domain": "strategy",
+  "kind": "AXIS_DEFECT",
+  "brief": "Licence application starts M1. Earliest possible licence grant is M8. Regulated revenue legally requires the licence to have been granted.",
+  "artifact": "Regulated revenue begins M7.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "regulated revenue begins before the earliest possible licence grant",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "api_migration_effective_date",
+  "domain": "sql",
+  "kind": "AXIS_DEFECT",
+  "brief": "API v1 is accepted through the end of M6. From the start of M7 only API v2 is accepted.",
+  "artifact": "Deployment plan continues sending API v1 requests throughout M7.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "plan uses API v1 after the explicitly stated v2-only effective date",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "credential_expiry_mid_job",
+  "domain": "sql",
+  "kind": "AXIS_DEFECT",
+  "brief": "Credential expires at 00:00. Job starts at 23:55 and requires 20 uninterrupted authenticated minutes. No credential refresh occurs during the job.",
+  "artifact": "Plan runs the whole job using the expiring credential.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "credential expires five minutes into a job that requires authentication for the full 20 minutes",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "storage_lifecycle",
+  "domain": "medical",
+  "kind": "AXIS_DEFECT",
+  "brief": "Material must remain between 2C and 8C during storage before use. At the use stage it may operate at room temperature.",
+  "artifact": "Material is stored overnight at 22C and used the next morning.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "pre-use storage violates the supplied 2-8C lifecycle requirement",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "rollback_state_transition",
+  "domain": "sql",
+  "kind": "AXIS_DEFECT",
+  "brief": "Version 2 writes records with a new mandatory field. Version 1 cannot parse records containing that field. Deployment plan claims rollback to v1 is safe after v2 has written production data.",
+  "artifact": "Deploy v2, allow it to write production records, then rollback to v1 if needed without data conversion.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "rollback state is incompatible with records already written by v2",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "permission_state_expiry",
+  "domain": "summary",
+  "kind": "AXIS_DEFECT",
+  "brief": "Trial permission is valid through day 30 only. Export job requires valid permission at execution time. The export is scheduled for day 31 and no paid permission is activated.",
+  "artifact": "Plan assumes the trial permission will authorize the day-31 export.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "export is scheduled after the supplied permission expiry",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "unit_handoff_anchor",
+  "domain": "sql",
+  "kind": "COMPOSITE_DEFECT",
+  "brief": "Two-stage telemetry pipeline. Stage A outputs duration values in milliseconds. Stage B must compute average duration in seconds and expects its input already converted to seconds.",
+  "artifact": "Stage A outputs duration=1500 for a 1.5 second event. Stage B directly averages the numeric values and reports 1500 seconds.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "Stage B interprets millisecond values as seconds",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "report_decision_anchor",
+  "domain": "summary",
+  "kind": "COMPOSITE_DEFECT",
+  "brief": "Source report: pilot n=60; conversion moved from 10% to 12%; result is not statistically significant; recommendation is to gather another 300 observations before rollout.",
+  "artifact": "Results section: conversion moved from 10% to 12% in n=60 and was not statistically significant. Recommendation section: roll out to all users now.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "recommendation reverses the supplied wait-for-more-evidence decision",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "selection_gate_anchor",
+  "domain": "naming",
+  "kind": "COMPOSITE_DEFECT",
+  "brief": "A supplier may be irreversibly selected only after both financial and security screening are complete.",
+  "artifact": "Financial screening: PASS. Security screening: scheduled tomorrow. Decision: supplier contract irreversibly awarded today.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "irreversible selection occurs before mandatory security screening",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "timeline_mapping_anchor",
+  "domain": "summary",
+  "kind": "COMPOSITE_DEFECT",
+  "brief": "A video edit removes the first 10 seconds of the source. All downstream effect timestamps must use the edited-output timeline.",
+  "artifact": "Source event at 00:30 should appear at 00:20 after the cut. Zoom plan still places the effect at 00:30 in the edited output.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "downstream effect uses source time instead of edited-output time",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "clean_multi_actor",
+  "domain": "summary",
+  "kind": "CLEAN_READY",
+  "brief": "Actors are user, payer and platform operator. The only supplied acceptance requirement is that report export completes in under 2 seconds. No additional actor-specific constraints are supplied.",
+  "artifact": "Measured export time: 1.4 seconds.",
+  "target_class": "NONE",
+  "target_finding": "",
+  "status": "PASS",
+  "readiness": "READY"
+ },
+ {
+  "id": "clean_multilevel",
+  "domain": "sql",
+  "kind": "CLEAN_READY",
+  "brief": "A sensor sends integer values 0-100 to a controller. The controller explicitly accepts integer values 0-100. The gateway accepts the controller's resulting JSON unchanged. No other surrounding-system constraints are supplied.",
+  "artifact": "Sensor sends 0-100 integers; controller validates 0-100 and emits the required JSON; gateway receives it unchanged.",
+  "target_class": "NONE",
+  "target_finding": "",
+  "status": "PASS",
+  "readiness": "READY"
+ },
+ {
+  "id": "future_contract_unknown",
+  "domain": "sql",
+  "kind": "CLEAN_INCOMPLETE",
+  "brief": "The current API contract is supplied and the artifact satisfies it. The artifact is also being considered for deployment next quarter, but the next-quarter API contract has not yet been published and may change.",
+  "artifact": "Implementation exactly satisfies the current API contract.",
+  "target_class": "EVIDENCE_GAP",
+  "target_finding": "next-quarter API contract is unavailable",
+  "status": "PASS",
+  "readiness": "NEEDS_EVIDENCE"
+ },
+ {
+  "id": "stakeholder_rule_unknown",
+  "domain": "summary",
+  "kind": "CLEAN_INCOMPLETE",
+  "brief": "The current product behavior is fully specified and satisfied. Before a later enterprise launch, procurement will supply an additional data-retention rule, but that rule is not yet available.",
+  "artifact": "Current product behavior matches all currently supplied requirements.",
+  "target_class": "EVIDENCE_GAP",
+  "target_finding": "future enterprise data-retention rule is unavailable",
+  "status": "PASS",
+  "readiness": "NEEDS_EVIDENCE"
+ }
+]

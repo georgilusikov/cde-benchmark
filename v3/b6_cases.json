@@ -1,0 +1,156 @@
+[
+ {
+  "id": "platform_rate_conflict",
+  "domain": "summary",
+  "kind": "AXIS_DEFECT",
+  "brief": "The creator wants all 10 queued posts published as quickly as possible. The platform operator explicitly permits at most 3 posts per account per hour. Both requirements are part of the supplied brief.",
+  "artifact": "Publish all 10 queued posts immediately in the first minute.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "publication plan violates the platform operator's explicit 3-post/hour limit",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "payer_authorization",
+  "domain": "medical",
+  "kind": "AXIS_DEFECT",
+  "brief": "The patient wants the earliest available appointment. The payer explicitly requires authorization to be granted before the appointment occurs.",
+  "artifact": "Appointment is booked for tomorrow; authorization will be requested after the appointment.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "appointment occurs before required payer authorization",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "creator_moderation",
+  "domain": "summary",
+  "kind": "AXIS_DEFECT",
+  "brief": "The creator wants flagged content published immediately. The platform safety reviewer explicitly requires flagged content to be approved before publication.",
+  "artifact": "Flagged content is published immediately; reviewer approval is requested afterward.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "flagged content is published before mandatory reviewer approval",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "throughput_operator_safety",
+  "domain": "strategy",
+  "kind": "AXIS_DEFECT",
+  "brief": "Warehouse owner target: at least 100 packages/hour. Operator safety rule: packages above 20 kg require two-person lifting. Package P weighs 30 kg. Both are mandatory supplied requirements.",
+  "artifact": "To maintain throughput, package P is assigned to one operator.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "one-person handling violates the explicit two-person rule for the 30 kg package",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "client_maintainer_window",
+  "domain": "sql",
+  "kind": "AXIS_DEFECT",
+  "brief": "API client requires continuous service during business hours 09:00-18:00. Maintainer rule: database migrations that interrupt service must run outside business hours.",
+  "artifact": "A migration causing 8 minutes of downtime is scheduled for 12:00.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "disruptive migration is scheduled inside the explicitly protected business-hours window",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "advertiser_user_consent",
+  "domain": "naming",
+  "kind": "AXIS_DEFECT",
+  "brief": "Advertiser wants attribution events collected. User requirement: attribution data may be collected only after explicit consent. Both are supplied constraints.",
+  "artifact": "Attribution collection starts when the page loads; consent is requested afterward.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "attribution data is collected before explicit user consent",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "unit_handoff_anchor",
+  "domain": "sql",
+  "kind": "COMPOSITE_DEFECT",
+  "brief": "Two-stage telemetry pipeline. Stage A outputs duration values in milliseconds. Stage B must compute average duration in seconds and expects its input already converted to seconds.",
+  "artifact": "Stage A outputs duration=1500 for a 1.5 second event. Stage B directly averages the numeric values and reports 1500 seconds.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "Stage B interprets millisecond values as seconds",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "report_decision_anchor",
+  "domain": "summary",
+  "kind": "COMPOSITE_DEFECT",
+  "brief": "Source report: pilot n=60; conversion moved from 10% to 12%; result is not statistically significant; recommendation is to gather another 300 observations before rollout.",
+  "artifact": "Results section: conversion moved from 10% to 12% in n=60 and was not statistically significant. Recommendation section: roll out to all users now.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "recommendation reverses the supplied wait-for-more-evidence decision",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "selection_gate_anchor",
+  "domain": "naming",
+  "kind": "COMPOSITE_DEFECT",
+  "brief": "A supplier may be irreversibly selected only after both financial and security screening are complete.",
+  "artifact": "Financial screening: PASS. Security screening: scheduled tomorrow. Decision: supplier contract irreversibly awarded today.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "irreversible selection occurs before mandatory security screening",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "timeline_mapping_anchor",
+  "domain": "summary",
+  "kind": "COMPOSITE_DEFECT",
+  "brief": "A video edit removes the first 10 seconds of the source. All downstream effect timestamps must use the edited-output timeline.",
+  "artifact": "Source event at 00:30 should appear at 00:20 after the cut. Zoom plan still places the effect at 00:30 in the edited output.",
+  "target_class": "CONFIRMED_DEFECT",
+  "target_finding": "downstream effect uses source time instead of edited-output time",
+  "status": "FAIL",
+  "readiness": "BLOCKED"
+ },
+ {
+  "id": "clean_multi_actor",
+  "domain": "summary",
+  "kind": "CLEAN_READY",
+  "brief": "Actors are user, payer and platform operator. The only supplied acceptance requirement is that report export completes in under 2 seconds. No additional actor-specific constraints are supplied.",
+  "artifact": "Measured export time: 1.4 seconds.",
+  "target_class": "NONE",
+  "target_finding": "",
+  "status": "PASS",
+  "readiness": "READY"
+ },
+ {
+  "id": "clean_multilevel",
+  "domain": "sql",
+  "kind": "CLEAN_READY",
+  "brief": "A sensor sends integer values 0-100 to a controller. The controller explicitly accepts integer values 0-100. The gateway accepts the controller's resulting JSON unchanged. No other surrounding-system constraints are supplied.",
+  "artifact": "Sensor sends 0-100 integers; controller validates 0-100 and emits the required JSON; gateway receives it unchanged.",
+  "target_class": "NONE",
+  "target_finding": "",
+  "status": "PASS",
+  "readiness": "READY"
+ },
+ {
+  "id": "future_contract_unknown",
+  "domain": "sql",
+  "kind": "CLEAN_INCOMPLETE",
+  "brief": "The current API contract is supplied and the artifact satisfies it. The artifact is also being considered for deployment next quarter, but the next-quarter API contract has not yet been published and may change.",
+  "artifact": "Implementation exactly satisfies the current API contract.",
+  "target_class": "EVIDENCE_GAP",
+  "target_finding": "next-quarter API contract is unavailable",
+  "status": "PASS",
+  "readiness": "NEEDS_EVIDENCE"
+ },
+ {
+  "id": "stakeholder_rule_unknown",
+  "domain": "summary",
+  "kind": "CLEAN_INCOMPLETE",
+  "brief": "The current product behavior is fully specified and satisfied. Before a later enterprise launch, procurement will supply an additional data-retention rule, but that rule is not yet available.",
+  "artifact": "Current product behavior matches all currently supplied requirements.",
+  "target_class": "EVIDENCE_GAP",
+  "target_finding": "future enterprise data-retention rule is unavailable",
+  "status": "PASS",
+  "readiness": "NEEDS_EVIDENCE"
+ }
+]
