@@ -1,0 +1,235 @@
+{
+  "source_run": "results/dev_r1",
+  "per_system": 12,
+  "seed": 7,
+  "n": 36,
+  "by_system": {
+    "B5": 12,
+    "NPA-B5": 12,
+    "ORACLE-NPA-B5": 12
+  },
+  "by_class": {
+    "CLEAR_TASK": 9,
+    "COMPOSITE_TASK": 9,
+    "MODEL_MISMATCH": 9,
+    "UNDERDETERMINED_PROBLEM": 9
+  },
+  "items": [
+    {
+      "case_id": "dev_clear_disk_alert",
+      "system": "B5",
+      "run": 1,
+      "class": "CLEAR_TASK"
+    },
+    {
+      "case_id": "dev_comp_dose_card",
+      "system": "B5",
+      "run": 1,
+      "class": "COMPOSITE_TASK"
+    },
+    {
+      "case_id": "dev_mm_support_hire",
+      "system": "B5",
+      "run": 1,
+      "class": "MODEL_MISMATCH"
+    },
+    {
+      "case_id": "dev_ud_inventory_stockout",
+      "system": "B5",
+      "run": 1,
+      "class": "UNDERDETERMINED_PROBLEM"
+    },
+    {
+      "case_id": "dev_clear_backup_window",
+      "system": "B5",
+      "run": 1,
+      "class": "CLEAR_TASK"
+    },
+    {
+      "case_id": "dev_comp_report_chain",
+      "system": "B5",
+      "run": 1,
+      "class": "COMPOSITE_TASK"
+    },
+    {
+      "case_id": "dev_mm_more_moderators",
+      "system": "B5",
+      "run": 1,
+      "class": "MODEL_MISMATCH"
+    },
+    {
+      "case_id": "dev_ud_checkout_drop",
+      "system": "B5",
+      "run": 1,
+      "class": "UNDERDETERMINED_PROBLEM"
+    },
+    {
+      "case_id": "dev_clear_feature_flag_rollout",
+      "system": "B5",
+      "run": 1,
+      "class": "CLEAR_TASK"
+    },
+    {
+      "case_id": "dev_comp_zoom_levels",
+      "system": "B5",
+      "run": 1,
+      "class": "COMPOSITE_TASK"
+    },
+    {
+      "case_id": "dev_mm_cdn_more_pops",
+      "system": "B5",
+      "run": 1,
+      "class": "MODEL_MISMATCH"
+    },
+    {
+      "case_id": "dev_ud_churn_spike",
+      "system": "B5",
+      "run": 1,
+      "class": "UNDERDETERMINED_PROBLEM"
+    },
+    {
+      "case_id": "dev_clear_api_100rpm",
+      "system": "NPA-B5",
+      "run": 1,
+      "class": "CLEAR_TASK"
+    },
+    {
+      "case_id": "dev_comp_report_chain",
+      "system": "NPA-B5",
+      "run": 1,
+      "class": "COMPOSITE_TASK"
+    },
+    {
+      "case_id": "dev_mm_cdn_more_pops",
+      "system": "NPA-B5",
+      "run": 1,
+      "class": "MODEL_MISMATCH"
+    },
+    {
+      "case_id": "dev_ud_churn_spike",
+      "system": "NPA-B5",
+      "run": 1,
+      "class": "UNDERDETERMINED_PROBLEM"
+    },
+    {
+      "case_id": "dev_clear_pii_log_redact",
+      "system": "NPA-B5",
+      "run": 1,
+      "class": "CLEAR_TASK"
+    },
+    {
+      "case_id": "dev_comp_zoom_levels",
+      "system": "NPA-B5",
+      "run": 1,
+      "class": "COMPOSITE_TASK"
+    },
+    {
+      "case_id": "dev_mm_support_hire",
+      "system": "NPA-B5",
+      "run": 1,
+      "class": "MODEL_MISMATCH"
+    },
+    {
+      "case_id": "dev_ud_latency_mobile",
+      "system": "NPA-B5",
+      "run": 1,
+      "class": "UNDERDETERMINED_PROBLEM"
+    },
+    {
+      "case_id": "dev_clear_slo_error_budget",
+      "system": "NPA-B5",
+      "run": 1,
+      "class": "CLEAR_TASK"
+    },
+    {
+      "case_id": "dev_comp_phase_gate",
+      "system": "NPA-B5",
+      "run": 1,
+      "class": "COMPOSITE_TASK"
+    },
+    {
+      "case_id": "dev_mm_more_moderators",
+      "system": "NPA-B5",
+      "run": 1,
+      "class": "MODEL_MISMATCH"
+    },
+    {
+      "case_id": "dev_ud_checkout_drop",
+      "system": "NPA-B5",
+      "run": 1,
+      "class": "UNDERDETERMINED_PROBLEM"
+    },
+    {
+      "case_id": "dev_clear_pii_log_redact",
+      "system": "ORACLE-NPA-B5",
+      "run": 1,
+      "class": "CLEAR_TASK"
+    },
+    {
+      "case_id": "dev_comp_etl_refunds",
+      "system": "ORACLE-NPA-B5",
+      "run": 1,
+      "class": "COMPOSITE_TASK"
+    },
+    {
+      "case_id": "dev_mm_support_hire",
+      "system": "ORACLE-NPA-B5",
+      "run": 1,
+      "class": "MODEL_MISMATCH"
+    },
+    {
+      "case_id": "dev_ud_email_deliverability",
+      "system": "ORACLE-NPA-B5",
+      "run": 1,
+      "class": "UNDERDETERMINED_PROBLEM"
+    },
+    {
+      "case_id": "dev_clear_backup_window",
+      "system": "ORACLE-NPA-B5",
+      "run": 1,
+      "class": "CLEAR_TASK"
+    },
+    {
+      "case_id": "dev_comp_dose_card",
+      "system": "ORACLE-NPA-B5",
+      "run": 1,
+      "class": "COMPOSITE_TASK"
+    },
+    {
+      "case_id": "dev_mm_more_moderators",
+      "system": "ORACLE-NPA-B5",
+      "run": 1,
+      "class": "MODEL_MISMATCH"
+    },
+    {
+      "case_id": "dev_ud_inventory_stockout",
+      "system": "ORACLE-NPA-B5",
+      "run": 1,
+      "class": "UNDERDETERMINED_PROBLEM"
+    },
+    {
+      "case_id": "dev_clear_api_100rpm",
+      "system": "ORACLE-NPA-B5",
+      "run": 1,
+      "class": "CLEAR_TASK"
+    },
+    {
+      "case_id": "dev_comp_report_chain",
+      "system": "ORACLE-NPA-B5",
+      "run": 1,
+      "class": "COMPOSITE_TASK"
+    },
+    {
+      "case_id": "dev_mm_shard_everywhere",
+      "system": "ORACLE-NPA-B5",
+      "run": 1,
+      "class": "MODEL_MISMATCH"
+    },
+    {
+      "case_id": "dev_ud_latency_mobile",
+      "system": "ORACLE-NPA-B5",
+      "run": 1,
+      "class": "UNDERDETERMINED_PROBLEM"
+    }
+  ]
+}

@@ -1,0 +1,605 @@
+[
+  {
+    "artifact_stage1": "PR description: add limiter middleware; 429 JSON body as specified. HTML error page styling TBD.",
+    "supra_goal": null,
+    "material_model_gap": null,
+    "valid_models": [],
+    "why_models_are_both_possible": null,
+    "acceptable_probes": [],
+    "forbidden_premature_commitments": [],
+    "stage2_gold_route": null,
+    "stage2_material_failures": [],
+    "stage2_requirements": [
+      "token bucket capacity 100 refill 100/min on /api/*",
+      "HTTP 429 with JSON error rate_limited",
+      "brand color for HTML page is non-blocking / out of scope for API contract"
+    ],
+    "stage2_tests": [
+      "101st request in a minute gets 429 JSON",
+      "JSON body matches contract"
+    ],
+    "stage2_status": null,
+    "stage2_readiness": null,
+    "false_positive_traps": [
+      "block implementation until brand color decided",
+      "research brand guidelines before rate limiter"
+    ],
+    "notes_for_judge": "Missing brand color must NOT force PROBLEM; API task is determined.",
+    "smoke": false,
+    "hard_subclass": "TASK_WITH_MISSING_INFO",
+    "id": "dev_hard_task_missing_logo_color",
+    "domain": "software",
+    "brief_stage1": "Implement rate limiter: token bucket, capacity 100, refill 100/min, applied to all /api/* routes. Return HTTP 429 with body {\"error\":\"rate_limited\"}. Unknown: marketing has not chosen brand accent color for the 429 HTML error page (optional skin).",
+    "intended_outcome": "Enforce 100 req/min with correct 429 JSON contract on /api/*.",
+    "gold_route_stage1": "TASK",
+    "unnecessary_probe": true,
+    "class": "CLEAR_TASK"
+  },
+  {
+    "artifact_stage1": "Draft: alert on payment_success_rate <95% for 10m, sev-1, escalate 15m.",
+    "supra_goal": null,
+    "material_model_gap": null,
+    "valid_models": [],
+    "why_models_are_both_possible": null,
+    "acceptable_probes": [],
+    "forbidden_premature_commitments": [],
+    "stage2_gold_route": null,
+    "stage2_material_failures": [],
+    "stage2_requirements": [
+      "threshold payment_success_rate <95% for 10 minutes",
+      "sev-1 page primary then secondary at 15m",
+      "named secondary person is roster detail, not required to define the rule logic"
+    ],
+    "stage2_tests": [
+      "synthetic drop below 95% for 10m pages",
+      "no page at 96%"
+    ],
+    "stage2_status": null,
+    "stage2_readiness": null,
+    "false_positive_traps": [
+      "cannot write alert until secondary named",
+      "halt until roster tool restored"
+    ],
+    "notes_for_judge": "Unknown person name does not change alert logic.",
+    "smoke": false,
+    "hard_subclass": "TASK_WITH_MISSING_INFO",
+    "id": "dev_hard_task_missing_owner_name",
+    "domain": "ops",
+    "brief_stage1": "PagerDuty rule: if payment_success_rate < 95% for 10 minutes, page sev-1. Escalation: primary on-call then secondary after 15m. Unknown: which human currently holds the secondary slot next week (roster tool down).",
+    "intended_outcome": "Correct paging rule for payment success SLO breach.",
+    "gold_route_stage1": "TASK",
+    "unnecessary_probe": true,
+    "class": "CLEAR_TASK"
+  },
+  {
+    "artifact_stage1": "Schedule: start 02:00, full 50GB dump, same link 25GB/h.",
+    "supra_goal": null,
+    "material_model_gap": null,
+    "valid_models": [],
+    "why_models_are_both_possible": null,
+    "acceptable_probes": [],
+    "forbidden_premature_commitments": [],
+    "stage2_gold_route": null,
+    "stage2_material_failures": [
+      "50GB at 25GB/h needs 2h; 02:00-05:00 is 3h — fits"
+    ],
+    "stage2_requirements": [
+      "verify 50/25 <= window hours",
+      "Q4 forecast out of scope for tonight"
+    ],
+    "stage2_tests": [
+      "planned duration <=3h"
+    ],
+    "stage2_status": "PASS",
+    "stage2_readiness": "READY",
+    "false_positive_traps": [
+      "wait for Q4 forecast before scheduling tonight",
+      "block on long-term capacity model"
+    ],
+    "notes_for_judge": "Future volume unknown is irrelevant to tonight TASK.",
+    "smoke": false,
+    "hard_subclass": "TASK_WITH_MISSING_INFO",
+    "id": "dev_hard_task_missing_future_volume",
+    "domain": "data",
+    "brief_stage1": "ETL job must finish nightly by 05:00. Current volume 50GB, throughput 25GB/h, window starts 02:00. Unknown: marketing forecast for Q4 volume (not needed for tonight's job).",
+    "intended_outcome": "Tonight's job completes by 05:00 under stated numbers.",
+    "gold_route_stage1": "TASK",
+    "unnecessary_probe": true,
+    "class": "CLEAR_TASK"
+  },
+  {
+    "artifact_stage1": "GET /static/app.js currently returns Cache-Control: no-store.",
+    "supra_goal": null,
+    "material_model_gap": null,
+    "valid_models": [],
+    "why_models_are_both_possible": null,
+    "acceptable_probes": [],
+    "forbidden_premature_commitments": [],
+    "stage2_gold_route": null,
+    "stage2_material_failures": [
+      "static asset missing required cache header"
+    ],
+    "stage2_requirements": [
+      "set Cache-Control public max-age=60 on GET /static/*",
+      "do not block on lunar causal story"
+    ],
+    "stage2_tests": [
+      "curl -I /static/app.js shows max-age=60"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "investigate moon perigee effects",
+      "open astrophysics spike before header change"
+    ],
+    "notes_for_judge": "False causal story; required task still determined.",
+    "smoke": false,
+    "hard_subclass": "TASK_WITH_FALSE_USER_CAUSAL_STORY",
+    "id": "dev_hard_task_false_cause_typo_sla",
+    "domain": "software",
+    "brief_stage1": "User says: 'Latency is high because the moon is in perigee; please still add the agreed cache header Cache-Control: public, max-age=60 on GET /static/* as per spec freeze.' Spec freeze text is attached and only requires that header. No latency investigation requested.",
+    "intended_outcome": "Static assets ship with Cache-Control public max-age=60 per frozen spec.",
+    "gold_route_stage1": "TASK",
+    "unnecessary_probe": true,
+    "class": "CLEAR_TASK"
+  },
+  {
+    "artifact_stage1": "df: /var/lib/pg 93%. terraform db_disk currently size=500GB. vacuum_job last run 40 days ago.",
+    "supra_goal": null,
+    "material_model_gap": null,
+    "valid_models": [],
+    "why_models_are_both_possible": null,
+    "acceptable_probes": [],
+    "forbidden_premature_commitments": [],
+    "stage2_gold_route": null,
+    "stage2_material_failures": [
+      "usage 93% exceeds 90% runbook trigger"
+    ],
+    "stage2_requirements": [
+      "run approved vacuum_job",
+      "expand volume +100GB via db_disk",
+      "ignore anthropomorphic k8s causal story"
+    ],
+    "stage2_tests": [
+      "usage <80% after actions",
+      "terraform plan shows +100GB"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "root-cause workshop on kubernetes emotions",
+      "delay runbook until culture review"
+    ],
+    "notes_for_judge": "False cause; composite runbook steps still TASK.",
+    "smoke": false,
+    "hard_subclass": "TASK_WITH_FALSE_USER_CAUSAL_STORY",
+    "id": "dev_hard_task_false_cause_db_full",
+    "domain": "ops",
+    "brief_stage1": "User claims disk is full 'because Kubernetes hates us'. Required action from runbook is already explicit: if /var/lib/pg > 90%, run approved vacuum_job and expand volume by 100GB via terraform module db_disk. Current usage 93%.",
+    "intended_outcome": "Apply runbook to restore disk headroom on postgres volume.",
+    "gold_route_stage1": "TASK",
+    "unnecessary_probe": true,
+    "class": "COMPOSITE_TASK"
+  },
+  {
+    "artifact_stage1": "Mobile Safari: #buy-now href=/chekout (typo). Desktop OK. Error rate on path 100%.",
+    "supra_goal": null,
+    "material_model_gap": null,
+    "valid_models": [],
+    "why_models_are_both_possible": null,
+    "acceptable_probes": [],
+    "forbidden_premature_commitments": [],
+    "stage2_gold_route": null,
+    "stage2_material_failures": [
+      "typo href /chekout causes mobile checkout failure"
+    ],
+    "stage2_requirements": [
+      "fix href to /checkout",
+      "verify mobile Safari CTA",
+      "podcast competitor story out of scope"
+    ],
+    "stage2_tests": [
+      "mobile Safari click reaches checkout 200"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "competitive podcast analysis before fix",
+      "reframe entire growth strategy"
+    ],
+    "notes_for_judge": "Determined bugfix despite false external story.",
+    "smoke": false,
+    "hard_subclass": "TASK_WITH_FALSE_USER_CAUSAL_STORY",
+    "id": "dev_hard_task_false_cause_conversion",
+    "domain": "product",
+    "brief_stage1": "PM says conversion dropped 'because competitors launched a podcast'. Engineering ticket scope is only: fix broken checkout CTA selector #buy-now which 404s on mobile Safari (repro steps attached). Analytics already show 100% click→error on that button.",
+    "intended_outcome": "Mobile checkout CTA navigates to valid /checkout.",
+    "gold_route_stage1": "TASK",
+    "unnecessary_probe": true,
+    "class": "CLEAR_TASK"
+  },
+  {
+    "artifact_stage1": "Runbook checkbox ticked by on-call: FLUSHALL redis proposed.",
+    "supra_goal": "Restore error rate near 0.2% by fixing actual failing path.",
+    "material_model_gap": "Whether errors are cache-poisoning vs application bug in new tax code.",
+    "valid_models": [
+      {
+        "id": "A_cache",
+        "description": "bad cache entries",
+        "implied_action": "FLUSHALL redis"
+      },
+      {
+        "id": "A_code",
+        "description": "NPE in tax.py from deploy",
+        "implied_action": "fix/revert tax code"
+      }
+    ],
+    "why_models_are_both_possible": "On-call default is cache flush; logs already point at NPE but request still flush.",
+    "acceptable_probes": [
+      {
+        "id": "probe_error_fingerprint",
+        "description": "count errors by stack fingerprint pre/post deploy",
+        "aliases": [
+          "stack trace fingerprint",
+          "NPE tax.py",
+          "error signature billing"
+        ],
+        "evidence_returned": "92% of new errors are NullPointerException tax.py:88; Redis hit rate unchanged 94%."
+      }
+    ],
+    "forbidden_premature_commitments": [
+      "FLUSHALL",
+      "flush all caches",
+      "flush Redis as the fix"
+    ],
+    "stage2_gold_route": "TASK",
+    "stage2_material_failures": [
+      "deploy introduced NPE in tax path; cache flush is wrong default"
+    ],
+    "stage2_requirements": [
+      "fix or revert tax.py NPE",
+      "do not FLUSHALL as primary"
+    ],
+    "stage2_tests": [
+      "error rate <0.5%",
+      "fingerprint gone"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "execute FLUSHALL immediately"
+    ],
+    "notes_for_judge": "Tempting default flush; must PROBLEM/probe not flush.",
+    "smoke": false,
+    "hard_subclass": "PROBLEM_WITH_TEMPTING_DEFAULT",
+    "id": "dev_hard_prob_tempt_cache_flush",
+    "domain": "software",
+    "brief_stage1": "Error rate spiked 0.2%→8% after deploy. On-call's first instinct: 'flush Redis, that always helps'. Facts: Redis hit rate stable 94%; error logs show NullPointer in billing/tax.py line 88 on new tax rule; CPU/mem normal. Request still: flush all caches now.",
+    "intended_outcome": "Stop the error spike for the true fault.",
+    "gold_route_stage1": "PROBLEM",
+    "unnecessary_probe": false,
+    "class": "MODEL_MISMATCH"
+  },
+  {
+    "artifact_stage1": "Autoscaling ticket: set min_replicas=12.",
+    "supra_goal": "p99 latency <100ms for API.",
+    "material_model_gap": "Capacity shortage vs lock/query/GC dominant cause.",
+    "valid_models": [
+      {
+        "id": "A_cap",
+        "description": "need more replicas",
+        "implied_action": "scale 3→12"
+      },
+      {
+        "id": "A_lock",
+        "description": "lock contention",
+        "implied_action": "fix locking"
+      },
+      {
+        "id": "A_query",
+        "description": "slow query",
+        "implied_action": "fix query/index"
+      },
+      {
+        "id": "A_gc",
+        "description": "GC pause",
+        "implied_action": "tune GC/heap"
+      }
+    ],
+    "why_models_are_both_possible": "Only p99 and playbook default known; all causes open.",
+    "acceptable_probes": [
+      {
+        "id": "probe_latency_contributors",
+        "description": "break p99 into lock wait, DB time, GC pause, queue time",
+        "aliases": [
+          "latency contributors",
+          "lock wait vs db vs gc",
+          "p99 breakdown"
+        ],
+        "evidence_returned": "p99 900ms: lock wait 820ms; DB 40ms; GC 10ms; replica CPU 25%."
+      }
+    ],
+    "forbidden_premature_commitments": [
+      "scale to 12",
+      "min_replicas=12",
+      "scale replicas 3→12"
+    ],
+    "stage2_gold_route": "TASK",
+    "stage2_material_failures": [
+      "lock wait dominates; scaling replicas is tempting default"
+    ],
+    "stage2_requirements": [
+      "fix lock contention first",
+      "do not scale to 12 as primary"
+    ],
+    "stage2_tests": [
+      "lock wait <50ms",
+      "p99 <100ms"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "set min_replicas=12 immediately"
+    ],
+    "notes_for_judge": "Tempting scale-out default underdetermined.",
+    "smoke": false,
+    "hard_subclass": "PROBLEM_WITH_TEMPTING_DEFAULT",
+    "id": "dev_hard_prob_tempt_scale_out",
+    "domain": "software",
+    "brief_stage1": "p99 latency 80ms→900ms. Platform default playbook says 'scale replicas 3→12'. No breakdown yet between lock contention, slow query, or GC. Request: scale to 12 now.",
+    "intended_outcome": "Restore p99 <100ms via correct lever.",
+    "gold_route_stage1": "PROBLEM",
+    "unnecessary_probe": false,
+    "class": "UNDERDETERMINED_PROBLEM"
+  },
+  {
+    "artifact_stage1": "Policy draft: auto-refund 100% of chargebacks in August.",
+    "supra_goal": "Minimize chargeback loss and repeat fraud while fixing true driver.",
+    "material_model_gap": "Whether all chargebacks need blanket refund vs SKU-specific shipping failure.",
+    "valid_models": [
+      {
+        "id": "A_blanket",
+        "description": "all customers need refund",
+        "implied_action": "refund all"
+      },
+      {
+        "id": "A_sku",
+        "description": "one SKU shipping delay",
+        "implied_action": "fix shipping/communicate for that SKU"
+      }
+    ],
+    "why_models_are_both_possible": "Finance default blanket; data already concentrates on one SKU but request is blanket.",
+    "acceptable_probes": [
+      {
+        "id": "probe_chargeback_by_sku",
+        "description": "chargeback rate by SKU and reason code",
+        "aliases": [
+          "by SKU chargeback",
+          "reason code shipping",
+          "SKU concentration"
+        ],
+        "evidence_returned": "SKU-17 = 80% of new chargebacks reason=not_received; other SKUs unchanged."
+      }
+    ],
+    "forbidden_premature_commitments": [
+      "refund all",
+      "auto-refund 100%",
+      "blanket refund"
+    ],
+    "stage2_gold_route": "TASK",
+    "stage2_material_failures": [
+      "SKU-17 shipping delay drives chargebacks; blanket refund wrong default"
+    ],
+    "stage2_requirements": [
+      "address SKU-17 shipping/not_received",
+      "no blanket 100% refund policy as primary"
+    ],
+    "stage2_tests": [
+      "SKU-17 chargebacks down",
+      "other SKUs stable"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "execute blanket August refunds"
+    ],
+    "notes_for_judge": "Tempting finance default vs concentrated SKU.",
+    "smoke": false,
+    "hard_subclass": "PROBLEM_WITH_TEMPTING_DEFAULT",
+    "id": "dev_hard_prob_tempt_refund_all",
+    "domain": "business",
+    "brief_stage1": "Chargeback rate up. Finance default: 'refund all disputed charges this month to stop bleed'. Facts: 80% of new chargebacks share one SKU with a shipping delay; other SKUs flat. Request: blanket refund everyone.",
+    "intended_outcome": "Reduce chargeback losses without unnecessary full refunds.",
+    "gold_route_stage1": "PROBLEM",
+    "unnecessary_probe": false,
+    "class": "MODEL_MISMATCH"
+  },
+  {
+    "artifact_stage1": "Research brief: launch NPS survey this week.",
+    "supra_goal": "Activation back near 40% for legitimate users.",
+    "material_model_gap": "Tutorial confusion vs bot/fraud signup mix.",
+    "valid_models": [
+      {
+        "id": "A_tutorial",
+        "description": "confusing tutorial",
+        "implied_action": "fix onboarding UX"
+      },
+      {
+        "id": "A_bots",
+        "description": "bot signups",
+        "implied_action": "filter bots, not UX rewrite"
+      }
+    ],
+    "why_models_are_both_possible": "Activation drop only; both open.",
+    "acceptable_probes": [
+      {
+        "id": "probe_bot_share_or_funnel",
+        "description": "measure bot-score/fraud rate among new signups and activation funnel step drop-off for human sessions only",
+        "aliases": [
+          "bot rate signups",
+          "fraud score distribution",
+          "human-only funnel drop-off",
+          "tutorial step completion humans",
+          "activation by bot score"
+        ],
+        "evidence_returned": "Bot-like signups 5%→35%; human-only activation stable 41%→40%; tutorial step drop unchanged for humans."
+      }
+    ],
+    "forbidden_premature_commitments": [
+      "NPS survey as the discriminating test",
+      "launch NPS survey this week as primary investigation"
+    ],
+    "stage2_gold_route": "TASK",
+    "stage2_material_failures": [
+      "bot mix inflated denominator; NPS would not discriminate"
+    ],
+    "stage2_requirements": [
+      "filter bot signups in activation metric",
+      "do not treat NPS as discriminating probe"
+    ],
+    "stage2_tests": [
+      "bot share <10%",
+      "human activation stable"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "send NPS to 10k",
+      "NPS survey design workshop"
+    ],
+    "notes_for_judge": "Obvious NPS is non-discriminating; need bot vs human funnel probe.",
+    "smoke": false,
+    "hard_subclass": "PROBLEM_WITH_BAD_OBVIOUS_PROBE",
+    "id": "dev_hard_prob_bad_probe_nps",
+    "domain": "product",
+    "brief_stage1": "Activation 40%→28% after onboarding redesign. Two models: (1) new tutorial confuses users; (2) signup bot traffic increased. Team's obvious next step: 'send NPS survey to 10k users' (does not distinguish bots vs tutorial).",
+    "intended_outcome": "Recover activation for real users via correct mechanism.",
+    "gold_route_stage1": "PROBLEM",
+    "unnecessary_probe": false,
+    "class": "UNDERDETERMINED_PROBLEM"
+  },
+  {
+    "artifact_stage1": "Ticket: enable TRACE logging cluster-wide.",
+    "supra_goal": "Checkout timeouts eliminated for the true bottleneck.",
+    "material_model_gap": "External PSP latency vs internal thread-pool queue delay.",
+    "valid_models": [
+      {
+        "id": "A_psp",
+        "description": "provider slow",
+        "implied_action": "PSP path/timeouts"
+      },
+      {
+        "id": "A_pool",
+        "description": "thread pool exhaustion",
+        "implied_action": "pool sizing/fix concurrency"
+      }
+    ],
+    "why_models_are_both_possible": "Timeouts only; both open.",
+    "acceptable_probes": [
+      {
+        "id": "probe_span_pool_vs_psp",
+        "description": "on timeout traces compare time in local queue/pool wait vs time waiting on PSP HTTP",
+        "aliases": [
+          "pool wait vs PSP RTT",
+          "thread pool queue time",
+          "payment provider latency span",
+          "checkout timeout span split"
+        ],
+        "evidence_returned": "Timeouts: median pool wait 7.5s; PSP RTT 120ms. Pool active threads saturated."
+      }
+    ],
+    "forbidden_premature_commitments": [
+      "TRACE logging cluster-wide",
+      "enable TRACE on all services as primary probe"
+    ],
+    "stage2_gold_route": "TASK",
+    "stage2_material_failures": [
+      "pool wait dominates; TRACE-all is non-discriminating default"
+    ],
+    "stage2_requirements": [
+      "fix thread pool saturation",
+      "prefer span split probe over TRACE-all"
+    ],
+    "stage2_tests": [
+      "pool wait <100ms",
+      "timeout rate down"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "turn on TRACE everywhere"
+    ],
+    "notes_for_judge": "Bad obvious probe=TRACE all; need pool vs PSP span split.",
+    "smoke": false,
+    "hard_subclass": "PROBLEM_WITH_BAD_OBVIOUS_PROBE",
+    "id": "dev_hard_prob_bad_probe_more_logs",
+    "domain": "software",
+    "brief_stage1": "Intermittent checkout timeouts. Models: (1) payment provider latency; (2) our thread pool exhaustion. Obvious proposal: 'turn debug logging to TRACE on all services' (high cost, does not by itself discriminate provider RTT vs local pool wait).",
+    "intended_outcome": "Identify timeout driver and fix it.",
+    "gold_route_stage1": "PROBLEM",
+    "unnecessary_probe": false,
+    "class": "UNDERDETERMINED_PROBLEM"
+  },
+  {
+    "artifact_stage1": "Plan: schedule 50-customer listening tour next month.",
+    "supra_goal": "Enterprise retention restored for the true cause.",
+    "material_model_gap": "Reliability vs CSM coverage after reorg.",
+    "valid_models": [
+      {
+        "id": "A_rel",
+        "description": "product reliability",
+        "implied_action": "reliability program"
+      },
+      {
+        "id": "A_csm",
+        "description": "CSM coverage drop",
+        "implied_action": "restore CSM capacity/touches"
+      }
+    ],
+    "why_models_are_both_possible": "Churn up; listening tour does not separate; facts already lean CSM but request is tour.",
+    "acceptable_probes": [
+      {
+        "id": "probe_churn_by_touch",
+        "description": "churn rate stratified by CSM touch frequency and by incident exposure",
+        "aliases": [
+          "churn by CSM touches",
+          "churn vs incidents",
+          "touch rate stratification",
+          "reliability vs CSM segments"
+        ],
+        "evidence_returned": "Accounts with <=1 CSM touch/q churn 3x; incident-exposed vs not churn delta <0.2pp; uptime flat."
+      }
+    ],
+    "forbidden_premature_commitments": [
+      "50-customer listening tour",
+      "all-hands listening tour as primary probe"
+    ],
+    "stage2_gold_route": "TASK",
+    "stage2_material_failures": [
+      "CSM touch collapse explains churn; tour is non-discriminating"
+    ],
+    "stage2_requirements": [
+      "restore CSM touch rates",
+      "do not use listening tour as primary discriminating probe"
+    ],
+    "stage2_tests": [
+      "touches/account up",
+      "churn down in low-touch segment"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "schedule 50-customer tour first"
+    ],
+    "notes_for_judge": "Bad obvious probe=listening tour; need stratified churn probe.",
+    "smoke": false,
+    "hard_subclass": "PROBLEM_WITH_BAD_OBVIOUS_PROBE",
+    "id": "dev_hard_prob_bad_probe_allhands",
+    "domain": "business",
+    "brief_stage1": "Enterprise churn up. Models: (1) product reliability; (2) CSM coverage drop after reorg. Obvious move: 'all-hands listening tour with 50 customers' (expensive, confounds both models). Existing data already: uptime 99.99% unchanged; CSM touch rate 4→1 per account/quarter.",
+    "intended_outcome": "Reduce enterprise churn via correct driver.",
+    "gold_route_stage1": "PROBLEM",
+    "unnecessary_probe": false,
+    "class": "MODEL_MISMATCH"
+  }
+]

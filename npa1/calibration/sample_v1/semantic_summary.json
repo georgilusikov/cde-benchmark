@@ -1,0 +1,35 @@
+{
+  "B5": {
+    "n": 12,
+    "model_gap_correct": 1.0,
+    "probe_discriminating": 1.0,
+    "premature_commitment": 0.5,
+    "unnecessary_reframe": 0.0,
+    "requirement_recall": 1.0,
+    "unsupported_confirmed_rate": 0.0,
+    "readiness_correct": null,
+    "stage2_requirement_recall": null
+  },
+  "NPA-B5": {
+    "n": 12,
+    "model_gap_correct": 1.0,
+    "probe_discriminating": 1.0,
+    "premature_commitment": 0.0,
+    "unnecessary_reframe": 0.0,
+    "requirement_recall": 1.0,
+    "unsupported_confirmed_rate": 0.0,
+    "readiness_correct": null,
+    "stage2_requirement_recall": 1.0
+  },
+  "ORACLE-NPA-B5": {
+    "n": 12,
+    "model_gap_correct": 1.0,
+    "probe_discriminating": 1.0,
+    "premature_commitment": 0.0,
+    "unnecessary_reframe": 0.0,
+    "requirement_recall": 1.0,
+    "unsupported_confirmed_rate": 0.0,
+    "readiness_correct": null,
+    "stage2_requirement_recall": 1.0
+  }
+}

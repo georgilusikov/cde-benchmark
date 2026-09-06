@@ -1,0 +1,58 @@
+{"phase": "eval", "jobs": 16, "mode": "agy", "systems": ["B5", "NPA-B5"]}
+{
+  "done": true,
+  "out": "results/smoke_agy36",
+  "aggregate": {
+    "B5": {
+      "n_runs": 8,
+      "json_valid_rate": 1.0,
+      "route_accuracy": 0.5,
+      "problem_route_recall": 0.0,
+      "task_route_specificity": 1.0,
+      "premature_commitment_rate": 0.0,
+      "unnecessary_reframe_rate": 0.0,
+      "probe_match_rate": 0.0,
+      "latency_median_s": 17.34267246723175,
+      "chars_mean": 4560.0,
+      "task_runs": 4,
+      "problem_runs": 4
+    },
+    "NPA-B5": {
+      "n_runs": 8,
+      "json_valid_rate": 1.0,
+      "route_accuracy": 0.875,
+      "problem_route_recall": 1.0,
+      "task_route_specificity": 0.75,
+      "premature_commitment_rate": 0.0,
+      "unnecessary_reframe_rate": 0.25,
+      "probe_match_rate": 1.0,
+      "latency_median_s": 12.354955315589905,
+      "chars_mean": 2288.5,
+      "task_runs": 4,
+      "problem_runs": 4
+    }
+  },
+  "deterministic_core_pass": false,
+  "errors": 0
+}
+# NPA-1 run (agy)
+
+cases=8 systems=['B5', 'NPA-B5'] runs=1 jobs=16
+
+| system | route_acc | PROBLEM recall | TASK spec | PCR | URR | probe | lat med |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| B5 | 0.5 | 0.0 | 1.0 | 0.0 | 0.0 | 0.0 | 17.34267246723175 |
+| NPA-B5 | 0.875 | 1.0 | 0.75 | 0.0 | 0.25 | 1.0 | 12.354955315589905 |
+
+## Gates (deterministic core)
+
+- A_problem_detection: PASS — PROBLEM recall=1.0
+- B_pcr_reduction: PASS — PCR 0.0 <= 0.0 (baseline 0.0)
+- C_paranoia_guard: FAIL/PENDING — URR=0.25
+- D_b5_preservation: FAIL/PENDING — requires semantic requirement recall (not in deterministic layer)
+- E_hallucination: FAIL/PENDING — requires semantic unsupported rate
+- F_recovery: FAIL/PENDING — requires post-probe semantic recall
+- cost_latency: PASS — lat 12.354955315589905 vs 17.34267246723175
+- cost_chars: PASS — chars 2288.5 vs 4560.0
+- deterministic_core_pass: False
+

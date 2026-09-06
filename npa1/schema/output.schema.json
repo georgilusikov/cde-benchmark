@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NPA-1 evaluator output",
+  "type": "object",
+  "required": ["intended_outcome", "route", "decision_readiness"],
+  "properties": {
+    "intended_outcome": {"type": "string"},
+    "route": {"type": "string", "enum": ["TASK", "PROBLEM"]},
+    "supra_goal": {},
+    "model_gap": {},
+    "competing_models": {},
+    "probe": {},
+    "success": {},
+    "parts": {},
+    "material_failures": {},
+    "requirements": {},
+    "tests": {},
+    "evidence_gaps": {},
+    "decision_readiness": {
+      "type": "string",
+      "enum": ["READY", "NEEDS_EVIDENCE", "BLOCKED"]
+    }
+  }
+}

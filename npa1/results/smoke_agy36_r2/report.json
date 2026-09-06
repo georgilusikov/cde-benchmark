@@ -1,0 +1,614 @@
+{
+  "manifest": {
+    "cases": "smoke/cases.json",
+    "n_cases": 8,
+    "systems": [
+      "B5",
+      "NPA-B5"
+    ],
+    "runs": 1,
+    "mode": "agy",
+    "model": "gemini-3.6-flash-high",
+    "jobs": 16,
+    "seconds": 59.93,
+    "stage1_errors": 0,
+    "stage2_errors": 0,
+    "gold_hidden_from_evaluator": true
+  },
+  "stage1_scores": [
+    {
+      "case_id": "smoke_clear_api_rate",
+      "class": "CLEAR_TASK",
+      "gold_route": "TASK",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": true,
+      "premature_commitment": false,
+      "unnecessary_reframe": false,
+      "probe_matched": false,
+      "probe_id": null,
+      "has_downstream": true,
+      "decision_readiness": null,
+      "stop_discipline_ok": true,
+      "latency_s": 17.127228260040283,
+      "chars": 5865,
+      "system": "B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_clear_api_rate",
+      "class": "CLEAR_TASK",
+      "gold_route": "TASK",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": true,
+      "premature_commitment": false,
+      "unnecessary_reframe": false,
+      "probe_matched": false,
+      "probe_id": null,
+      "has_downstream": true,
+      "decision_readiness": "READY",
+      "stop_discipline_ok": true,
+      "latency_s": 10.926244020462036,
+      "chars": 4100,
+      "system": "NPA-B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_clear_backup_window",
+      "class": "CLEAR_TASK",
+      "gold_route": "TASK",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": true,
+      "premature_commitment": false,
+      "unnecessary_reframe": false,
+      "probe_matched": false,
+      "probe_id": null,
+      "has_downstream": true,
+      "decision_readiness": null,
+      "stop_discipline_ok": true,
+      "latency_s": 19.138896703720093,
+      "chars": 4376,
+      "system": "B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_clear_backup_window",
+      "class": "CLEAR_TASK",
+      "gold_route": "TASK",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": true,
+      "premature_commitment": false,
+      "unnecessary_reframe": false,
+      "probe_matched": false,
+      "probe_id": null,
+      "has_downstream": true,
+      "decision_readiness": "BLOCKED",
+      "stop_discipline_ok": true,
+      "latency_s": 12.885501861572266,
+      "chars": 1834,
+      "system": "NPA-B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_comp_dose_card",
+      "class": "COMPOSITE_TASK",
+      "gold_route": "TASK",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": true,
+      "premature_commitment": false,
+      "unnecessary_reframe": false,
+      "probe_matched": false,
+      "probe_id": null,
+      "has_downstream": true,
+      "decision_readiness": null,
+      "stop_discipline_ok": true,
+      "latency_s": 16.918025016784668,
+      "chars": 4018,
+      "system": "B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_comp_dose_card",
+      "class": "COMPOSITE_TASK",
+      "gold_route": "TASK",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": true,
+      "premature_commitment": false,
+      "unnecessary_reframe": false,
+      "probe_matched": false,
+      "probe_id": null,
+      "has_downstream": true,
+      "decision_readiness": "BLOCKED",
+      "stop_discipline_ok": true,
+      "latency_s": 15.707119226455688,
+      "chars": 1943,
+      "system": "NPA-B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_comp_etl_handoff",
+      "class": "COMPOSITE_TASK",
+      "gold_route": "TASK",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": true,
+      "premature_commitment": false,
+      "unnecessary_reframe": false,
+      "probe_matched": false,
+      "probe_id": null,
+      "has_downstream": true,
+      "decision_readiness": null,
+      "stop_discipline_ok": true,
+      "latency_s": 21.713353157043457,
+      "chars": 3967,
+      "system": "B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_comp_etl_handoff",
+      "class": "COMPOSITE_TASK",
+      "gold_route": "TASK",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": true,
+      "premature_commitment": false,
+      "unnecessary_reframe": false,
+      "probe_matched": false,
+      "probe_id": null,
+      "has_downstream": true,
+      "decision_readiness": "READY",
+      "stop_discipline_ok": true,
+      "latency_s": 13.218588829040527,
+      "chars": 2988,
+      "system": "NPA-B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_mm_cache_more_ram",
+      "class": "MODEL_MISMATCH",
+      "gold_route": "PROBLEM",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": false,
+      "premature_commitment": true,
+      "unnecessary_reframe": false,
+      "probe_matched": false,
+      "probe_id": null,
+      "has_downstream": true,
+      "decision_readiness": null,
+      "stop_discipline_ok": false,
+      "latency_s": 18.404019832611084,
+      "chars": 3958,
+      "system": "B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_mm_cache_more_ram",
+      "class": "MODEL_MISMATCH",
+      "gold_route": "PROBLEM",
+      "json_valid": true,
+      "route": "PROBLEM",
+      "route_correct": true,
+      "premature_commitment": false,
+      "unnecessary_reframe": false,
+      "probe_matched": true,
+      "probe_id": "probe_latency_breakdown",
+      "has_downstream": false,
+      "decision_readiness": "NEEDS_EVIDENCE",
+      "stop_discipline_ok": true,
+      "latency_s": 24.216212034225464,
+      "chars": 1353,
+      "system": "NPA-B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_mm_support_hire",
+      "class": "MODEL_MISMATCH",
+      "gold_route": "PROBLEM",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": false,
+      "premature_commitment": true,
+      "unnecessary_reframe": false,
+      "probe_matched": false,
+      "probe_id": null,
+      "has_downstream": true,
+      "decision_readiness": null,
+      "stop_discipline_ok": false,
+      "latency_s": 16.068233966827393,
+      "chars": 3027,
+      "system": "B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_mm_support_hire",
+      "class": "MODEL_MISMATCH",
+      "gold_route": "PROBLEM",
+      "json_valid": true,
+      "route": "PROBLEM",
+      "route_correct": true,
+      "premature_commitment": false,
+      "unnecessary_reframe": false,
+      "probe_matched": true,
+      "probe_id": "probe_time_breakdown",
+      "has_downstream": false,
+      "decision_readiness": "NEEDS_EVIDENCE",
+      "stop_discipline_ok": true,
+      "latency_s": 10.283017873764038,
+      "chars": 1141,
+      "system": "NPA-B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_ud_checkout_drop",
+      "class": "UNDERDETERMINED_PROBLEM",
+      "gold_route": "PROBLEM",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": false,
+      "premature_commitment": true,
+      "unnecessary_reframe": false,
+      "probe_matched": false,
+      "probe_id": null,
+      "has_downstream": true,
+      "decision_readiness": null,
+      "stop_discipline_ok": false,
+      "latency_s": 15.907737970352173,
+      "chars": 5126,
+      "system": "B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_ud_checkout_drop",
+      "class": "UNDERDETERMINED_PROBLEM",
+      "gold_route": "PROBLEM",
+      "json_valid": true,
+      "route": "PROBLEM",
+      "route_correct": true,
+      "premature_commitment": false,
+      "unnecessary_reframe": false,
+      "probe_matched": true,
+      "probe_id": "probe_auth_rate",
+      "has_downstream": false,
+      "decision_readiness": "NEEDS_EVIDENCE",
+      "stop_discipline_ok": true,
+      "latency_s": 8.430980920791626,
+      "chars": 1203,
+      "system": "NPA-B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_ud_ship_delay",
+      "class": "UNDERDETERMINED_PROBLEM",
+      "gold_route": "PROBLEM",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": false,
+      "premature_commitment": true,
+      "unnecessary_reframe": false,
+      "probe_matched": false,
+      "probe_id": null,
+      "has_downstream": true,
+      "decision_readiness": null,
+      "stop_discipline_ok": false,
+      "latency_s": 15.078779935836792,
+      "chars": 4171,
+      "system": "B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    },
+    {
+      "case_id": "smoke_ud_ship_delay",
+      "class": "UNDERDETERMINED_PROBLEM",
+      "gold_route": "PROBLEM",
+      "json_valid": true,
+      "route": "PROBLEM",
+      "route_correct": true,
+      "premature_commitment": false,
+      "unnecessary_reframe": false,
+      "probe_matched": true,
+      "probe_id": "probe_stage_timestamps",
+      "has_downstream": false,
+      "decision_readiness": "NEEDS_EVIDENCE",
+      "stop_discipline_ok": true,
+      "latency_s": 11.442742109298706,
+      "chars": 1176,
+      "system": "NPA-B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage1"
+    }
+  ],
+  "stage2_scores": [
+    {
+      "case_id": "smoke_mm_cache_more_ram",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": true,
+      "has_downstream": true,
+      "decision_readiness": "READY",
+      "latency_s": 10.572916984558105,
+      "chars": 2410,
+      "system": "NPA-B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage2"
+    },
+    {
+      "case_id": "smoke_mm_support_hire",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": true,
+      "has_downstream": true,
+      "decision_readiness": "READY",
+      "latency_s": 13.057130098342896,
+      "chars": 1988,
+      "system": "NPA-B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage2"
+    },
+    {
+      "case_id": "smoke_ud_checkout_drop",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": true,
+      "has_downstream": true,
+      "decision_readiness": "READY",
+      "latency_s": 12.325223922729492,
+      "chars": 2197,
+      "system": "NPA-B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage2"
+    },
+    {
+      "case_id": "smoke_ud_ship_delay",
+      "json_valid": true,
+      "route": "TASK",
+      "route_correct": true,
+      "has_downstream": true,
+      "decision_readiness": "READY",
+      "latency_s": 15.26994776725769,
+      "chars": 1945,
+      "system": "NPA-B5",
+      "model": "gemini-3.6-flash-high",
+      "run": 1,
+      "stage": "stage2"
+    }
+  ],
+  "aggregate": {
+    "systems": {
+      "B5": {
+        "n_runs": 8,
+        "json_valid_rate": 1.0,
+        "route_accuracy": 0.5,
+        "problem_route_recall": 0.0,
+        "task_route_specificity": 1.0,
+        "premature_commitment_rate": 1.0,
+        "unnecessary_reframe_rate": 0.0,
+        "probe_match_rate": 0.0,
+        "latency_median_s": 17.022626638412476,
+        "chars_mean": 4313.5,
+        "task_runs": 4,
+        "problem_runs": 4
+      },
+      "NPA-B5": {
+        "n_runs": 8,
+        "json_valid_rate": 1.0,
+        "route_accuracy": 1.0,
+        "problem_route_recall": 1.0,
+        "task_route_specificity": 1.0,
+        "premature_commitment_rate": 0.0,
+        "unnecessary_reframe_rate": 0.0,
+        "probe_match_rate": 1.0,
+        "latency_median_s": 12.164121985435486,
+        "chars_mean": 1967.25,
+        "task_runs": 4,
+        "problem_runs": 4
+      }
+    },
+    "case_stable": {
+      "smoke_clear_api_rate": {
+        "B5": {
+          "route_correct": true,
+          "premature_commitment": false,
+          "unnecessary_reframe": false,
+          "probe_matched": false,
+          "maj_route": "TASK"
+        },
+        "NPA-B5": {
+          "route_correct": true,
+          "premature_commitment": false,
+          "unnecessary_reframe": false,
+          "probe_matched": false,
+          "maj_route": "TASK"
+        }
+      },
+      "smoke_clear_backup_window": {
+        "B5": {
+          "route_correct": true,
+          "premature_commitment": false,
+          "unnecessary_reframe": false,
+          "probe_matched": false,
+          "maj_route": "TASK"
+        },
+        "NPA-B5": {
+          "route_correct": true,
+          "premature_commitment": false,
+          "unnecessary_reframe": false,
+          "probe_matched": false,
+          "maj_route": "TASK"
+        }
+      },
+      "smoke_comp_dose_card": {
+        "B5": {
+          "route_correct": true,
+          "premature_commitment": false,
+          "unnecessary_reframe": false,
+          "probe_matched": false,
+          "maj_route": "TASK"
+        },
+        "NPA-B5": {
+          "route_correct": true,
+          "premature_commitment": false,
+          "unnecessary_reframe": false,
+          "probe_matched": false,
+          "maj_route": "TASK"
+        }
+      },
+      "smoke_comp_etl_handoff": {
+        "B5": {
+          "route_correct": true,
+          "premature_commitment": false,
+          "unnecessary_reframe": false,
+          "probe_matched": false,
+          "maj_route": "TASK"
+        },
+        "NPA-B5": {
+          "route_correct": true,
+          "premature_commitment": false,
+          "unnecessary_reframe": false,
+          "probe_matched": false,
+          "maj_route": "TASK"
+        }
+      },
+      "smoke_mm_cache_more_ram": {
+        "B5": {
+          "route_correct": false,
+          "premature_commitment": true,
+          "unnecessary_reframe": false,
+          "probe_matched": false,
+          "maj_route": "TASK"
+        },
+        "NPA-B5": {
+          "route_correct": true,
+          "premature_commitment": false,
+          "unnecessary_reframe": false,
+          "probe_matched": true,
+          "maj_route": "PROBLEM"
+        }
+      },
+      "smoke_mm_support_hire": {
+        "B5": {
+          "route_correct": false,
+          "premature_commitment": true,
+          "unnecessary_reframe": false,
+          "probe_matched": false,
+          "maj_route": "TASK"
+        },
+        "NPA-B5": {
+          "route_correct": true,
+          "premature_commitment": false,
+          "unnecessary_reframe": false,
+          "probe_matched": true,
+          "maj_route": "PROBLEM"
+        }
+      },
+      "smoke_ud_checkout_drop": {
+        "B5": {
+          "route_correct": false,
+          "premature_commitment": true,
+          "unnecessary_reframe": false,
+          "probe_matched": false,
+          "maj_route": "TASK"
+        },
+        "NPA-B5": {
+          "route_correct": true,
+          "premature_commitment": false,
+          "unnecessary_reframe": false,
+          "probe_matched": true,
+          "maj_route": "PROBLEM"
+        }
+      },
+      "smoke_ud_ship_delay": {
+        "B5": {
+          "route_correct": false,
+          "premature_commitment": true,
+          "unnecessary_reframe": false,
+          "probe_matched": false,
+          "maj_route": "TASK"
+        },
+        "NPA-B5": {
+          "route_correct": true,
+          "premature_commitment": false,
+          "unnecessary_reframe": false,
+          "probe_matched": true,
+          "maj_route": "PROBLEM"
+        }
+      }
+    }
+  },
+  "gates": {
+    "gates": {
+      "A_problem_detection": {
+        "pass": true,
+        "detail": "PROBLEM recall=1.0"
+      },
+      "B_pcr_reduction": {
+        "pass": true,
+        "detail": "PCR 0.0 <= 0.6 (baseline 1.0)"
+      },
+      "C_paranoia_guard": {
+        "pass": true,
+        "detail": "URR=0.0"
+      },
+      "D_b5_preservation": {
+        "pass": false,
+        "detail": "requires semantic requirement recall (not in deterministic layer)"
+      },
+      "E_hallucination": {
+        "pass": false,
+        "detail": "requires semantic unsupported rate"
+      },
+      "F_recovery": {
+        "pass": false,
+        "detail": "requires post-probe semantic recall"
+      },
+      "cost_latency": {
+        "pass": true,
+        "detail": "lat 12.164121985435486 vs 17.022626638412476"
+      },
+      "cost_chars": {
+        "pass": true,
+        "detail": "chars 1967.25 vs 4313.5"
+      }
+    },
+    "deterministic_core_pass": true,
+    "full_adoption_pass": false
+  }
+}

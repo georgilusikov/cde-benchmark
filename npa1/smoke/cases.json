@@ -1,0 +1,379 @@
+[
+  {
+    "id": "smoke_clear_api_rate",
+    "domain": "software",
+    "class": "CLEAR_TASK",
+    "smoke": true,
+    "brief_stage1": "Design an API client. Hard constraint: upstream allows max 100 requests/min. Workload: 500 independent jobs/hour, each job needs exactly 1 request. Jobs may be queued. No other constraints.",
+    "artifact_stage1": null,
+    "intended_outcome": "Process 500 jobs/hour without exceeding 100 req/min.",
+    "gold_route_stage1": "TASK",
+    "supra_goal": null,
+    "material_model_gap": null,
+    "valid_models": [],
+    "why_models_are_both_possible": null,
+    "acceptable_probes": [],
+    "forbidden_premature_commitments": [],
+    "unnecessary_probe": true,
+    "stage2_gold_route": null,
+    "stage2_material_failures": [],
+    "stage2_requirements": [
+      "client average rate <= 100 req/min",
+      "sustained throughput >= 500 jobs/hour",
+      "queue or schedule jobs when instantaneous demand would exceed rate limit"
+    ],
+    "stage2_tests": [
+      "burst 200 jobs in 30s does not send >100 req in any rolling 60s window",
+      "steady 500 jobs/hour completes within SLA"
+    ],
+    "stage2_status": null,
+    "stage2_readiness": null,
+    "false_positive_traps": [
+      "need to research business model of the API",
+      "need market analysis of job volume",
+      "need to know why 500 jobs exist"
+    ],
+    "notes_for_judge": "Enough numeric constraints for a client design. Extra business unknowns must not force PROBLEM."
+  },
+  {
+    "id": "smoke_clear_backup_window",
+    "domain": "ops",
+    "class": "CLEAR_TASK",
+    "smoke": true,
+    "brief_stage1": "Nightly backup job. Constraint: must finish between 01:00 and 03:00 local. Dataset size 80 GB. Observed backup throughput 20 GB/hour on the only available link. Link is exclusively reserved for backup in that window.",
+    "artifact_stage1": "Proposed plan: full backup every night starting 01:00 on the 20 GB/h link.",
+    "intended_outcome": "Complete nightly backup inside the 01:00-03:00 window.",
+    "gold_route_stage1": "TASK",
+    "supra_goal": null,
+    "material_model_gap": null,
+    "valid_models": [],
+    "why_models_are_both_possible": null,
+    "acceptable_probes": [],
+    "forbidden_premature_commitments": [],
+    "unnecessary_probe": true,
+    "stage2_gold_route": null,
+    "stage2_material_failures": [
+      "80 GB at 20 GB/h needs 4 hours; window is only 2 hours"
+    ],
+    "stage2_requirements": [
+      "backup volume per night must fit in 2 hours at available throughput, or throughput/window must increase",
+      "do not schedule a full 80 GB backup on a 20 GB/h link inside a 2h window"
+    ],
+    "stage2_tests": [
+      "planned bytes / throughput_h <= 2"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "need corporate backup policy research",
+      "need to interview stakeholders about RPO philosophy"
+    ],
+    "notes_for_judge": "Arithmetic contradiction is fully determined. TASK with FAIL."
+  },
+  {
+    "id": "smoke_comp_etl_handoff",
+    "domain": "data",
+    "class": "COMPOSITE_TASK",
+    "smoke": true,
+    "brief_stage1": "Two-stage pipeline. Extract: return all 2024 order rows; PAID positive, REFUND negative; one row per order/refund. Load: sum extracted rows per customer; keep customers with net total >= 1000.",
+    "artifact_stage1": "Extract: SELECT customer_id, amount FROM orders WHERE status='PAID' AND created_at >= DATE '2024-01-01' AND created_at < DATE '2025-01-01'. Load: SELECT customer_id, SUM(amount) AS total FROM extracted GROUP BY customer_id HAVING SUM(amount) >= 1000.",
+    "intended_outcome": "Correct net-per-customer totals including refunds for 2024.",
+    "gold_route_stage1": "TASK",
+    "supra_goal": null,
+    "material_model_gap": null,
+    "valid_models": [],
+    "why_models_are_both_possible": null,
+    "acceptable_probes": [],
+    "forbidden_premature_commitments": [],
+    "unnecessary_probe": true,
+    "stage2_gold_route": null,
+    "stage2_material_failures": [
+      "extract drops REFUND rows required by load-stage net sum"
+    ],
+    "stage2_requirements": [
+      "extract must include REFUND rows for 2024",
+      "load net sum must see both PAID and REFUND"
+    ],
+    "stage2_tests": [
+      "customer with +1500 PAID and -600 REFUND is excluded if threshold 1000 after correct net"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "need warehouse vendor selection research"
+    ],
+    "notes_for_judge": "Classic composite interface defect; still TASK."
+  },
+  {
+    "id": "smoke_comp_dose_card",
+    "domain": "ops",
+    "class": "COMPOSITE_TASK",
+    "smoke": true,
+    "brief_stage1": "Medication Covelin (fictional). Section A prescriber: 10 mg twice daily, max 20 mg/day. Section B patient card must restate the same schedule; patient follows only section B.",
+    "artifact_stage1": "Section A: 10 mg twice daily, maximum 20 mg/day. Section B: take 10 mg in the morning and 10 mg whenever needed during the day.",
+    "intended_outcome": "Patient receives the same safe schedule as prescribed.",
+    "gold_route_stage1": "TASK",
+    "supra_goal": null,
+    "material_model_gap": null,
+    "valid_models": [],
+    "why_models_are_both_possible": null,
+    "acceptable_probes": [],
+    "forbidden_premature_commitments": [],
+    "unnecessary_probe": true,
+    "stage2_gold_route": null,
+    "stage2_material_failures": [
+      "patient card allows as-needed dose that can violate daily maximum"
+    ],
+    "stage2_requirements": [
+      "section B schedule must be identical in meaning to section A max 20 mg/day fixed BID"
+    ],
+    "stage2_tests": [
+      "no PRN language that permits >20 mg/day"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "need clinical trial literature review before judging the card"
+    ],
+    "notes_for_judge": "Interface mismatch fully visible; TASK."
+  },
+  {
+    "id": "smoke_mm_support_hire",
+    "domain": "business",
+    "class": "MODEL_MISMATCH",
+    "smoke": true,
+    "brief_stage1": "Request: hire more support agents because SLA is 4 hours and tickets are late. Facts already available: agent utilization 43%; 72% of delay time occurs before ticket assignment; after assignment median resolution is 19 minutes.",
+    "artifact_stage1": "Proposed solution doc: open 8 new agent seats next month to fix SLA.",
+    "intended_outcome": "Meet 4-hour SLA for ticket resolution.",
+    "gold_route_stage1": "PROBLEM",
+    "supra_goal": "Tickets reach compliant resolution within 4 hours end-to-end.",
+    "material_model_gap": "Whether lateness is caused by insufficient agent capacity after assignment, or by pre-assignment queue/routing delay.",
+    "valid_models": [
+      {
+        "id": "A_capacity",
+        "description": "Agents are the bottleneck after assignment",
+        "implied_action": "hire more agents"
+      },
+      {
+        "id": "A_preassign",
+        "description": "Most delay is before assignment; post-assign work is fast",
+        "implied_action": "fix intake/routing/assignment, not headcount"
+      }
+    ],
+    "why_models_are_both_possible": "Utilization 43% and 19 min median post-assign argue against capacity; request still assumes hiring. Pre-assignment delay share is given but root cause of that share is not fully specified—still enough to reject hiring-as-default.",
+    "acceptable_probes": [
+      {
+        "id": "probe_time_breakdown",
+        "description": "Measure mean time waiting for assignment vs mean handle time for late tickets",
+        "aliases": ["assignment wait vs handle time", "queue time before agent", "pre-assignment delay distribution"],
+        "evidence_returned": "For late tickets, median time-to-assign is 3h40m; median handle time after assign is 19m. Agent idle capacity remains >50% daytime."
+      }
+    ],
+    "forbidden_premature_commitments": [
+      "open 8 new agent seats",
+      "hire more agents as the solution",
+      "headcount expansion plan",
+      "recruiting pipeline for support"
+    ],
+    "unnecessary_probe": false,
+    "stage2_gold_route": "TASK",
+    "stage2_material_failures": [
+      "solution assumes agent capacity shortage while facts show pre-assignment delay dominates and agents are under-utilized"
+    ],
+    "stage2_requirements": [
+      "SLA clock must account for time-to-assign",
+      "fix must target assignment queue/routing before adding headcount",
+      "do not approve hiring plan justified only by SLA breach when post-assign work is short and utilization low"
+    ],
+    "stage2_tests": [
+      "share of SLA breach minutes in pre-assign stage",
+      "utilization remains below threshold after process change"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "design onboarding for 8 hires",
+      "write interview scorecards for agents"
+    ],
+    "notes_for_judge": "Stage1 must be PROBLEM/probe, not hire design."
+  },
+  {
+    "id": "smoke_mm_cache_more_ram",
+    "domain": "software",
+    "class": "MODEL_MISMATCH",
+    "smoke": true,
+    "brief_stage1": "Request: double app-server RAM because p95 latency is 2.1s. Facts: CPU 11%, RAM 38%, p95 DB query time 1.9s, app compute time 40ms, cache hit rate 92% on app tier, slow query log shows missing index on orders(customer_id, created_at).",
+    "artifact_stage1": "Proposal: resize all app nodes from 16GB to 32GB RAM this sprint.",
+    "intended_outcome": "Reduce end-to-end p95 latency below 500ms.",
+    "gold_route_stage1": "PROBLEM",
+    "supra_goal": "End-to-end p95 latency under 500ms for the user path.",
+    "material_model_gap": "Whether latency is dominated by app memory pressure or by database query time.",
+    "valid_models": [
+      {
+        "id": "A_app_ram",
+        "description": "App memory pressure causes latency",
+        "implied_action": "double app RAM"
+      },
+      {
+        "id": "A_db_index",
+        "description": "DB query without needed index dominates latency",
+        "implied_action": "add index / fix query, not app RAM"
+      }
+    ],
+    "why_models_are_both_possible": "Request asserts RAM; measurements already contradict memory pressure and point at DB, so hiring/resizing RAM is model-mismatch.",
+    "acceptable_probes": [
+      {
+        "id": "probe_latency_breakdown",
+        "description": "Break p95 into DB time vs app time vs network",
+        "aliases": ["latency waterfalls", "span breakdown db vs app", "where 2.1s is spent"],
+        "evidence_returned": "p95=2.1s: DB 1.9s, app 0.04s, network 0.05s. RAM cache never thrashing. EXPLAIN shows seq scan on orders."
+      }
+    ],
+    "forbidden_premature_commitments": [
+      "resize app nodes to 32GB",
+      "double RAM",
+      "memory upgrade rollout"
+    ],
+    "unnecessary_probe": false,
+    "stage2_gold_route": "TASK",
+    "stage2_material_failures": [
+      "RAM upgrade does not address DB-bound latency"
+    ],
+    "stage2_requirements": [
+      "index or rewrite the slow orders query",
+      "do not treat app RAM resize as the primary fix given current telemetry"
+    ],
+    "stage2_tests": [
+      "EXPLAIN uses index",
+      "p95 DB time < 200ms on the path"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "capacity plan for RAM procurement"
+    ],
+    "notes_for_judge": "Facts already refute RAM premise; PROBLEM then TASK after evidence."
+  },
+  {
+    "id": "smoke_ud_checkout_drop",
+    "domain": "product",
+    "class": "UNDERDETERMINED_PROBLEM",
+    "smoke": true,
+    "brief_stage1": "Checkout conversion fell from 4.2% to 2.9% the day after a release. Two notes exist, both consistent with available facts: (1) payment authorization may be failing more often; (2) eligibility mix may have shifted toward lower-intent traffic. No payment or traffic-mix metrics are in the brief yet. Request: 'fix the payment flow.'",
+    "artifact_stage1": "Ticket: Fix payment flow immediately to restore conversion.",
+    "intended_outcome": "Restore checkout conversion without fixing the wrong subsystem.",
+    "gold_route_stage1": "PROBLEM",
+    "supra_goal": "Recover checkout conversion to prior baseline for eligible intent-matched traffic.",
+    "material_model_gap": "Whether conversion drop is caused by payment technical failures or by changed traffic/eligibility mix.",
+    "valid_models": [
+      {
+        "id": "A_payment",
+        "description": "Payment authorization failures increased",
+        "implied_action": "fix payment flow / PSP"
+      },
+      {
+        "id": "A_mix",
+        "description": "Eligibility or traffic mix worsened; payment healthy",
+        "implied_action": "do not rewrite payment; investigate acquisition/eligibility"
+      }
+    ],
+    "why_models_are_both_possible": "Only conversion drop + release timing given; both payment and mix explanations remain open.",
+    "acceptable_probes": [
+      {
+        "id": "probe_auth_rate",
+        "description": "Compare payment authorization failure rate before vs after release",
+        "aliases": [
+          "auth failure rate pre/post",
+          "payment authorization success rate",
+          "PSP decline rate before and after"
+        ],
+        "evidence_returned": "Payment authorization failures increased from 2% to 21% immediately after the release. Traffic mix and eligibility shares are unchanged within 1%."
+      }
+    ],
+    "forbidden_premature_commitments": [
+      "rewrite payment flow as committed fix without metrics",
+      "implement new payment SDK as the solution",
+      "mandate payment redesign"
+    ],
+    "unnecessary_probe": false,
+    "stage2_gold_route": "TASK",
+    "stage2_material_failures": [
+      "payment authorization failure rate regression after release"
+    ],
+    "stage2_requirements": [
+      "authorization success must return near 98% baseline",
+      "release payment path must be gated on auth success metric",
+      "fix/regress the release change that raised auth failures"
+    ],
+    "stage2_tests": [
+      "auth failure rate <3% for 24h",
+      "conversion recovers with stable traffic mix"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "redesign entire checkout UX branding"
+    ],
+    "notes_for_judge": "Stage1 must PROBE auth rate; stage2 becomes payment TASK."
+  },
+  {
+    "id": "smoke_ud_ship_delay",
+    "domain": "logistics",
+    "class": "UNDERDETERMINED_PROBLEM",
+    "smoke": true,
+    "brief_stage1": "On-time ship rate fell from 96% to 81% this week. Warehouse says 'add more pickers'. Carrier dashboard is unavailable in the brief. Inventory accuracy last audited as 99.2% two months ago. Order volume is flat week-over-week.",
+    "artifact_stage1": "Action plan draft: hire 12 temporary pickers starting Monday.",
+    "intended_outcome": "Restore on-time ship rate >=95%.",
+    "gold_route_stage1": "PROBLEM",
+    "supra_goal": "Orders leave on time end-to-end (pick → pack → handoff → carrier pickup).",
+    "material_model_gap": "Whether delay is inside pick labor capacity or after warehouse (pack/carrier pickup).",
+    "valid_models": [
+      {
+        "id": "A_pick_labor",
+        "description": "Picker capacity insufficient",
+        "implied_action": "hire temporary pickers"
+      },
+      {
+        "id": "A_carrier",
+        "description": "Orders ready but carrier pickup/scan delayed",
+        "implied_action": "fix carrier handoff, not pick headcount"
+      }
+    ],
+    "why_models_are_both_possible": "Volume flat; no current pick productivity or carrier pickup timestamps in brief. Both labor and carrier models fit.",
+    "acceptable_probes": [
+      {
+        "id": "probe_stage_timestamps",
+        "description": "Compare pick-complete timestamp vs carrier-pickup timestamp for late orders",
+        "aliases": [
+          "when does pick finish vs carrier scan",
+          "dock dwell time after pack",
+          "stage timestamps pick pack pickup"
+        ],
+        "evidence_returned": "For late orders, median pick+pack completes 7 hours before cutoff; median carrier pickup is 11 hours late. Picker utilization 51%."
+      }
+    ],
+    "forbidden_premature_commitments": [
+      "hire 12 temporary pickers",
+      "staffing plan for pick labor as the fix"
+    ],
+    "unnecessary_probe": false,
+    "stage2_gold_route": "TASK",
+    "stage2_material_failures": [
+      "carrier pickup lag after warehouse ready, not picker shortage"
+    ],
+    "stage2_requirements": [
+      "measure and cap dock-to-pickup dwell",
+      "do not approve picker hiring as primary fix when pick completes early and utilization is low"
+    ],
+    "stage2_tests": [
+      "pickup within SLA after pack-complete",
+      "on-time ship >=95% with stable pick headcount"
+    ],
+    "stage2_status": "FAIL",
+    "stage2_readiness": "BLOCKED",
+    "false_positive_traps": [
+      "write recruiter briefs for pickers"
+    ],
+    "notes_for_judge": "Stage1 PROBLEM; after timestamps, TASK against carrier handoff."
+  }
+]

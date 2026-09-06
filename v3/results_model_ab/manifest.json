@@ -1,0 +1,18 @@
+{
+  "jobs": 120,
+  "systems": [
+    "B1",
+    "B5"
+  ],
+  "runs": 3,
+  "eval_models": [
+    "gemini-3.6-flash-high",
+    "gemini-3.8-flash-high"
+  ],
+  "judge_model": "gemini-3.8-flash-high",
+  "gold_hidden": true,
+  "cases": "b5_cases.json",
+  "seed": 5105,
+  "eval_seconds": 309.2,
+  "evaluator_errors": 0
+}

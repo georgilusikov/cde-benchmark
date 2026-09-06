@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NPA-1 case",
+  "type": "object",
+  "required": [
+    "id", "domain", "class", "brief_stage1", "intended_outcome",
+    "gold_route_stage1", "unnecessary_probe", "false_positive_traps"
+  ],
+  "properties": {
+    "id": {"type": "string"},
+    "domain": {"type": "string"},
+    "class": {
+      "type": "string",
+      "enum": ["CLEAR_TASK", "COMPOSITE_TASK", "MODEL_MISMATCH", "UNDERDETERMINED_PROBLEM"]
+    },
+    "brief_stage1": {"type": "string"},
+    "artifact_stage1": {"type": ["string", "null"]},
+    "intended_outcome": {"type": "string"},
+    "gold_route_stage1": {"type": "string", "enum": ["TASK", "PROBLEM"]},
+    "supra_goal": {"type": ["string", "null"]},
+    "material_model_gap": {"type": ["string", "null"]},
+    "valid_models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "description", "implied_action"],
+        "properties": {
+          "id": {"type": "string"},
+          "description": {"type": "string"},
+          "implied_action": {"type": "string"}
+        }
+      }
+    },
+    "why_models_are_both_possible": {"type": ["string", "null"]},
+    "acceptable_probes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "description", "aliases", "evidence_returned"],
+        "properties": {
+          "id": {"type": "string"},
+          "description": {"type": "string"},
+          "aliases": {"type": "array", "items": {"type": "string"}},
+          "evidence_returned": {"type": "string"}
+        }
+      }
+    },
+    "forbidden_premature_commitments": {"type": "array", "items": {"type": "string"}},
+    "unnecessary_probe": {"type": "boolean"},
+    "stage2_gold_route": {"type": ["string", "null"], "enum": ["TASK", "PROBLEM", null]},
+    "stage2_material_failures": {"type": "array", "items": {"type": "string"}},
+    "stage2_requirements": {"type": "array", "items": {"type": "string"}},
+    "stage2_tests": {"type": "array", "items": {"type": "string"}},
+    "stage2_status": {"type": ["string", "null"]},
+    "stage2_readiness": {"type": ["string", "null"]},
+    "false_positive_traps": {"type": "array", "items": {"type": "string"}},
+    "notes_for_judge": {"type": ["string", "null"]},
+    "smoke": {"type": "boolean"}
+  }
+}
