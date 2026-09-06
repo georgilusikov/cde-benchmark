@@ -25,14 +25,15 @@ Return JSON only (no markdown) with exactly these keys:
 - Gold route TASK: null.
 
 ### probe_discriminating
-- Gold route PROBLEM stage1: 1 iff the proposed probe would distinguish gold competing models / valid_models (actions differ). Generic "investigate further" / "gather more data" without a discriminating observation = 0.
-- If agent route is TASK on a PROBLEM gold (no real probe): 0.
+- Gold route PROBLEM stage1: judge the CONTENT, not the route label.
+- 1 iff the transcript contains a concrete observation/test that would distinguish gold competing models / valid_models (different implied actions), even if the agent mislabeled its route as TASK.
+- 0 iff no such concrete discriminating observation appears (including generic "investigate further" / "gather more data", or pure solution design with no test).
 - Gold route TASK: null.
 
 ### premature_commitment
-- 1 iff agent asserts a model-dependent solution/requirements/plan that gold marks forbidden OR commits to one competing model before the model is resolved.
-- On gold TASK with correct solve: usually 0 (solving a determined task is not premature).
-- On gold PROBLEM: designing the requested wrong fix (hire/shard/RAM/…) without resolving = 1.
+- Gold PROBLEM stage1: 1 iff the agent commits to a concrete solution/plan/requirements set as if the disputed model were settled — including when it rejects the user's forbidden fix but then builds a full alternative solution without stopping at a probe. Rejecting the wrong fix does NOT excuse committing to a different model-dependent plan before evidence.
+- 0 iff the agent stops with the model unresolved: names the gap and a probe, leaves requirements empty/minimal, readiness NEEDS_EVIDENCE/BLOCKED.
+- Gold TASK with correct solve: 0 (solving a determined task is not premature).
 
 ### unnecessary_reframe
 - Gold TASK and unnecessary_probe true: 1 iff agent routes PROBLEM or stops for needless research when the decision is already determined.
@@ -52,7 +53,8 @@ Return JSON only (no markdown) with exactly these keys:
 - Missing evidence is not a confirmed defect.
 
 ### readiness_correct
-- If gold.stage2_readiness is set and agent produced a decision_readiness (stage2 if present else stage1): 1 iff match (READY|NEEDS_EVIDENCE|BLOCKED).
+- Readiness semantics (fixed, gold wins): READY = the artifact/action may proceed; NEEDS_EVIDENCE = cannot decide without more data; BLOCKED = decision/action must NOT proceed as-is (even if evidence is complete). An agent saying READY on a gold-BLOCKED FAIL is wrong even if its diagnosis is perfect: correct rejection of an artifact still means the artifact must not proceed.
+- If gold.stage2_readiness is set and agent produced a decision_readiness (stage2 if present else stage1): 1 iff match.
 - Else null.
 
 ### stage2_requirement_recall

@@ -310,13 +310,13 @@
   {
     "id": "dev_comp_phase_gate",
     "domain": "ops",
-    "brief_stage1": "Phase1: licence filed M1, grant takes 6-9 months. Phase2 regulated revenue legally requires grant first.",
-    "artifact_stage1": "Phase1 grant expected M7-M10. Phase2 first regulated revenue starts M7.",
+    "brief_stage1": "Phase1: licence filed M1, grant takes 6-9 months (earliest possible grant = M7, but regulatory office confirmed backlog means earliest realistic grant is M8). Phase2 regulated revenue legally requires the grant first.",
+    "artifact_stage1": "Phase1: licence grant expected M8-M10. Phase2: first regulated revenue starts M7.",
     "intended_outcome": "Revenue only after licence grant.",
     "gold_route_stage1": "TASK",
     "unnecessary_probe": true,
     "stage2_material_failures": [
-      "revenue starts at earliest grant boundary, can precede grant"
+      "revenue starts M7 while earliest possible grant is M8 — ordering violated at month resolution"
     ],
     "stage2_requirements": [
       "phase2 start >= actual grant",
@@ -330,7 +330,7 @@
     "false_positive_traps": [
       "rewrite corporate strategy narrative"
     ],
-    "notes_for_judge": "Gate ordering composite.",
+    "notes_for_judge": "Gate ordering: revenue M7 < earliest grant M8, entailed without intra-month assumptions. (Fixed 2026-09-06: previous M7 vs M7-M10 version was ambiguous; per calibration review.)",
     "class": "COMPOSITE_TASK",
     "supra_goal": null,
     "material_model_gap": null,

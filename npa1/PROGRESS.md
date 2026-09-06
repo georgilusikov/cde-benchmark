@@ -59,6 +59,27 @@ Treated as **suspicious ease**, not proof. Next: semantic judge + hard+12 + runs
 - Not production change  
 - Perfect scores likely partly due to easy separation + post-hoc alias fit  
 
+### Calibration round 1 (2026-09-06, post-reviewer)
+
+- Independent reviewer labels: `assistant_labels.jsonl` (gpt-5.6-sol) — model reviewer, NOT human gold
+- Gemini-3.8 judge vs reviewer: micro 0.903; probe_discriminating 0.61 → rubric conflict
+- **judge.md edits (calibration phase):**
+  - probe_discriminating: content-based; route=TASK mislabel does not force 0 if a discriminating observation exists
+  - premature_commitment: rejecting forbidden fix but committing to an alternative plan without probe = 1
+  - readiness_correct: fixed semantics; READY=proceed, BLOCKED=must-not-proceed even with complete evidence; gold wins
+- **dev gold fix:** `dev_comp_phase_gate` ambiguous (revenue M7 vs grant M7-M10). Rewritten: earliest grant M8 vs revenue M7 → entailed.
+- Packets 22/23/30/34 lack stage2 evidence because sample came from dev_r1 run BEFORE alias expansion (harness gates stage2 on runtime match). Do not read missing stage2 as agent failure; dev_r3 will have aliases at runtime.
+
+### Calibration round 1 result (2026-09-06)
+
+- Gemini-3.8 judge vs adjudicated reviewer labels: **binary micro agreement 0.960 ≥ 0.90 → GATE PASS**
+  - model_gap_correct 0.944, premature_commitment 1.0, unnecessary_reframe 1.0, readiness_correct 1.0
+  - probe_discriminating 0.778 — residual gap: judge stricter on "embedded discriminating test inside a full solution" than reviewer. All 5 disagreements adjudicated with reasons (see agreement_adjudicated.json). Caveat recorded: for gate decisions treat judge probe_discriminating as conservative lower bound; deterministic probe_match is primary probe metric.
+  - Continuous: requirement_recall MAE 0.043 (within-0.25: 91%); unsupported_rate MAE 0.26 — known noisy field per REVIEW_QUEUE P2; use as advisory not gate-critical.
+- Judge prompt frozen content after these edits (probe content-based, PCR alternative-commitment, readiness semantics). Further judge.md changes require a new calibration round.
+- Reviewer labels = model (gpt-5.6-sol), adjudication = hermes+reviewer; human spot-check of REVIEW_QUEUE still recommended before held-out freeze, but calibration gate is considered met for dev work.
+- `dev_comp_phase_gate` gold fixed (M8 earliest grant vs M7 revenue).
+
 ### Queue (locked)
 1. ~~Fix provenance~~  
 2. Semantic judge (D/E/F fields) + wire  

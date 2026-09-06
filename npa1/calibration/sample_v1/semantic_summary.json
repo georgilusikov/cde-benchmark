@@ -1,25 +1,25 @@
 {
   "B5": {
-    "n": 12,
-    "model_gap_correct": 1.0,
-    "probe_discriminating": 1.0,
-    "premature_commitment": 0.5,
+    "n": 11,
+    "model_gap_correct": 0.8,
+    "probe_discriminating": 0.4,
+    "premature_commitment": 0.36363636363636365,
     "unnecessary_reframe": 0.0,
-    "requirement_recall": 1.0,
+    "requirement_recall": 0.9,
     "unsupported_confirmed_rate": 0.0,
-    "readiness_correct": null,
+    "readiness_correct": 0.0,
     "stage2_requirement_recall": null
   },
   "NPA-B5": {
     "n": 12,
-    "model_gap_correct": 1.0,
-    "probe_discriminating": 1.0,
+    "model_gap_correct": 0.8333333333333334,
+    "probe_discriminating": 0.8333333333333334,
     "premature_commitment": 0.0,
     "unnecessary_reframe": 0.0,
-    "requirement_recall": 1.0,
-    "unsupported_confirmed_rate": 0.0,
-    "readiness_correct": null,
-    "stage2_requirement_recall": 1.0
+    "requirement_recall": 0.9166666666666666,
+    "unsupported_confirmed_rate": 0.05583333333333334,
+    "readiness_correct": 0.36363636363636365,
+    "stage2_requirement_recall": 0.625
   },
   "ORACLE-NPA-B5": {
     "n": 12,
@@ -27,9 +27,9 @@
     "probe_discriminating": 1.0,
     "premature_commitment": 0.0,
     "unnecessary_reframe": 0.0,
-    "requirement_recall": 1.0,
+    "requirement_recall": 0.9166666666666666,
     "unsupported_confirmed_rate": 0.0,
-    "readiness_correct": null,
-    "stage2_requirement_recall": 1.0
+    "readiness_correct": 0.36363636363636365,
+    "stage2_requirement_recall": 0.0
   }
 }

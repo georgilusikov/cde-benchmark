@@ -1,0 +1,138 @@
+{
+  "binary_per_field": {
+    "model_gap_correct": {
+      "agree": 16,
+      "disagree": 2,
+      "skipped_null": 18,
+      "agreement": 0.8888888888888888
+    },
+    "probe_discriminating": {
+      "agree": 14,
+      "disagree": 4,
+      "skipped_null": 18,
+      "agreement": 0.7777777777777778
+    },
+    "premature_commitment": {
+      "agree": 34,
+      "disagree": 2,
+      "skipped_null": 0,
+      "agreement": 0.9444444444444444
+    },
+    "unnecessary_reframe": {
+      "agree": 18,
+      "disagree": 0,
+      "skipped_null": 18,
+      "agreement": 1.0
+    },
+    "readiness_correct": {
+      "agree": 34,
+      "disagree": 0,
+      "skipped_null": 2,
+      "agreement": 1.0
+    }
+  },
+  "binary_macro_agreement": 0.9222222222222222,
+  "binary_micro_agreement": 0.9354838709677419,
+  "binary_gate_pass": true,
+  "continuous": {
+    "requirement_recall": {
+      "n": 23,
+      "mae": 0.043478260869565216,
+      "within_0_25": 0.9130434782608695
+    },
+    "unsupported_confirmed_rate": {
+      "n": 36,
+      "mae": 0.2613333333333333,
+      "within_0_25": 0.6111111111111112
+    },
+    "stage2_requirement_recall": {
+      "n": 8,
+      "mae": 0.1875,
+      "within_0_25": 0.625
+    }
+  },
+  "disagreements": [
+    {
+      "key": [
+        "dev_mm_support_hire",
+        "B5",
+        1
+      ],
+      "field": "model_gap_correct",
+      "human": 1,
+      "judge": 0
+    },
+    {
+      "key": [
+        "dev_mm_support_hire",
+        "NPA-B5",
+        1
+      ],
+      "field": "model_gap_correct",
+      "human": 1,
+      "judge": 0
+    },
+    {
+      "key": [
+        "dev_mm_support_hire",
+        "B5",
+        1
+      ],
+      "field": "probe_discriminating",
+      "human": 1,
+      "judge": 0
+    },
+    {
+      "key": [
+        "dev_mm_more_moderators",
+        "B5",
+        1
+      ],
+      "field": "probe_discriminating",
+      "human": 1,
+      "judge": 0
+    },
+    {
+      "key": [
+        "dev_mm_cdn_more_pops",
+        "B5",
+        1
+      ],
+      "field": "probe_discriminating",
+      "human": 1,
+      "judge": 0
+    },
+    {
+      "key": [
+        "dev_mm_support_hire",
+        "NPA-B5",
+        1
+      ],
+      "field": "probe_discriminating",
+      "human": 1,
+      "judge": 0
+    },
+    {
+      "key": [
+        "dev_ud_inventory_stockout",
+        "B5",
+        1
+      ],
+      "field": "premature_commitment",
+      "human": 0,
+      "judge": 1
+    },
+    {
+      "key": [
+        "dev_ud_churn_spike",
+        "B5",
+        1
+      ],
+      "field": "premature_commitment",
+      "human": 0,
+      "judge": 1
+    }
+  ],
+  "n_human": 36,
+  "n_judge": 36
+}
